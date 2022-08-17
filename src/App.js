@@ -40,14 +40,14 @@ function App() {
 					</Container>
 				</Navbar>
 				<Routes>
-					<Route path="/" element={<Home/>} />
-					<Route path="/home" element={<Home/>} />
-					<Route path="/login" element={<Login/>} />
-					<Route path="/logout" element={<Logout/>} />
-					<Route path="/shoppinglist" element={<ShoppingList/>} />
-					<Route path="/inventory" element={<Inventory/>} />
-					<Route path="/priceswatch" element={<PriceWatch/>} />
-					<Route path="/settings" element={<Settings/>} />
+					<Route exact path="/" element={<Home/>} />
+					<Route exact path="/home" element={<Home/>} />
+					<Route exact path="/login" element={<Login/>} />
+					<Route exact path="/logout" element={<Logout/>} />
+					<Route exact path="/shoppinglist" element={<ShoppingList/>} />
+					<Route exact path="/inventory" element={<Inventory/>} />
+					<Route exact path="/priceswatch" element={<PriceWatch/>} />
+					<Route exact path="/settings" element={<Settings/>} />
 				</Routes>
 			</Router>
 		</div>
