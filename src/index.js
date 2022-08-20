@@ -1,30 +1,37 @@
+// react imports
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-// import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
+// index style
+import './style/index.css';
+
+// root component
+import App from './App';
+
+// for routing
+import { BrowserRouter as Router} from 'react-router-dom';
+
+// for design
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import reportWebVitals from './reportWebVitals';
+// for the service worker
+import swregistration from './service/swregistration';
 
+// for reporting web vitals
+// import WebVitals from './util/WebVitals';
+
+// render root component
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <App />
+    </Router>
   </React.StrictMode>
 );
 
-if (module.hot) {
-  module.hot.accept();
-}
+// register service worker
+swregistration();
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://cra.link/PWA
-// serviceWorkerRegistration.unregister();
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+// send webvitals logs to console
+// WebVitals(console.log);

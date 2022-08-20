@@ -1,57 +1,74 @@
-import React from 'react';
+// react
+import {React, useState } from 'react';
+
+// react router
+import { Navigate } from 'react-router-dom';
+
+// firebase
+import { getAuth as auth, signInWithEmailAndPassword as login } from "firebase/auth";
+import {useAuthValue} from '../auth/AuthContext'
+
+// components
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
 
 export default function Login() {
-    const style = {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginTop: 'auto',
-        marginBottom: 'auto',
-        paddingTop: '2rem'
-    };
+	// get current user from context
+	const {currentUser} = useAuthValue();
 
-    return (
-        <div style={style}>
-            <LoginCard/>
-        </div>
-    )
-}
+	// create state for email, password, and error message
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [userMessage, setUserMessage] = useState('');
 
-function LoginCard() {
-  return (
-    <Card style={{ width: '18rem' }}>
-      {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
-      <Card.Body>
-        <Card.Title>Login</Card.Title>
-            <Form>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" placeholder="Enter email" />
-                <Form.Text className="text-muted">
-                We'll never share your email with anyone else.
-                </Form.Text>
-            </Form.Group>
+	// redirect to home if user is logged in
+	if (currentUser !== null) {
+		return <Navigate to="/"/>
+	}
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Password" />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                <Form.Check type="checkbox" label="Save Login" />
-            </Form.Group>
-            <Button variant="primary" type="submit">
-                Submit
-            </Button>
-        </Form>
-        {/* <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </Card.Text> */}
-        {/* <Button variant="primary">Go somewhere</Button> */}
-      </Card.Body>
-    </Card>
-  );
+	// login user
+	const handleLogin = e => {
+		e.preventDefault();
+		if (email !== '' && password !== '') {
+			login(auth(), email, password)
+				.then(() => {
+					console.log('logged in');
+					window.location.href = "/";
+				}).catch(error => {
+					if(error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+						setUserMessage("Invalid email or password");
+					} else {
+						setUserMessage(error.message);
+					}
+				}
+			);
+		} else {
+			setUserMessage('Please fill in all fields');
+		}
+	}
+
+	return (
+		<Card style={{ width: '18rem' }}>
+			<Card.Body>
+				<Card.Title>Login</Card.Title>
+				{userMessage && <div style={{color: 'red'}} >{userMessage}</div>}
+				<br />
+				<Form onSubmit={handleLogin} name='login_form'>
+					<InputGroup className="mb-3">
+						<Form.Control placeholder="Enter email" required value={email} onChange={e => setEmail(e.target.value)}/>
+					</InputGroup>
+
+					<InputGroup className="mb-3">
+						<Form.Control placeholder="Enter password" type="password" required value={password} onChange={e => setPassword(e.target.value)}/>
+					</InputGroup>
+
+					<Button variant="primary" type="submit">
+						Submit
+					</Button>
+				</Form>
+			</Card.Body>
+		</Card>
+	);
 }
