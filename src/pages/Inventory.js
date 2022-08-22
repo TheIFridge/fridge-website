@@ -1,9 +1,10 @@
 // react
-import { React, useRef } from 'react';
+import { React, useState, useEffect} from 'react';
 
 // firebase
 import { firestore } from '../service/firebase';
-import { addDoc, collection } from '@firebase/firestore';
+import { getDocs, updateDoc, collection, arrayUnion, doc } from '@firebase/firestore';
+import { useAuthValue } from '../auth/AuthContext';
 
 // components
 import Button from 'react-bootstrap/Button';
@@ -14,35 +15,103 @@ import Table from 'react-bootstrap/Table';
 // main function
 export default function Inventory() {
     // get current user from context
-    // const {currentUser} = useAuthValue();
+    const {currentUser} = useAuthValue();
 
-    // create item reference
-    const itemRef = useRef();
+    // current user doc id
+    const [docID, setDocID] = useState('');
 
-    // setup firestore reference
-    const ref = collection(firestore, 'testinv');
+    const [items,setItems] = useState([]);
+    const fetchItems = async()=>{
+        const response = collection(firestore, 'users');
+        const data = await getDocs(response);
+
+        data.forEach((document) => {
+            if (document.data().uid === currentUser.uid) {
+                setDocID(document.id);
+                setItems(document.data().inventory);
+            }
+        });
+    }
+
+    const [add, setAdd] = useState('');
+    useEffect(() => {fetchItems();});
 
     // handle save item
     const handleSave = async (e) => {
         e.preventDefault();
-        if(itemRef.current.value !== '') {
-            console.log(itemRef.current.value);
-
-            let data = {
-                message: itemRef.current.value,
-                timestamp: "sometimestamp"
-            };
-
-            itemRef.current.value = '';
-
-            try {
-                addDoc(ref, data);
-            } catch (err) {
-                console.log(err);
+        
+        if (add !== '') {
+            // check if item already exists in inventory
+            let exists = false;
+            items.forEach((item) => {
+                if (item.item === add) {
+                    exists = true;
+                }
             }
-        } else {
-            alert('Please enter an item!');
+            );
+            if (!exists) {
+                console.log('adding item');
+                // add item to inventory
+                const response = doc(firestore, 'users', docID);
+                await updateDoc(response, {
+                    inventory: arrayUnion({item: add, quantity: 1, quantityType: 'unit'})
+                });
+                fetchItems();
+                // setItems(data.data().inventory);
+                // setItems(data.data().inventory);
+                setAdd('');
+            } else {
+                console.log('item already exists');
+                // add 1 to quantity of item in inventory
+                const response = doc(firestore, 'users', docID, 'inventory');
+                console.log(response);
+                // const data = 
+                // const data = getDocs(response);
+                // console.log(data);
+                // data.forEach((field) => {
+                //     console.log(field.data().inventory);
+                // }
+                // const data = await updateDoc(response, {
+                //     inventory: arrayUnion({item: add, quantity: 1, quantityType: 'unit'})
+                // });
+            }
         }
+
+
+
+        // var someRef = doc(firestore, "users", docID);
+
+
+
+
+        // updateDoc(someRef, {
+        //     inventory: arrayUnion({item: add, quantity: 1, quantityType: 'unit'})
+        // }).then(() => {
+        //     console.log("Document successfully updated!");
+        //     setAdd('');
+        // }).catch((error) => {
+        //     console.error("Error updating document: ", error);
+        // }).then(() => {
+        //     fetchItems();
+        // });
+
+        // if(add !== '') {
+        //     let data = {
+        //         item: add,
+        //         quantity: 1,
+        //         quantityType: 'units',
+        //     };
+
+        //     setAdd('');
+
+        //     try {
+        //         addDoc(ref, data);
+        //     } catch (err) {
+        //         console.log(err);
+        //     }
+        // } else {
+        //     alert('Please enter an item!');
+        // }
     };
 
     return (
@@ -53,8 +122,8 @@ export default function Inventory() {
             <br />
 
             <Form onSubmit={handleSave}>
-                <InputGroup size="lg"> 
-                    <Form.Control aria-label="Large" aria-describedby="inputGroup-sizing-sm" ref={itemRef}/>
+                <InputGroup className="mb-3">
+                    <Form.Control placeholder="Enter item to add..." required value={add} onChange={e => setAdd(e.target.value)}/>
                     <Button id="inputGroup-sizing-lg" type="submit">+</Button>
                 </InputGroup>
             </Form>
@@ -69,30 +138,14 @@ export default function Inventory() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Apple</td>
-                        <td>
-                            <Button variant="primary" style={{ width: '100%'}}>+</Button>{' '}
-                            <p style={{ width: '40%', margin: 'auto' }}>69</p>{' '}
-                            <Button variant="primary" style={{ width: '100%'}}>-</Button>{' '}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Banana</td>
-                        <td>
-                            <Button variant="primary" style={{ width: '100%'}}>+</Button>{' '}
-                            <p style={{ width: '40%', margin: 'auto' }}>12</p>{' '}
-                            <Button variant="primary" style={{ width: '100%'}}>-</Button>{' '}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Mayonaise</td>
-                        <td>
-                            <Button variant="primary" style={{ width: '100%'}}>+</Button>{' '}
-                            <p style={{ width: '40%', margin: 'auto' }}>42g</p>{' '}
-                            <Button variant="primary" style={{ width: '100%'}}>-</Button>{' '}
-                        </td>
-                    </tr>
+                    {items && items.map(item=>{
+                        return (
+                            <tr key={Math.random()}>
+                                <td>{item.item}</td>
+                                <td>{item.quantity}</td>
+                            </tr>
+                        )})
+                    }
                 </tbody>
             </Table>
         </div>
