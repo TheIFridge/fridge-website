@@ -22,6 +22,7 @@ import ShoppingList from './pages/ShoppingList';
 import Inventory from './pages/Inventory';
 import PriceWatch from './pages/PriceWatch';
 import Settings from './pages/Settings';
+import Recepies from './pages/Recepies';
 
 // styles
 import './style/App.css';
@@ -60,6 +61,7 @@ function App() {
 						<Route exact path="/shoppinglist" element={<ShoppingList/>} />
 						<Route exact path="/inventory" element={<Inventory/>} />
 						<Route exact path="/pricewatch" element={<PriceWatch/>} />
+						<Route exact path="/recepies" element={<Recepies/>} />
 						<Route exact path="/settings" element={<Settings/>} />
 					</Routes>
 				</div>
