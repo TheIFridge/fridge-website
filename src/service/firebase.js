@@ -17,8 +17,10 @@ const firebaseConfig = {
   projectId: "ifridge-9bb1e",
   storageBucket: "ifridge-9bb1e.appspot.com",
   messagingSenderId: "505666645968",
-  appId: "1:505666645968:web:472206ee5c08ee304293d5",
-  measurementId: "G-Q1J980MVYL"
+  appId: "1:505666645968:web:68197528ca538a774293d5",
+  measurementId: "G-MRLXB8JG6N"
+  // appId: "1:505666645968:web:472206ee5c08ee304293d5",
+  // measurementId: "G-Q1J980MVYL"
 };
 
 // initialise Firebase
