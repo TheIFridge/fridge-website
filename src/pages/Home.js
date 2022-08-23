@@ -5,8 +5,19 @@ import React from 'react';
 export default function Home() {
     return (
         <div>
-            <h1>Home</h1>
-            <p>Here's some rubbish marketing pitch about how this product is so revolutionary when in actuality it just solves a problem that doesn't exist and is purely a product to micromange something that does not need to be micromanaged.</p>
+            <img src = {'./img/icons/old/favicon-196x196.png'} alt = "logo" />
+            {{/*bender*/}}
+            <style jsx>{`
+                img {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                }
+            `}</style>
+
+
+            <h1>Ifridge</h1>
+
         </div>
     );
 }
