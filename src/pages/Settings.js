@@ -6,7 +6,7 @@ export default function Settings() {
   return (
     <div>
         <h1>Settings</h1>
-        <p>settings</p>
+        <h2>Settings</h2>
     </div>
   )
 }
