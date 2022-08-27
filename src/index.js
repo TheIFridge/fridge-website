@@ -20,14 +20,19 @@ import swregistration from './service/swregistration';
 // for reporting web vitals
 // import WebVitals from './util/WebVitals';
 
+// for rendering the theme colour
+import ThemeContextWrapper from './context/ThemeContextWrapper';
+
 // render root component
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <Router>
-      <App />
-    </Router>
-  </React.StrictMode>
+	<ThemeContextWrapper>
+		<React.StrictMode>
+			<Router>
+				<App />
+			</Router>
+		</React.StrictMode>
+	</ThemeContextWrapper>,
 );
 
 // register service worker

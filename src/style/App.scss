@@ -1,0 +1,89 @@
+// import colors from './colors.scss';
+@import './_colours.scss';
+
+body {
+    background-color: $secondary;
+}
+
+.App {
+	text-align: center;
+}
+
+form .form-label {
+    font-weight: bold; 
+    margin: auto;
+    padding-right: 1rem;
+}
+
+form .form-control {
+    outline: none;
+    border: none;
+    color: $primary;
+    border-radius: 0;
+}
+
+form .form-control:focus {
+    box-shadow: none;
+}
+
+form .form-select {
+    outline: none;
+    border: none;
+    color: $primary;
+    border-radius: 0;
+}
+
+form .form-select:focus {
+    box-shadow: none;
+}
+
+// light mode
+.light-mode {
+    background-color: $secondary;
+    color: $primary;
+}
+
+.light-mode form .form-select {
+    background-color: $secondary;
+    color: $primary;
+    border-bottom: 1px solid $primary;
+}
+
+.light-mode form .form-control {
+    background-color: $secondary;
+    color: $primary;
+    border-bottom: 1px solid $primary;
+}
+
+.light-mode form .form-control:focus {
+    background-color: $secondary;
+}
+
+// dark mode
+.dark-mode {
+    background-color: $secondary-dark;
+    color: $primary-dark;
+}
+
+.dark-mode form .form-select {
+    background-color: $secondary-dark;
+    color: $primary-dark;
+    border-bottom: 1px solid $primary-dark;
+}
+
+.dark-mode form .form-control:focus {
+    background-color: $secondary-dark;
+}
+
+.dark-mode form .form-control {
+    background-color: $secondary-dark;
+    color: $primary-dark;
+    border-bottom: 1px solid $primary-dark;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+}

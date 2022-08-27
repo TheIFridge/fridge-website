@@ -10,7 +10,7 @@ import {AuthProvider} from './auth/AuthContext'
 
 // components
 import NavigationBar from './components/Navbar';
-import Footer from './components/Footer';
+// import Footer from './components/Footer';
 
 // pages
 import Home from './pages/Home';
@@ -65,7 +65,7 @@ function App() {
 						<Route exact path="/settings" element={<Settings/>} />
 					</Routes>
 				</div>
-				<Footer />
+				{/* <Footer /> */}
 			</AuthProvider>
 		</div>
 	)
