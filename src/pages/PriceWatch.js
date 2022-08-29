@@ -1,6 +1,7 @@
 // react
 import React from 'react';
 
+
 // main function
 export default function PriceWatch() {
     return (

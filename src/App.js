@@ -23,7 +23,6 @@ import Inventory from './pages/Inventory';
 import PriceWatch from './pages/PriceWatch';
 import Settings from './pages/Settings';
 import Recepies from './pages/Recepies';
-
 // styles
 import './style/App.css';
 
