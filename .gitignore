@@ -26,3 +26,7 @@ yarn-error.log*
 .vscode
 jsconfig.json
 
+# idea and intellij
+.idea
+.idea/**
+*.iml
