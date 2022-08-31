@@ -37,6 +37,17 @@ export default function Settings() {
 		e.preventDefault();
 		console.log('submit');
 	}
+
+	// TODO:
+	// - add validation
+	// - add error handling
+	// - add login, logout, password change, and account deletion
+	// - support, feedback, contact us, FAQ
+	// - share this app
+	// - add a privacy policy
+	// - add a terms of service
+	// - add a disclaimer
+	// - add way to manage subscription
 	
 	return (
 	<div>
