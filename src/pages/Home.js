@@ -13,7 +13,7 @@ export default function Home() {
                 <Row>
                     <Col>
                         <h1>
-                            Welcome to the Recipe App
+                            Welcome to the Fridge App
                         </h1>
                     </Col>
                     <Col>
@@ -21,12 +21,17 @@ export default function Home() {
                             <Card.Img variant="top" src="img/pages/home/fridge.png" />
                         </Card>
                     </Col>
+                    <Col>
+                    {/*button to start*/}
+                        
+
+                    </Col>
                 </Row>
                 <br></br><br></br>
                 <Row>
                     <Col>
                         <h1>
-                            This is the App
+                            Mobile Application
                         </h1>
                     </Col>
                     <Col>
