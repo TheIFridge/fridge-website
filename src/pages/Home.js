@@ -25,17 +25,21 @@ export default function Home() {
                 <br></br><br></br>
                 <Row>
                     <Col>
-                    <Card bg = "light" border="light" style={{ width: '18rem' }}>
+                        <h1>
+                            This is the App
+                        </h1>
+                    </Col>
+                    <Col>
+                        <Card bg="light" border="light" style={{ width: '18rem' }}>
                             <Card.Img variant="top" src="img/pages/home/fridgeApp.png" />
                         </Card>
                     </Col>
                     <Col>
-                        <h1>
-                            This is the App
-                        </h1>
                         <p>
                             A resposnive web app that allows you to search for recipes based on the ingredients you have in your fridge.
-                            
+                        </p>
+                        <p>
+                            The app will also allow you to save your favourite recipes and create your own recipes.
                         </p>
                     </Col>
                 </Row>
