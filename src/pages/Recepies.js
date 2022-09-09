@@ -9,11 +9,11 @@ import Stack from 'react-bootstrap/Stack';
 import '../style/Recipes.css'
 
 function Buttons() {
-  // grab the data from the Data.js file
-  const data = Data;
-  //if the data Category is equal to the button name, then return the data
-  const vegetarian = data.filter((item) => item.category === "Vegetarian");
-  const nonVegetarian = data.filter((item) => item.category === "Non-Vegetarian");
+  // // grab the data from the Data.js file
+  // const data = Data;
+  // //if the data Category is equal to the button name, then return the data
+  // const vegetarian = data.filter((item) => item.category === "Vegetarian");
+  // const nonVegetarian = data.filter((item) => item.category === "Non-Vegetarian");
 }
 
 

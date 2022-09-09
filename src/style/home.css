@@ -1,0 +1,27 @@
+.Button {
+    /*inline with the image*/
+    display: block;
+    /*center the text*/
+    text-align: center;
+    /*center the image*/
+    margin: auto;
+    
+  }/*# sourceMappingURL=Recipes.css.map */
+  
+  .ImagePosition{
+    /*allign the image to the centre of the text*/
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;  }
+  
+  .Header{
+    /*allign the text with the image*/
+    text-align: center;
+  }
+
+  .Body{
+    /*allign the text with the image*/
+    text-align: left;
+
+  }
