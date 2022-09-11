@@ -23,6 +23,7 @@ import Inventory from './pages/Inventory';
 import PriceWatch from './pages/PriceWatch';
 import Settings from './pages/Settings';
 import Recepies from './pages/Recepies';
+import Recipe from './pages/Recipe';
 // styles
 import './style/App.css';
 
@@ -62,6 +63,7 @@ function App() {
 						<Route exact path="/pricewatch" element={<PriceWatch/>} />
 						<Route exact path="/recepies" element={<Recepies/>} />
 						<Route exact path="/settings" element={<Settings/>} />
+						<Route exact path="/recipe" element={<Recipe/>} />
 					</Routes>
 				</div>
 				{/* <Footer /> */}

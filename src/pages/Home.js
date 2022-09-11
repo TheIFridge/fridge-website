@@ -2,6 +2,7 @@
 import React from 'react';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import { Button } from 'react-bootstrap';
 
 // main function
 export default function Home() {
@@ -17,9 +18,7 @@ export default function Home() {
                 <Col>
                     <br>
                     </br>
-                    <a href="/inventory">
-                        <button type="button" class="Button">Inventory</button>
-                    </a>
+                    <Button href="./Recepies" variant="primary">Recipe</Button>
                 </Col>
             </Row>
             <br></br>

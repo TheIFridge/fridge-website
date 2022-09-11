@@ -1,5 +1,5 @@
 // react
-import React from 'react';
+import React, { useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import { Button } from 'react-bootstrap';
 import Col from 'react-bootstrap/esm/Col';
@@ -7,27 +7,32 @@ import Row from 'react-bootstrap/esm/Row';
 import '../style/Recipes.css'
 
 
-
 export default function Recepies() {
+
+
   return (
     <>
       <div>
+        {/*filter buttons*/}
+        <Button variant="outline-primary" className="filterButton">Dairy Free</Button>
+        <Button variant="outline-primary" className="filterButton">Gluten Free</Button>
+        <Button variant="outline-primary" className="filterButton">Low Sugar</Button>
         {/* Cards */}
         <Row>
           <Col>
-            <Card style={{ width: '18rem' }}>
+            <Card>
               <Card.Img variant="top" src="https://www.countdown.co.nz/Content/Recipes/227490_ButterChicken_large_810x570.jpg" />
               <Card.Body>
                 <Card.Title>Butter Chicken</Card.Title>
                 <Card.Text>
                   You forget about takeaways with this easy and delicious recipe for Butter Chicken! This curry favourite is easy to prepare and ready in 30 minutes.
                 </Card.Text>
-                <Button  href="./Recipe" variant="primary">Recipe</Button>
+                <Button href="./Recipe" variant="primary">Recipe</Button>
               </Card.Body>
             </Card>
           </Col>
           <Col>
-            <Card style={{ width: '18rem' }}>
+            <Card>
               <Card.Img variant="top" src="https://www.countdown.co.nz/Content/Recipes/227490_Herb-InfusedRoastLamb_large_810x570.jpg" />
               <Card.Body>
                 <Card.Title>Herb-Infused Roast Lamb</Card.Title>
@@ -39,7 +44,7 @@ export default function Recepies() {
             </Card>
           </Col>
           <Col>
-            <Card style={{ width: '18rem' }}>
+            <Card>
               <Card.Img variant="top" src="https://www.countdown.co.nz/Content/Recipes/Large_751.jpg" />
               <Card.Body>
                 <Card.Title>Baked Salmon with Tomato Salsa and Crushed Potatoes</Card.Title>
@@ -54,7 +59,7 @@ export default function Recepies() {
         <br></br>
         <Row>
           <Col>
-            <Card style={{ width: '18rem' }}>
+            <Card>
               <Card.Img variant="top" src="https://www.countdown.co.nz/Content/Recipes/Roasted-Baby-Carrot-Salad-540.jpg" />
               <Card.Body>
                 <Card.Title>Roasted Baby Carrot Salad</Card.Title>
@@ -66,7 +71,7 @@ export default function Recepies() {
             </Card>
           </Col>
           <Col>
-            <Card style={{ width: '18rem' }}>
+            <Card>
               <Card.Img variant="top" src="https://www.countdown.co.nz/Content/Recipes/Thai-Beef-and-Sweet-Potato-Curry540.jpg" />
               <Card.Body>
                 <Card.Title>Thai Beef Curry</Card.Title>
@@ -78,7 +83,7 @@ export default function Recepies() {
             </Card>
           </Col>
           <Col>
-            <Card style={{ width: '18rem' }}>
+            <Card>
               <Card.Img variant="top" src="https://www.countdown.co.nz/Content/Recipes/bbq-corn-540.jpg" />
               <Card.Body>
                 <Card.Title>BBQ Corn</Card.Title>
