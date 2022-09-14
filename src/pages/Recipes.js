@@ -5,8 +5,7 @@ import Card from './RecipeCard';
 import Buttons from './RecipeButtons';
 // import '../style/Recipes.css'
 
-
-const Recipes = () => {
+export default function Recipes() {
     const [item, setItem] = useState(Data);
     const menuItems = [...new Set(Data.map((Val) => Val.category))];
 
@@ -33,8 +32,6 @@ const Recipes = () => {
         </>
     )
 }
-
-export default Recipes;
 
 
 
