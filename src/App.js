@@ -1,5 +1,5 @@
 // react
-import { React, useState, useEffect } from 'react'
+import { React, useState, useEffect, useContext } from 'react'
 
 // react router
 import { Route, Routes } from 'react-router-dom';
@@ -7,6 +7,8 @@ import { Route, Routes } from 'react-router-dom';
 // firebase
 import { getAuth as auth, onAuthStateChanged } from "firebase/auth";
 import {AuthProvider} from './auth/AuthContext'
+import {ThemeContext} from './context/ThemeContext'
+import { getTheme } from './util/Helpers';
 
 // components
 import NavigationBar from './components/Navbar';
@@ -23,8 +25,11 @@ import Inventory from './pages/Inventory';
 import PriceWatch from './pages/PriceWatch';
 import Settings from './pages/Settings';
 import Recepies from './pages/Recepies';
+
 // styles
 import './style/App.css';
+
+import { userLoggedIn } from './util/Helpers';
 
 // main function
 function App() {
@@ -34,6 +39,9 @@ function App() {
 		onAuthStateChanged(auth(), (user) => {
 			if(user !== currentUser) {
 				setCurrentUser(user);
+				if (!userLoggedIn()) {
+					sessionStorage.setItem("loggedIn", "true");
+				}
 			}
 		 })
 	}, [currentUser, setCurrentUser]);
@@ -43,6 +51,12 @@ function App() {
 
 	// setup document title
 	document.title = "iFridge";
+
+	const { changeTheme } = useContext(ThemeContext);
+
+	useEffect(() => {
+		changeTheme(getTheme());
+	});
 
 	return (
 		<div className="App">

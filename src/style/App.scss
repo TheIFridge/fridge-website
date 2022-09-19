@@ -37,7 +37,7 @@ form .form-select:focus {
     box-shadow: none;
 }
 
-// light mode
+// LIGHT MODE
 .light-mode {
     background-color: $secondary;
     color: $primary;
@@ -59,7 +59,18 @@ form .form-select:focus {
     background-color: $secondary;
 }
 
-// dark mode
+.light-mode .dropdown-menu {
+    background-color: $secondary;
+    color: $primary;
+    border: 1px solid $primary;
+}
+
+.light-mode .dropdown-menu a {
+    color: $primary;
+    text-align: center;
+}
+
+// DARK MODE
 .dark-mode {
     background-color: $secondary-dark;
     color: $primary-dark;
@@ -79,6 +90,17 @@ form .form-select:focus {
     background-color: $secondary-dark;
     color: $primary-dark;
     border-bottom: 1px solid $primary-dark;
+}
+
+.dark-mode .dropdown-menu {
+    background-color: $secondary-dark;
+    color: $primary-dark;
+    border: 1px solid $primary-dark;
+}
+
+.dark-mode .dropdown-menu a {
+    color: $primary-dark;
+    text-align: center;
 }
 
 .footer {

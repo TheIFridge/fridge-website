@@ -55,6 +55,17 @@ form .form-select:focus {
   background-color: #e2fff9;
 }
 
+.light-mode .dropdown-menu {
+  background-color: #e2fff9;
+  color: #1F2937;
+  border: 1px solid #1F2937;
+}
+
+.light-mode .dropdown-menu a {
+  color: #1F2937;
+  text-align: center;
+}
+
 .dark-mode {
   background-color: #1F2937;
   color: #e2fff9;
@@ -74,6 +85,17 @@ form .form-select:focus {
   background-color: #1F2937;
   color: #e2fff9;
   border-bottom: 1px solid #e2fff9;
+}
+
+.dark-mode .dropdown-menu {
+  background-color: #1F2937;
+  color: #e2fff9;
+  border: 1px solid #e2fff9;
+}
+
+.dark-mode .dropdown-menu a {
+  color: #e2fff9;
+  text-align: center;
 }
 
 .footer {
