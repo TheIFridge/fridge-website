@@ -1,57 +1,58 @@
 // react
-import { React, useState } from 'react'
+import React, { useState, useContext } from 'react'
 
 import InputGroup from 'react-bootstrap/InputGroup'
-// import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
 
 import { ThemeContext, themes } from '../context/ThemeContext';
-
-// import ButtonGroup from 'react-bootstrap/ButtonGroup'
-// import ToggleButton from 'react-bootstrap/ToggleButton'
-import Form from 'react-bootstrap/Form'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons'
 import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
 import { faLock } from '@fortawesome/free-solid-svg-icons'
 
-// import { FontAwesomeIcon } from 'react-fontawesome'
-// import { faCoffee } from '@fortawesome/free-solid-svg-icons'
-// import { solid, regular, brands } from '@fortawesome/fontawesome-svg-core/import.macro'
-
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
-// import { View, Text, StyleSheet, Button, TextInput, ScrollView, FlatList, TouchableOpacity } from 'react-native'
-
-// import { useAuthValue } from '../auth/AuthContext'
+import { getDark } from '../util/Helpers';
 
 // main function
 export default function Settings() {
-	// setup current user
-	// const {currentUser} = useAuthValue();
+	const { changeTheme } = useContext(ThemeContext);
+	const [darkMode, setDarkMode] = useState(getDark());
+	const updateDarkMode = () => {
+		setDarkMode(!darkMode);
+		changeTheme(darkMode ? themes.light : themes.dark);
+	}
 
 	// create states for each registration field
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
 	const [displayName, setDisplayName] = useState('');
 	const [email, setEmail] = useState('');
-	// const [userMessage, setUserMessage] = useState('');
-
-	const [darkMode, setDarkMode] = useState(true);
 
 	const handleSubmit = e => {
 		e.preventDefault();
 		console.log('submit');
 	}
+
+	// TODO:
+	// - add validation
+	// - add error handling
+	// - add login, logout, password change, and account deletion
+	// - support, feedback, contact us, FAQ
+	// - share this app
+	// - add a privacy policy
+	// - add a terms of service
+	// - add a disclaimer
+	// - add way to manage subscription
 	
 	return (
 	<div>
 		<h1 className="page-title">Settings</h1>
 		<br />
-		{/* {userMessage && <div style={{color: 'red'}} >{userMessage}</div>} */}
 
 		<Form onSubmit={handleSubmit}>
 			<Container>
@@ -119,14 +120,7 @@ export default function Settings() {
 				<br />
 				<Row>
 					<Col xs={12} md={4} className="mb-4">
-						<ThemeContext.Consumer>
-							{({ changeTheme }) => (
-							<Button variant="secondary" onClick={() => {
-							changeTheme(darkMode ? themes.dark : themes.light);
-							setDarkMode(!darkMode);
-							}}><FontAwesomeIcon icon={darkMode ? faMoon : faSun} />&nbsp;{darkMode ? "Enable" : "Disable"} Dark Mode</Button>
-							)}
-						</ThemeContext.Consumer>
+						<Button variant="secondary" onClick={updateDarkMode}><FontAwesomeIcon icon={!darkMode ? faMoon : faSun} />&nbsp;{!darkMode ? "Enable" : "Disable"} Dark Mode</Button>
 					</Col>
 					<Col xs={12} md={4} className="mb-4">
 						<Button variant="danger" onClick={() => {
