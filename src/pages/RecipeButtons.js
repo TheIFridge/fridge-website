@@ -4,14 +4,25 @@ import Data from "./Data";
 const RecipeButtons = ({ filterItem, setItem, menuItems }) => {
     return (
         <>
-            <div>
-                {menuItems.map((Val, id) => {
-                    return (
-                        <button onClick={() => filterItem(Val)} key={id}>{Val}</button>
-                    );
-                })}
-                <button onClick={() => setItem(Data)}>All</button>
-            </div>
+        <div className="d-flex justify-content-center">
+        {menuItems.map((Val, id) => {
+          return (
+            <button
+              className="btn-dark text-white p-1 px-2 mx-5 btn fw-bold"
+              onClick={() => filterItem(Val)}
+              key={id}
+            >
+              {Val}
+            </button>
+          );
+        })}
+        <button
+          className="btn-dark text-white p-1 px-3 mx-5 fw-bold btn"
+          onClick={() => setItem(Data)}
+        >
+          All
+        </button>
+        </div>
         </>
     )
 }
