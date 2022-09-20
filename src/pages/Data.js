@@ -5,7 +5,8 @@ const Data = [
         "images": "https://www.countdown.co.nz/Content/Recipes/227490_ButterChicken_small_174x174.jpg",
         "category": "Lunch",
         "price": "$10.00",
-        "desc": "Butter chicken is a dish of chicken in a spiced curry sauce. The sauce is usually creamy and orange-coloured. It is a popular dish in the Indian subcontinent and among the Indian diaspora. It is often served with naan or rice."
+        "desc": "Butter chicken is a dish of chicken in a spiced curry sauce. The sauce is usually creamy and orange-coloured. It is a popular dish in the Indian subcontinent and among the Indian diaspora. It is often served with naan or rice.",
+        "ingredients": "Chicken, Butter, Tomato, Onion, Garlic, Ginger, Spices, Cream, Salt, Pepper"
     },
     {
         "id": 2,
