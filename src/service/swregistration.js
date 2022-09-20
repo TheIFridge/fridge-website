@@ -2,7 +2,8 @@
 export default function swregistration() {
     let swUrl = `${process.env.PUBLIC_URL}/sw.js`;
     navigator.serviceWorker.register(swUrl).then((response) => {
-        // console.log("response: ", response);
+        console.log("response: ", response);
+        window.localStorage.setItem("userToken","thisisusedtocheckifuserisloggedinbuthiswillbesetwhenuserlogsinafterregistration");
     });
 
     // navigator.serviceWorker.register(swUrl).then(registration => {

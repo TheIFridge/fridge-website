@@ -1,5 +1,7 @@
 // Service Worker - DON'T TOUCH THIS FILE! (yet)!
 console.log("sw file is in the public folder");
+console.log("check for updates to user prefs, save locally");
+// c
 // let cacheData = "appvV1";
 // this.addEventListener("install", (event) => {
 //     event.waitUntil(
