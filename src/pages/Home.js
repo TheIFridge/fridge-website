@@ -15,7 +15,7 @@ export default function Home() {
                     <h1 className="header">
                         Welcome to the Fridge App
                     </h1>
-                    <img src="img/pages/home/fridge.png" class="ImagePosition" width="400" height="300" alt="fridge"></img>
+                    <img src="img/pages/home/fridge.png" className="ImagePosition" width="400" height="300" alt="fridge"></img>
                 </Col>
                 <Col>
                     <br>
@@ -30,13 +30,13 @@ export default function Home() {
                         Mobile Application
                     </h1>
                     <br className="imagePosition"></br>
-                    <img src="img/pages/home/fridgeApp.png" class="ImagePosition" width="350" height="250"  alt="run on mobile"></img>
+                    <img src="img/pages/home/fridgeApp.png" className="ImagePosition" width="350" height="250"  alt="run on mobile"></img>
                 </Col>
                 <Col>
-                    <p class = "Body">
+                    <p className="Body">
                         A resposnive web app that allows you to search for recipes based on the ingredients you have in your fridge.
                     </p>
-                    <p class = "Body">
+                    <p className="Body">
                         The app will also allow you to save your favourite recipes and create your own recipes.
                     </p>
                 </Col>
