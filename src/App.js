@@ -1,5 +1,5 @@
 // react
-import { React, useState, useEffect, useContext } from 'react'
+import { React, useState, useEffect, useContext, useMemo } from 'react'
 
 // react router
 import { Route, Routes } from 'react-router-dom';
@@ -32,6 +32,14 @@ import { userLoggedIn } from './util/Helpers';
 
 // main function
 function App() {
+	const { changeTheme } = useContext(ThemeContext);
+
+	useMemo(() => {
+		changeTheme(getTheme());
+		// console.log('This is useMemo')
+	}, [changeTheme]);
+
+
 	// create state for current user
 	const [currentUser, setCurrentUser] = useState(null);
 	useEffect(() => {
@@ -51,11 +59,13 @@ function App() {
 	// setup document title
 	document.title = "iFridge";
 
-	const { changeTheme } = useContext(ThemeContext);
+	// const { changeTheme } = useContext(ThemeContext);
+	// // const dark = getTheme();
 
-	useEffect(() => {
-		changeTheme(getTheme());
-	});
+	// useLayoutEffect(() => {
+	// 	console.log("current: " + document.body.className);
+	// 	changeTheme(getTheme());
+	// });
 
 	return (
 		<div className="App">
