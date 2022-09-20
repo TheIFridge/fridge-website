@@ -33,7 +33,7 @@ export default function PriceWatch() {
                         Search
                     </Button>
                 </InputGroup>
-               <div>
+                
             <Col xs={12} md={4}>
                 <Row>
                 <Card style={{ width: '25rem', height: '20rem', margin: '5px'}} key={index}>
@@ -51,7 +51,6 @@ export default function PriceWatch() {
                   </Card>
                  </Row>
             </Col>
-            </div> 
             </div>
           );
     };
