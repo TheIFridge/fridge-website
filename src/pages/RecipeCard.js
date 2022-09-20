@@ -1,53 +1,26 @@
 import React from "react";
-
-// const titles = [1, 2, 4, 5, 6, 7, 8, 9, 10]
-
-// export default function Recipe() {
-
-//     const [selected, updateSelect] = useState(1)
-
-//     const onChange = (e) => updateSelect(Number(e.target.value))
-
-//     return (
-//         <Container className="p-3">
-//             <select onChange={onChange}>
-//                 {[1, 2, 3, 4, 5, 6].map(num => <option value={num}>{num}</option>)}
-//             </select>
-//             {titles.filter(n => n === selected).map(num => (
-//                 <Card>
-//                     <Card.Body>
-//                         <Card.Title>{num}</Card.Title>
-//                         <Card.Text>
-//                             Text here.
-//                         </Card.Text>
-//                     </Card.Body>
-//                 </Card>
-//             )
-//             )}
-//         </Container>
-//     );
-
-// }
+import Data from './Data';
 
 const RecipeCard = ({ item }) => {
   return (
     <>
       <div>
         <div>
-          {item.map((Val) => {
+        {item.map((Val) => {
             return (
               <div
+                className="col-md-4 col-sm-6 card my-3 py-3 border-0"
                 key={Val.id}
               >
-                <div>
-                  <img src={Val.img} alt={Val.title}  />
+                <div className="card-img-top text-center">
+                  <img src={Val.images} alt={Val.title} className="photo w-75" />
                 </div>
-                <div>
-                  <div>
-                    {Val.title};
-                    {Val.price};
+                <div className="card-body">
+                  <div className="card-title fw-bold fs-4">
+                    {Val.title} &nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;
+                    {Val.price}
                   </div>
-                  <div>{Val.desc}</div>
+                  <div className="card-text">{Val.desc}</div>
                 </div>
               </div>
             );
