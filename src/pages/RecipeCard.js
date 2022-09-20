@@ -4,8 +4,8 @@ import React from "react";
 const RecipeCard = ({ item }) => {
   return (
     <>
-      <div>
-        <div>
+      <div className="container-fluid">
+        <div className="row justify-content-centre">
         {item.map((Val) => {
             return (
               <div
@@ -21,6 +21,14 @@ const RecipeCard = ({ item }) => {
                     {Val.price}
                   </div>
                   <div className="card-text">{Val.desc}</div>
+                </div>
+                {/*Button that links to the RecipeMethod page*/}
+                <div className="card-footer">
+                  <button className="btn btn-dark text-white fw-bold">
+                    <a href="./RecipeMethod" className="text-white">
+                      View Recipe
+                    </a>
+                  </button>
                 </div>
               </div>
             );
