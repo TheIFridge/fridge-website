@@ -38,7 +38,7 @@ export default function Recipes() {
 
 
 
-// export default function Recepies() {
+// export default function Recipes() {
 
 
 //   return (

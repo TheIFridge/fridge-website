@@ -12,25 +12,25 @@ export default function Home() {
         <>
             <Row>
                 <Col>
-                    <h1 class="header">
+                    <h1 className="header">
                         Welcome to the Fridge App
                     </h1>
-                    <img src ="img/pages/home/fridge.png" class = "ImagePosition" width="400" height ="300"></img>
+                    <img src="img/pages/home/fridge.png" class="ImagePosition" width="400" height="300" alt="fridge"></img>
                 </Col>
                 <Col>
                     <br>
                     </br>
-                    <Button href="./Recepies" variant="primary">Recipe</Button>
+                    <Button href="./Recipes" variant="primary">Recipe</Button>
                 </Col>
             </Row>
             <br></br>
             <Row>
                 <Col>
-                    <h1 class="header">
+                    <h1 className="header">
                         Mobile Application
                     </h1>
-                    <br class="imagePosition"></br>
-                    <img src ="img/pages/home/fridgeApp.png" class = "ImagePosition" width="350" height ="250"></img>
+                    <br className="imagePosition"></br>
+                    <img src="img/pages/home/fridgeApp.png" class="ImagePosition" width="350" height="250"  alt="run on mobile"></img>
                 </Col>
                 <Col>
                     <p class = "Body">
