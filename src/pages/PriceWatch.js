@@ -22,18 +22,26 @@ export default function PriceWatch() {
         {image: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/7._carton_of_eggs-9436ea8.jpg?quality=90&fit=700,350", title: "eggs", text: "eggs", price: "$2.50"},
     ];
 
+
+   
+        
+    
+
+
     const renderCard = (card, index) => {
 
-        return (
-            <div>
-                 <InputGroup className="mb-3">
-					<Form.Control/>
-                    &nbsp;
-                    <Button variant="secondary">
-                        Search
-                    </Button>
-                </InputGroup>
-                
+        // const [searchInput, setSearchInput] = useState("");
+        
+        // let inputHandler = (e) => {
+        //     var lowerCase = e.target.value.toLowerCase();
+        //     setInputText(lowerCase);
+        // }
+
+        // const handleSearchButtonClick = (index) => {
+        //     {inputHandler}
+        // }
+
+        return (             
             <Col xs={12} md={4}>
                 <Row>
                 <Card style={{ width: '25rem', height: '20rem', margin: '5px'}} key={index}>
@@ -51,11 +59,19 @@ export default function PriceWatch() {
                   </Card>
                  </Row>
             </Col>
-            </div>
           );
     };
 
     return <div className="App">
+        <InputGroup className="mb-3">
+			<Form.Control type="searchItem" placeholder="Enter item to search"/>
+            &nbsp;
+            <Button variant="secondary">
+            {/* onClick={() => handleSearchButtonCLick()} */}
+            Search
+            </Button>
+        </InputGroup>
+
         <Row>
         {cardInfo.map(renderCard)}
         </Row>
