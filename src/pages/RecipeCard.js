@@ -1,18 +1,41 @@
 import React from "react";
+import { motion } from "framer-motion";
+import { useState } from "react";
+import { Row,Col } from "react-bootstrap";
+
 // import Data from './Data';
 
 const RecipeCard = ({ item }) => {
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <>
       <div className="container-fluid">
-        <div className="row justify-content-centre">
-        {item.map((Val) => {
-            return (
+        <Row>
+          <Col>
+          {item.map((Val) => {
+          return (
               <div
                 className="col-md-4 col-sm-6 card my-3 py-3 border-0"
                 key={Val.id}
               >
-                <div className="card-img-top text-center">
+                <motion.div onClick={() => setIsOpen(!isOpen)} className="card">
+                  <motion.h2>{Val.title}</motion.h2>
+
+                  <motion.div>
+                    <motion.img src={Val.images} alt={Val.title} className="photo w-75"></motion.img>
+                    <motion.div>
+                      {Val.title}
+                      <br></br>
+                      {Val.price}
+                    </motion.div>
+                  </motion.div>
+                  {isOpen &&
+                    <motion.div>
+                      {Val.method}
+                    </motion.div>
+                  }
+
+                  {/* <div className="card-img-top text-center">
                   <img src={Val.images} alt={Val.title} className="photo w-75" />
                 </div>
                 <div className="card-body">
@@ -21,22 +44,21 @@ const RecipeCard = ({ item }) => {
                     {Val.price}
                   </div>
                   <div className="card-text">{Val.desc}</div>
-                </div>
-                {/*Button that links to the RecipeMethod page*/}
-                <div className="card-footer">
-                  <button className="btn btn-dark text-white fw-bold">
-                    <a href="./RecipeMethod" className="text-white">
-                      View Recipe
-                    </a>
-                  </button>
-                </div>
+                </div> */}
+                </motion.div>
               </div>
             );
           })}
-        </div>
+          </Col>
+        
+        </Row>
+        {/* <div className="row justify-content-centre"> */}
+          
+        {/* </div> */}
       </div>
     </>
   )
 }
+
 
 export default RecipeCard;
