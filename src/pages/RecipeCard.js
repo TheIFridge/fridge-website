@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { Button } from "react-bootstrap/Button";
 
 // import Data from './Data';
 
@@ -12,10 +13,7 @@ const RecipeCard = ({ item }) => {
         <motion.div className="row justify-content-center">
           {item.map((Val) => {
             return (
-              
-
-
-              <motion.div onClick={() => setIsOpen(!isOpen)} className="col-md-4 col-sm-6 card my-3 py-3 border-0" key={Val.id}>
+              <motion.div onClick={() => setIsOpen(!isOpen)} className="col-sm-4 row-sm-6 card my-3 py-3 border-1 me-1 18rem" key={Val.id}>
                 <motion.div className="card-img-top text-center">
                   <img src={Val.images} alt={Val.title} className="photo w-75" />
                 </motion.div>
@@ -30,6 +28,14 @@ const RecipeCard = ({ item }) => {
                       {Val.method}
                     </motion.div>
                   }
+                  
+
+                  {/*map a button to an id */}
+                  {/* <motion.div ButtonKey={Val.id}>
+                    <Button>
+                      <a href={Val.id} src ="/RecipeMethod">View Recipe</a>
+                    </Button>
+                  </motion.div> */}
                 </motion.div>
               </motion.div>
             );
@@ -42,20 +48,3 @@ const RecipeCard = ({ item }) => {
 
 
 export default RecipeCard;
-{/* <motion.div onClick={() => setIsOpen(!isOpen)} className="card">
-                  <motion.div className="card-img-top text-center">
-                    <motion.img src={Val.images} alt={Val.title} className="photo w-75"></motion.img>
-                    <motion.div>
-                      <motion.div>
-                        {Val.title}
-                        <br></br>
-                        {Val.price}
-                      </motion.div>
-                    </motion.div>
-                  </motion.div>
-                  {isOpen &&
-                    <motion.div>
-                      {Val.method}
-                    </motion.div>
-                  }
-                </motion.div> */}
