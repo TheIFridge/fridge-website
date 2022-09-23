@@ -1,5 +1,5 @@
 // react
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 
 import InputGroup from 'react-bootstrap/InputGroup'
 import Button from 'react-bootstrap/Button'
@@ -17,6 +17,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
 import { getDark } from '../util/Helpers';
+import { getUserDetails } from '../util/Functions';
 
 // main function
 export default function Settings() {
@@ -27,11 +28,32 @@ export default function Settings() {
 		changeTheme(darkMode ? themes.light : themes.dark);
 	}
 
+	// get userjson
+	const [loading, setLoading] = useState(false);
+
+	const [userJson, setUserJson] = useState({});
+
+	!loading && getUserDetails(sessionStorage.getItem("token"), sessionStorage.getItem("userid")).then(async (response) => {
+		const data = await response.json();
+		setUserJson(data);
+		setLoading(true);
+	});
+
 	// create states for each registration field
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
 	const [displayName, setDisplayName] = useState('');
 	const [email, setEmail] = useState('');
+
+	// react on page load
+	useEffect(() => {
+		if(loading) {
+			setFirstName(userJson.firstName);
+			setLastName(userJson.lastName);
+			setDisplayName(userJson.username);
+			setEmail(userJson.email);
+		}
+	}, [loading, userJson]);
 
 	const handleSubmit = e => {
 		e.preventDefault();
@@ -124,7 +146,7 @@ export default function Settings() {
 					</Col>
 					<Col xs={12} md={4} className="mb-4">
 						<Button variant="danger" onClick={() => {
-						console.log("saved!");
+						console.log("password reset - todo!");
 						}}><FontAwesomeIcon icon={faLock} />&nbsp;&nbsp;Reset Password</Button>
 					</Col>
 					<Col xs={12} md={4} className="mb-4">

@@ -68,38 +68,6 @@ export default function Register() {
 			});
 		}
 
-
-		// 	signup(auth(), email, password)
-		// 	.then(() => {
-		// 		verify(auth().currentUser)   
-		// 		.then(() => {
-		// 			setTimeActive(true);
-		// 			navigate('/verify-email');
-
-		// 			let data = {
-		// 				firstName: firstName,
-		// 				lastName: lastName,
-		// 				displayName: firstName + '' + lastName + generateRandom() + '_' + generateRandom(),
-		// 				uid: auth().currentUser.uid,
-		// 				joined: new Date().toISOString(),
-		// 				dietryReq: [],
-		// 				profilePicture: '',
-		// 				darkMode: false,
-		// 				paymentTier: 'Free',
-		// 				paymentExpiration: ''
-		// 			};
-				
-		// 			try {
-		// 				addDoc(ref, data);
-		// 			} catch (err) {
-		// 				console.log(err);
-		// 			}
-
-		// 		}).catch((err) => alert(err.message))
-		// 	})
-		// 	.catch(err => setUserMessage(err.message));
-		// }
-
 		setFirstName('');
 		setLastName('');
 		setEmail('');
