@@ -28,6 +28,9 @@ import Recipes from './pages/Recipes';
 // import RecipeMethod from './pages/RecipeMethod';
 
 import Recipe1 from './pages/recipes/Recipe1';
+import Recipe2 from './pages/recipes/Recipe2';
+import Recipe3 from './pages/recipes/Recipe3';
+import Recipe4 from './pages/recipes/Recipe4';
 
 // styles
 import './style/App.css';
@@ -89,6 +92,9 @@ function App() {
 						<Route exact path="/pricewatch" element={<PriceWatch/>} />
 						<Route exact path="/recipes" element={<Recipes/>} />
 						<Route exact path="/settings" element={<Settings/>} />
+						<Route exact path="/recipes/Recipe2" element={<Recipe2/>} />
+						<Route exact path="/recipes/Recipe3" element={<Recipe3/>} />
+						<Route exact path="/recipes/Recipe4" element={<Recipe4/>} />
 						{/* <Route exact path="/recipemethod" element={<RecipeMethod/>} /> */}
 
 						<Route exact path="/recipes/recipe1" element={<Recipe1/>} />

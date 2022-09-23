@@ -9,7 +9,7 @@ export default function Recipe1() {
         <>
             <h1>Butter Chicken</h1>
             <div>
-                <img src="https://www.countdown.co.nz/Content/Recipes/227490_ButterChicken_small_174x174.jpg"></img>
+                <img src="https://www.countdown.co.nz/Content/Recipes/227490_ButterChicken_small_174x174.jpg " alt = "image1"></img>
             </div>
             <br></br>
             <Card>
