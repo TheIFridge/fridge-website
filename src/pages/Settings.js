@@ -30,14 +30,8 @@ export default function Settings() {
 
 	// get userjson
 	const [loading, setLoading] = useState(false);
-
 	const [userJson, setUserJson] = useState({});
 
-	!loading && getUserDetails(sessionStorage.getItem("token"), sessionStorage.getItem("userid")).then(async (response) => {
-		const data = await response.json();
-		setUserJson(data);
-		setLoading(true);
-	});
 
 	// create states for each registration field
 	const [firstName, setFirstName] = useState('');
@@ -47,11 +41,18 @@ export default function Settings() {
 
 	// react on page load
 	useEffect(() => {
+		
+		!loading && getUserDetails(sessionStorage.getItem("token"), sessionStorage.getItem("userid")).then(async (response) => {
+			const data = await response.json();
+			setUserJson(data);
+			setLoading(true);
+		});
+
 		if(loading) {
-			setFirstName(userJson.firstName);
-			setLastName(userJson.lastName);
+			setFirstName(userJson.first_name);
+			setLastName(userJson.last_name);
 			setDisplayName(userJson.username);
-			setEmail(userJson.email);
+			// setEmail(userJson.email);
 		}
 	}, [loading, userJson]);
 
