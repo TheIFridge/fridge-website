@@ -4,41 +4,56 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { Button } from 'react-bootstrap';
 
-
+import { userLoggedIn } from '../util/Helpers';
 
 // main function
 export default function Home() {
     return (
         <>
-            <Row>
-                <Col>
-                    <h1 className="header">
-                        Welcome to the Fridge App
-                    </h1>
-                    <img src="img/pages/home/fridge.png" className="ImagePosition" width="400" height="300" alt="fridge"></img>
-                </Col>
-                <Col>
-                    <br>
-                    </br>
-                    <Button href="./Recipes" variant="primary">Recipe</Button>
+            {/* JUMBO TEXT ifridge title */}
+            <Row className="justify-content-center">
+                <Col xs={12} md={8} lg={6}>
+                    <h1 className="text-center">iFridge</h1>
                 </Col>
             </Row>
-            <br></br>
-            <Row>
-                <Col>
-                    <h1 className="header">
-                        Mobile Application
-                    </h1>
-                    <br className="imagePosition"></br>
-                    <img src="img/pages/home/fridgeApp.png" className="ImagePosition" width="350" height="250"  alt="run on mobile"></img>
+
+            <br/>
+
+            {/* JUMBO TEXT ifridge subtitle */}
+            <Row className="justify-content-center">
+                <Col xs={12} md={8} lg={6}>
+                    <h4 className="text-center">Your Fridge. Your Way.</h4>
                 </Col>
-                <Col>
-                    <p className="Body">
-                        A resposnive web app that allows you to search for recipes based on the ingredients you have in your fridge.
-                    </p>
-                    <p className="Body">
-                        The app will also allow you to save your favourite recipes and create your own recipes.
-                    </p>
+            </Row>
+
+            <br/>
+
+            <br/>
+
+            {/* Picture of a Fridge */}
+            <Row className="justify-content-center">
+                <Col xs={12} md={8} lg={6}>
+                    <img src="img/pages/home/fridgeApp.png" alt="Fridge" className="img-fluid"/>
+                </Col>
+            </Row>
+
+            <br/>
+
+            <br/>
+
+            {/* Login button - very big*/}
+            <Row className="justify-content-center">
+                <Col xs={12} md={8} lg={6}>
+                    {/* conditional to say if user logged in or not */}
+                    {userLoggedIn() ? (
+                        <Button variant="primary" size="lg" href="/inventory">
+                            Go to Fridge
+                        </Button>
+                    ) : (
+                        <Button variant="primary" size="lg" href="/login">
+                            Login
+                        </Button>
+                    )}
                 </Col>
             </Row>
         </>

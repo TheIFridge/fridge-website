@@ -2,18 +2,17 @@
 import React from 'react';
 
 // firebase
-import { getAuth as auth, signOut } from "firebase/auth";
+// import { getAuth as auth, signOut } from "firebase/auth";
 
 import { logUserOut } from '../util/Helpers';
 
 // main function
 export default function Logout() {
-    signOut(auth()).then(() => {
-        logUserOut();
-        window.location.href = "/";
-    }).catch((error) => {
-        console.log(error)
-    });
+    // log user out
+    logUserOut();
+
+    // redirect to home page
+    window.location.href = '/home';
 
     return (
         <div>
