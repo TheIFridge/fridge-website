@@ -1,23 +1,24 @@
-import Data from './Data';
 import React from "react";
-import { Router } from 'react-router-dom';
+import { useRef } from "react";
+import RecipeCard from "./RecipeCard";
+import Data from "./Data";
+import { Button } from "react-bootstrap";
+
+export default function RecipeMethod() {
+    const ref = useRef(null);
 
 
-const RecipeMethod = ({ item }) => {
+    //call the getter to get the id from RecipeCard
+    const getRecipeId = () => {
+        RecipeCard.getRecipeId();
+    }
 
-    item.map((Val) => {
-        return (
-            <Router>
-                {/*depending on the button pressed on the recipe cards it will display a diffirent page*/}
-                
-                <div>
-                    {Val.method}
-                </div>
-            </Router>
 
-        )
-
-    })
-}
-
-export default RecipeMethod;
+    return (
+        <div>
+            <Button  onClick={getRecipeId}>
+                Recipe
+            </Button>
+        </div>
+    );
+};

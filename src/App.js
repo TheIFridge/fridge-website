@@ -25,6 +25,10 @@ import Inventory from './pages/Inventory';
 import PriceWatch from './pages/PriceWatch';
 import Settings from './pages/Settings';
 import Recipes from './pages/Recipes';
+// import RecipeMethod from './pages/RecipeMethod';
+
+import Recipe1 from './pages/recipes/Recipe1';
+
 // styles
 import './style/App.css';
 
@@ -85,6 +89,9 @@ function App() {
 						<Route exact path="/pricewatch" element={<PriceWatch/>} />
 						<Route exact path="/recipes" element={<Recipes/>} />
 						<Route exact path="/settings" element={<Settings/>} />
+						{/* <Route exact path="/recipemethod" element={<RecipeMethod/>} /> */}
+
+						<Route exact path="/recipes/recipe1" element={<Recipe1/>} />
 					</Routes>
 				</div>
 				{/* <Footer /> */}
