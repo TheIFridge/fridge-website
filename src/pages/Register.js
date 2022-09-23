@@ -5,10 +5,10 @@ import { React, useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 
 // firebase
-import { firestore } from '../service/firebase';
-import { addDoc, collection } from '@firebase/firestore';
-import { getAuth as auth, createUserWithEmailAndPassword as signup, sendEmailVerification as verify} from "firebase/auth";
-import { useAuthValue} from '../auth/AuthContext'
+// import { firestore } from '../service/firebase';
+// import { addDoc, collection } from '@firebase/firestore';
+// import { getAuth as auth, createUserWithEmailAndPassword as signup, sendEmailVerification as verify} from "firebase/auth";
+// import { useAuthValue} from '../auth/AuthContext'
 
 // components
 import Button from 'react-bootstrap/Button';
@@ -16,11 +16,10 @@ import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 
+import { register } from '../util/Functions.js';
+
 // main function
 export default function Register() {
-	// get current user from context
-	// const {currentUser} = useAuthValue();
-
 	// create states for each registration field
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
@@ -28,11 +27,8 @@ export default function Register() {
 	const [password, setPassword] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
 	const [userMessage, setUserMessage] = useState('');
+	
 	const navigate = useNavigate();
-	const {setTimeActive} = useAuthValue();
-
-	// setup firestore reference
-	const ref = collection(firestore, 'users');
 	
 	// check if passwords match
 	const checkPass = () => {
@@ -54,36 +50,55 @@ export default function Register() {
 
 		if(checkPass()) {
 			// Create a new user with email and password using firebase
-			signup(auth(), email, password)
-			.then(() => {
-				verify(auth().currentUser)   
-				.then(() => {
-					setTimeActive(true);
-					navigate('/verify-email');
-
-					let data = {
-						firstName: firstName,
-						lastName: lastName,
-						displayName: firstName + '' + lastName + generateRandom() + '_' + generateRandom(),
-						uid: auth().currentUser.uid,
-						joined: new Date().toISOString(),
-						dietryReq: [],
-						profilePicture: '',
-						darkMode: false,
-						paymentTier: 'Free',
-						paymentExpiration: ''
-					};
-				
-					try {
-						addDoc(ref, data);
-					} catch (err) {
-						console.log(err);
+			register(email, firstName, lastName, firstName + '' + lastName + generateRandom() + '_' + generateRandom(), password, password).then(response => {
+				console.log(response);
+				var valid = false;
+				if (response.status === 200) {
+					if(response.json().token !== '') {
+						valid = true;
+						sessionStorage.setItem("token", response.token);
+						sessionStorage.setItem("loggedIn", "true");
+						navigate('/');
 					}
+				}
 
-				}).catch((err) => alert(err.message))
-			})
-			.catch(err => setUserMessage(err.message));
+				if (!valid) {
+					setUserMessage('Registration failed. Please try again.');
+				}
+			});
 		}
+
+
+		// 	signup(auth(), email, password)
+		// 	.then(() => {
+		// 		verify(auth().currentUser)   
+		// 		.then(() => {
+		// 			setTimeActive(true);
+		// 			navigate('/verify-email');
+
+		// 			let data = {
+		// 				firstName: firstName,
+		// 				lastName: lastName,
+		// 				displayName: firstName + '' + lastName + generateRandom() + '_' + generateRandom(),
+		// 				uid: auth().currentUser.uid,
+		// 				joined: new Date().toISOString(),
+		// 				dietryReq: [],
+		// 				profilePicture: '',
+		// 				darkMode: false,
+		// 				paymentTier: 'Free',
+		// 				paymentExpiration: ''
+		// 			};
+				
+		// 			try {
+		// 				addDoc(ref, data);
+		// 			} catch (err) {
+		// 				console.log(err);
+		// 			}
+
+		// 		}).catch((err) => alert(err.message))
+		// 	})
+		// 	.catch(err => setUserMessage(err.message));
+		// }
 
 		setFirstName('');
 		setLastName('');
