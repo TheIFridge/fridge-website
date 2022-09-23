@@ -11,6 +11,12 @@ const RecipeCard = ({ item }) => {
 
 
 
+  //getter that returs the recipe id
+  const getRecipeId = event => {
+    return event.currentTarget.id;
+  }
+
+
 
   return (
     <>
@@ -26,7 +32,7 @@ const RecipeCard = ({ item }) => {
                     <Card.Text>
                       {Val.desc}
                     </Card.Text>
-                    <Button variant="primary" id={Val.id} onClick={Val.id} href="./recipes/Recipe1">View Recipe</Button>
+                    <Button variant="primary" id={Val.id} onClick={getRecipeId} href="/recipes/Recipe1">View Recipe</Button>
                   </Card.Body>
                 </Card>
             );
