@@ -1,5 +1,5 @@
 // react
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 // components
 import Container from 'react-bootstrap/Container';
@@ -11,17 +11,9 @@ import { userLoggedIn } from '../util/Helpers';
 
 // main function
 export default function NavigationBar() {
-
-    const [userActive, setUserActive] = useState(userLoggedIn());
-    useEffect(() => {
-        if (userActive !== userLoggedIn()) {
-            setUserActive(userLoggedIn());
-        }
-    }, [userActive, setUserActive]);
-
     return (
         <>
-            {userActive ? (
+            {userLoggedIn() ? (
                 <Navbar expand="lg" id="navB" className={sessionStorage.getItem("theme") !== "dark-mode" ? "navbar-light" : "navbar-dark"}>
                     <Container>
                         <Navbar.Brand href="/home">iFridge</Navbar.Brand>
