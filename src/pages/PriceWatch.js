@@ -1,4 +1,3 @@
-// react
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import React from 'react';
@@ -6,6 +5,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
+import { useState } from 'react';
+// import PriceWatchSearchBar from "../components/PriceWatchSearchBar";
 
 export default function PriceWatch() {
   
@@ -22,59 +23,83 @@ export default function PriceWatch() {
         {image: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/7._carton_of_eggs-9436ea8.jpg?quality=90&fit=700,350", title: "eggs", text: "eggs", price: "$2.50"},
     ];
 
+    // const handleSearchButtonClick = () => {
+    //     ("get beaned")     
+    // };
 
-   
+    const [searchTerm, setSearchTerm] = useState("");
         
-    
+    // let inputHandler = (e) => {
+    //     var lowerCase = e.target.value.toLowerCase();
+    //     setSearchInput(lowerCase);
+    // }
 
+    // const renderCard = (card, index) => {
 
-    const renderCard = (card, index) => {
-
-        // const [searchInput, setSearchInput] = useState("");
-        
-        // let inputHandler = (e) => {
-        //     var lowerCase = e.target.value.toLowerCase();
-        //     setInputText(lowerCase);
-        // }
-
-        // const handleSearchButtonClick = (index) => {
-        //     {inputHandler}
-        // }
-
-        return (             
-            <Col xs={12} md={4}>
-                <Row>
-                <Card style={{ width: '25rem', height: '20rem', margin: '5px'}} key={index}>
-                    <Card.Img style={{width: 120, height: 80}}variant="top" src={card.image} />
-                    <Card.Body>
-                      <Card.Title>{card.title}</Card.Title>
-                      <Card.Text>
-                       {card.text}
-                      </Card.Text>
-                      <Card.Text>
-                       {card.price}
-                      </Card.Text>
-                      <Button variant="primary">Go somewhere</Button>
-                    </Card.Body>
-                  </Card>
-                 </Row>
-            </Col>
-          );
-    };
+    //     return (             
+    //         <Col xs={12} md={4}>
+    //             <Row>
+    //             <Card style={{ width: '25rem', height: '20rem', margin: '5px'}} key={index}>
+    //                 <Card.Img style={{width: 120, height: 80}}variant="top" src={card.image} />
+    //                 <Card.Body>
+    //                   <Card.Title>{card.title}</Card.Title>
+    //                   <Card.Text>
+    //                    {card.text}
+    //                   </Card.Text>
+    //                   <Card.Text>
+    //                    {card.price}
+    //                   </Card.Text>
+    //                   <Button variant="primary">Go somewhere</Button>
+    //                 </Card.Body>
+    //               </Card>
+    //              </Row>
+    //         </Col>
+    //       );
+    // };
 
     return <div className="App">
         <InputGroup className="mb-3">
 			<Form.Control type="searchItem" placeholder="Enter item to search"/>
             &nbsp;
-            <Button variant="secondary">
-            {/* onClick={() => handleSearchButtonCLick()} */}
+            <Button variant="secondary" onClick={(event) => {setSearchTerm(event.target.value);}} >
             Search
             </Button>
         </InputGroup>
 
-        <Row>
-        {cardInfo.map(renderCard)}
-        </Row>
+        {cardInfo.filter((val) => {
+            if (searchTerm === "") { 
+                return val
+            } else if (val.text.toLowerCase().includes(searchTerm.toLowerCase())) {
+                return val
+            } return false;
+        }).map((val, key) => {
+            return (
+                <Col xs={12} md={4}>
+                <Row>
+                    <Card style={{ width: '25rem', height: '20rem', margin: '5px'}} key={key}>
+                        <Card.Img style={{width: 120, height: 80}}variant="top" src={val.image} />
+                        <Card.Body>
+                        <Card.Title>{val.title}</Card.Title>
+                        <Card.Text>
+                        {val.text}
+                        </Card.Text>
+                        <Card.Text>
+                        {val.price}
+                        </Card.Text>
+                        <Button variant="primary">Go somewhere</Button>
+                        </Card.Body>
+                    </Card>
+                </Row>
+            </Col>
+            )
+        })}
+
+
+        {/* <PriceWatchSearchBar placeholder="Enter item to search" data={cardInfo}/> */}
+
+        {/* <Row> */}
+        {/* {cardInfo.map(renderCard)} */}
+        {/* </Row> */}
     </div>
     
 }
