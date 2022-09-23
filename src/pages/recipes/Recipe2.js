@@ -8,7 +8,7 @@ export default function Recipe2() {
         <>
             <h1>Roasted Lamb</h1>
             <div>
-                <img src="https://www.countdown.co.nz/Content/Recipes/227490_Herb-InfusedRoastLamb_small_174x174.jpg"></img>
+                <img src="https://www.countdown.co.nz/Content/Recipes/227490_Herb-InfusedRoastLamb_small_174x174.jpg" alt = "image2"></img>
             </div>
 
             <br></br>
