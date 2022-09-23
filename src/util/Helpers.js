@@ -19,85 +19,40 @@ export function logUserOut() {
 export async function postFetch(endpoint, data, token) {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    // myHeaders.append("Accept", "application/json");
-    // myHeaders.append("Accept-Encoding", "gzip, deflate, br");
 
-    // var raw = JSON.stringify({
-    //     "email": "blake@fernandes.co.nz",
-    //     "password": "8FSaQwJh#A1G"
-    // });
+    if (token !== undefined) {
+        myHeaders.append("Authorization", `Bearer ${token}`);
+    }
 
     var requestOptions = {
         method: 'POST',
-        // mode: 'no-cors',
         headers: myHeaders,
         body: data,
         redirect: 'follow'
     };
 
-    return fetch(endpoint, requestOptions)
+    return await fetch(endpoint, requestOptions)
     .then(response => response)
     .catch(error => console.log('error', error));
-
-    // var myHeaders = new Headers();
-    // myHeaders.append("Content-Type", "application/json");
-    
-    // if (token) {
-    //     myHeaders.append("Authorization", `Token ${token}`);
-    // }
-
-    // var requestOptions = {
-    //     method: 'POST',
-    //     headers: myHeaders,
-    //     body: data,
-    //     redirect: 'follow'
-    // };
-
-    // return fetch(endpoint, requestOptions)
-    // .then(response => response)
-    // .catch(error => console.log('error', error));
 }
 
-// export async function postData(identifier, data) {
-//     const send = {"identifier": identifier,"data": data};
-//     return postFetch(`${process.env.REACT_APP_LOCAL_API_URL}/data/`, JSON.stringify(send))
-// }
-
-export async function getFetch(endpoint, data, token) {
+export async function getFetch(endpoint, token) {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     
-    if (token) {
-        myHeaders.append("Authorization", `Token ${token}`);
+    if (token !== undefined) {
+        myHeaders.append("Authorization", `Bearer ${token}`);
     }
 
     var requestOptions = {
         method: 'GET',
         headers: myHeaders,
-        body: data,
         redirect: 'follow'
     };
 
-    return fetch(endpoint, requestOptions)
+    return await fetch(endpoint, requestOptions)
     .then(response => response)
     .catch(error => console.log('error', error));
-    // return fetch(endpoint, {
-    //     cache: "default",
-    //     method: "GET",
-    //     headers: {
-    //         headers: {
-    //             'Accept': 'application/json',
-    //             "Accept-Encoding": "gzip, deflate, br",
-    //             'Content-Type': 'application/json',
-    //             'Authorization': token ? `Bearer ${token}` : ''
-    //         },
-    //     },
-    //     body: data
-    // }).then(response => response.json()).then(data => {
-    //     return data;
-    // }).catch(error => {
-    //     console.log(error);
-    // });
 }
 
 export async function putFetch(endpoint, data, token) {
@@ -118,22 +73,5 @@ export async function putFetch(endpoint, data, token) {
     return fetch(endpoint, requestOptions)
     .then(response => response)
     .catch(error => console.log('error', error));
-    // return fetch(endpoint, {
-    //     cache: "default",
-    //     method: "PUT",
-    //     headers: {
-    //         headers: {
-    //             'Accept': 'application/json',
-    //             "Accept-Encoding": "gzip, deflate, br",
-    //             'Content-Type': 'application/json',
-    //             'Authorization': token ? `Bearer ${token}` : ''
-    //         },
-    //     },
-    //     body: data
-    // }).then(response => response.json()).then(data => {
-    //     return data;
-    // }).catch(error => {
-    //     console.log(error);
-    // });
 }
 
