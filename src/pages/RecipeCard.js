@@ -1,61 +1,46 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { useState } from "react";
-import { Row,Col } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import { useRef } from "react";
+import { Card } from "react-bootstrap";
 
 // import Data from './Data';
 
 const RecipeCard = ({ item }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const ref = useRef(null);
+
+
+
+  //getter that returs the recipe id
+  const getRecipeId = event => {
+    return event.currentTarget.id;
+  }
+
+
+
   return (
     <>
-      <div className="container-fluid">
-        <Row>
-          <Col>
+      <motion.div className="container-fluid">
+        <motion.div className="row justify-content-center">
           {item.map((Val) => {
-          return (
-              <div
-                className="col-md-4 col-sm-6 card my-3 py-3 border-0"
-                key={Val.id}
-              >
-                <motion.div onClick={() => setIsOpen(!isOpen)} className="card">
-                  <motion.h2>{Val.title}</motion.h2>
-
-                  <motion.div>
-                    <motion.img src={Val.images} alt={Val.title} className="photo w-75"></motion.img>
-                    <motion.div>
-                      {Val.title}
-                      <br></br>
-                      {Val.price}
-                    </motion.div>
-                  </motion.div>
-                  {isOpen &&
-                    <motion.div>
-                      {Val.method}
-                    </motion.div>
-                  }
-
-                  {/* <div className="card-img-top text-center">
-                  <img src={Val.images} alt={Val.title} className="photo w-75" />
-                </div>
-                <div className="card-body">
-                  <div className="card-title fw-bold fs-4">
-                    {Val.title} &nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;
-                    {Val.price}
-                  </div>
-                  <div className="card-text">{Val.desc}</div>
-                </div> */}
-                </motion.div>
-              </div>
+            return (
+              
+                <Card key={Val.id} style={{ width: '18rem' }} className="my-2">
+                  <Card.Img variant="top" src={Val.images} />
+                  <Card.Body>
+                    <Card.Title>{Val.title}</Card.Title>
+                    <Card.Text>
+                      {Val.desc}
+                    </Card.Text>
+                    <Button variant="primary" id={Val.id} onClick={getRecipeId} href="/recipes/Recipe1">View Recipe</Button>
+                  </Card.Body>
+                </Card>
             );
           })}
-          </Col>
-        
-        </Row>
-        {/* <div className="row justify-content-centre"> */}
-          
-        {/* </div> */}
-      </div>
+        </motion.div>
+      </motion.div>
+
+
     </>
   )
 }
