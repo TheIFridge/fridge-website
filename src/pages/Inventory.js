@@ -77,6 +77,13 @@ export default function Inventory() {
 	const handleQuantityIncrease = (index) => {
 		const newItems = [...items];
 		newItems[index].quantity++;
+		putUserInventoryItem(sessionStorage.getItem("token"), sessionStorage.getItem("userid"), {
+			ingredient: {
+				identifier: newItems[index].ingredient.identifier ?? newItems[index].ingredient
+			},
+			quantity: newItems[index].quantity,
+			expiry: newItems[index].expiry
+		});
 		setItems(newItems);
 	};
 
@@ -84,6 +91,13 @@ export default function Inventory() {
 		const newItems = [...items];
 		newItems[index].quantity--;
 		const filteredItems = newItems.filter((item) => item.quantity > 0);
+		putUserInventoryItem(sessionStorage.getItem("token"), sessionStorage.getItem("userid"), {
+			ingredient: {
+				identifier: newItems[index].ingredient.identifier ?? newItems[index].ingredient
+			},
+			quantity: newItems[index].quantity,
+			expiry: newItems[index].expiry
+		});
 
 		setItems(filteredItems);
 	};
