@@ -1,6 +1,10 @@
 // import post fecch from the helpers.js file
 import { postFetch, getFetch } from './Helpers.js'
 
+export async function getIngredients(token) {
+    return await getFetch(`${process.env.REACT_APP_LOCAL_API_URL}/api/ingredients/`, token);
+}
+
 export async function login(email, password) {
     // return postFetch(`${process.env.REACT_APP_LOCAL_API_URL}/api/auth/login/`, { email: email, password: password });
     return await postFetch(`${process.env.REACT_APP_LOCAL_API_URL}/api/auth/login/`, JSON.stringify({ email: email, password: password }));

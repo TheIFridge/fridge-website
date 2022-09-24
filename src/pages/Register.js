@@ -57,7 +57,7 @@ export default function Register() {
 				if (response.status === 201) {
 					if(data.userToken !== '') {
 						valid = true;
-						sessionStorage.setItem("token", response.token);
+						sessionStorage.setItem("token", response.userToken);
 						sessionStorage.setItem("loggedIn", "true");
 						navigate('/');
 					}
