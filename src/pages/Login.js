@@ -26,7 +26,6 @@ export default function Login() {
 	const handleLogin = e => {
 		e.preventDefault();
 		if (email !== '' && password !== '') {
-			console.log(email + ' ' + password);
 			login(email, password).then(async (response) => {
 				var valid = false;
 				let json = await response.json();

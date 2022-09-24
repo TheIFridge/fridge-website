@@ -42,7 +42,6 @@ export default function Inventory() {
 
 		var add = true;
 		for(var i = 0; i < items.length; i++) {
-			console.log(items[i].ingredient.generic_name);
 			if(String(items[i].ingredient.generic_name).trim().toLowerCase() === String(inputValue.trim()).toLowerCase()) {
 				add = false;
 				handleQuantityIncrease(i);
@@ -99,6 +98,8 @@ export default function Inventory() {
 			expiry: newItems[index].expiry
 		});
 
+		
+
 		setItems(filteredItems);
 	};
 
@@ -145,7 +146,7 @@ export default function Inventory() {
 												<Card.Title>{capitalise(userIngredient.ingredient.generic_name ?? userIngredient.ingredient ?? "Unknown")}</Card.Title>
 												<Card.Text>Expiry: {userIngredient.expiry === 0 ? "Never" : millisecondsToString(new Date() - userIngredient.expiry)} </Card.Text>
 											</Card.Body>
-											<Card.Footer style={{width: '100%'}}>
+											<Card.Footer style={{width: '80%'}}>
 												<Button style={{width: '50%'}} variant="success" onClick={() => handleQuantityIncrease(index)}>+</Button>
 												<Button style={{width: '50%'}} variant="danger" onClick={() => handleQuantityDecrease(index)}>-</Button>
 											</Card.Footer>

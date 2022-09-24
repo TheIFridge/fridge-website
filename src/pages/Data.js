@@ -7,7 +7,8 @@ const Data = [
         "price": "$10.00",
         "desc": "Butter chicken is a dish of chicken in a spiced curry sauce. The sauce is usually creamy and orange-coloured. It is a popular dish in the Indian subcontinent and among the Indian diaspora. It is often served with naan or rice.",
         "ingredients": "Chicken, Butter, Tomato, Onion, Garlic, Ginger, Spices, Cream, Salt, Pepper",
-        "method": "1. Heat oil in a large saucepan over medium heat. Add onion and cook, stirring, for 5 minutes or until softened. Add garlic and ginger and cook, stirring, for 1 minute or until fragrant. Add tomato and cook, stirring, for 5 minutes or until thickened. Add chicken and cook, stirring, for 5 minutes or until chicken is browned. Add butter and cook, stirring, for 1 minute or until melted. Add cream and cook, stirring, for 2 minutes or until heated through. Season with salt and pepper. Serve with rice and naan."
+        "method": "1. Heat oil in a large saucepan over medium heat. Add onion and cook, stirring, for 5 minutes or until softened. Add garlic and ginger and cook, stirring, for 1 minute or until fragrant. Add tomato and cook, stirring, for 5 minutes or until thickened. Add chicken and cook, stirring, for 5 minutes or until chicken is browned. Add butter and cook, stirring, for 1 minute or until melted. Add cream and cook, stirring, for 2 minutes or until heated through. Season with salt and pepper. Serve with rice and naan.",
+        "url": "/receipes/receipe1"
     },
     {
         "id": 2,

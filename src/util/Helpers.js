@@ -37,8 +37,6 @@ export function capitalise(word) {
 }
 
 export function millisecondsToString(millis) {
-    // console.log("trying to convert " + millis + " milliseconds to a string");
-    // var isNegative = millis < 0;
     var prefix = millis < 0 ? "in " : "";
     var suffix = millis > 0 ? " ago" : "";
     millis = Math.abs(millis);
@@ -138,4 +136,3 @@ export async function putFetch(endpoint, data, token) {
     .then(response => response)
     .catch(error => console.log('error', error));
 }
-
