@@ -28,6 +28,14 @@ export function timestampToDateString(timestamp) {
     return dateString;
 }
 
+export function capitalise(word) {
+    if(word === undefined) return word;
+    // capitalise the first letter of every word in a string
+    return word.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+
+    // return word.charAt(0).toUpperCase() + word.slice(1);
+}
+
 export function millisecondsToString(millis) {
     // console.log("trying to convert " + millis + " milliseconds to a string");
     // var isNegative = millis < 0;

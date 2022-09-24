@@ -11,9 +11,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 
-import { userLoggedIn, millisecondsToString } from '../util/Helpers';
+import { userLoggedIn, millisecondsToString, capitalise } from '../util/Helpers';
 import { getUserInventory } from '../util/Functions';
-// import { ButtonGroup } from 'react-bootstrap';
 
 // main function
 export default function Inventory() {
@@ -26,13 +25,6 @@ export default function Inventory() {
 	const [inputValue, setInputValue] = useState('');
 
 	useEffect(() => {
-		// loading && getUserInventory(sessionStorage.getItem("token"), sessionStorage.getItem("userid")).then(async (response) => {
-		// 	const data = await response.json();
-		// 	setInventoryJson(data.ingredients);
-		// 	setLoading(true);
-		// 	console.log(data.ingredients);
-		// });
-
 		if(!loading) {
 			getUserInventory(sessionStorage.getItem("token"), sessionStorage.getItem("userid")).then(async (response) => {
 				const data = await response.json();
@@ -50,7 +42,8 @@ export default function Inventory() {
 
 		var add = true;
 		for(var i = 0; i < items.length; i++) {
-			if(String(items[i].ingredient.trim()) === String(inputValue.trim())) {
+			console.log(items[i].ingredient.generic_name);
+			if(String(items[i].ingredient.generic_name).trim().toLowerCase() === String(inputValue.trim()).toLowerCase()) {
 				add = false;
 				handleQuantityIncrease(i);
 				break;
@@ -58,13 +51,19 @@ export default function Inventory() {
 		}
 
 		if(add) {
-			const newItem = {
-				ingredient: inputValue,
-				expiry: 0,
-				quantity: 1,
-			};
+			const newIngredient = {
+				ingredient: {
+					generic_name: inputValue,
+				},
+				expiry: Date.now() + 604800000,
+				quantity: 1
+			}
 
-			const newItems = [...items, newItem];
+			// const newItem = {
+
+			// };
+
+			const newItems = [...items, newIngredient];
 			setItems(newItems);
 			setInputValue('');
 		}
@@ -95,13 +94,28 @@ export default function Inventory() {
 			<div><h1>Inventory</h1></div>
 			<div className='app-background'>
 				<div className='main-container'>
+					<br />
 					<div className='add-item-box'>
-						<InputGroup className="mb-3">
-							<Form.Control value={inputValue} onChange={(event) => setInputValue(event.target.value)} className='add-item-input' placeholder='Add an item'/>
-							&nbsp;
-							<Button variant="primary" type="submit" onClick={() => handleAddButtonClick()}>Add</Button>
+						<InputGroup>
+							<Form.Control
+								value={inputValue}
+								placeholder="Add Item..."
+								aria-label="Search bar with Add and Clear Buttons"
+								onChange={(event) => setInputValue(event.target.value)}
+								className='add-item-input'
+							/>
+							<Button variant="primary"
+								type="submit"
+								onClick={() => handleAddButtonClick()}
+							>Add</Button>
+							<Button variant="info"
+								type="submit"
+								onClick={() => setInputValue('')}
+							>Clear</Button>
 						</InputGroup>
 					</div>
+
+					<br/>
 
 					<div className='item-list'>
 						<Container>
@@ -112,11 +126,11 @@ export default function Inventory() {
 											{/* <Card.Img variant="top" src="https://images-prod.healthline.com/hlcmsresource/images/AN_images/health-benefits-of-apples-1296x728-feature.jpg" /> */}
 											<Card.Header>
 												<Button variant="dark" onClick={() => handleRemoveItem(index)} style={{float: 'right'}}> x </Button>
+												<h3 style={{float: 'left'}}>{userIngredient.quantity}</h3>
 											</Card.Header>
 											<Card.Body>
-												<Card.Title>{userIngredient.ingredient.name}</Card.Title>
+												<Card.Title>{capitalise(userIngredient.ingredient.generic_name)}</Card.Title>
 												<Card.Text>Expiry: {userIngredient.expiry === 0 ? "Never" : millisecondsToString(new Date() - userIngredient.expiry)} </Card.Text>
-												<span> {userIngredient.quantity}</span>
 											</Card.Body>
 											<Card.Footer style={{width: '100%'}}>
 												<Button style={{width: '50%'}} variant="success" onClick={() => handleQuantityIncrease(index)}>+</Button>
@@ -129,7 +143,6 @@ export default function Inventory() {
 							</Row>
 						</Container>						
 					</div>
-					{ loading && <div className='total'>Total items: {items.reduce((accum, item) => accum + item.quantity, 0)}</div>}
 				</div>
 			</div>
 		</div>
