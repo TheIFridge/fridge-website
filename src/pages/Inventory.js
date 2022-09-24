@@ -63,13 +63,14 @@ export default function Inventory() {
 
 			const newItems = [...items, newIngredient];
 			setItems(newItems);
-			setInputValue('');
 		}
 
 		return;
 	};
 
 	const handleRemoveItem = (index) => {
+		const newItems = [...items];
+		deleteUserInventoryItem(sessionStorage.getItem("token"), sessionStorage.getItem("userid"), newItems[index].ingredient.identifier ?? newItems[index].ingredient);
 		setItems((items) =>items.filter((_, i) => i !== index))
 	}
 
@@ -140,7 +141,6 @@ export default function Inventory() {
 								{loading && items.map((userIngredient, index) => (
 									<Col key={index} xs={12} md={4}>
 										<Card style={{ width: '100%', height: '90%' }}>
-											{/* <Card.Img variant="top" src="https://images-prod.healthline.com/hlcmsresource/images/AN_images/health-benefits-of-apples-1296x728-feature.jpg" /> */}
 											<Card.Header>
 												<Button variant="dark" onClick={() => handleRemoveItem(index)} style={{float: 'right'}}> x </Button>
 												<h3 style={{float: 'left'}}>{userIngredient.quantity}</h3>
@@ -149,7 +149,7 @@ export default function Inventory() {
 												<Card.Title>{capitalise(userIngredient.ingredient.generic_name ?? userIngredient.ingredient ?? "Unknown")}</Card.Title>
 												<Card.Text>Expiry: {userIngredient.expiry === 0 ? "Never" : millisecondsToString(new Date() - userIngredient.expiry)} </Card.Text>
 											</Card.Body>
-											<Card.Footer style={{width: '80%'}}>
+											<Card.Footer style={{width: '100%'}}>
 												<Button style={{width: '50%'}} variant="success" onClick={() => handleQuantityIncrease(index)}>+</Button>
 												<Button style={{width: '50%'}} variant="danger" onClick={() => handleQuantityDecrease(index)}>-</Button>
 											</Card.Footer>
