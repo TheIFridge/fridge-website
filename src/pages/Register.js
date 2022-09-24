@@ -50,11 +50,12 @@ export default function Register() {
 
 		if(checkPass()) {
 			// Create a new user with email and password using firebase
-			register(email, firstName, lastName, firstName + '' + lastName + generateRandom() + '_' + generateRandom(), password, password).then(response => {
+			register(email, firstName, lastName, firstName + '' + lastName + generateRandom() + '_' + generateRandom(), password).then(async (response) => {
+				const data = await response.json();
 				console.log(response);
 				var valid = false;
-				if (response.status === 200) {
-					if(response.json().token !== '') {
+				if (response.status === 201) {
+					if(data.userToken !== '') {
 						valid = true;
 						sessionStorage.setItem("token", response.token);
 						sessionStorage.setItem("loggedIn", "true");
@@ -63,7 +64,7 @@ export default function Register() {
 				}
 
 				if (!valid) {
-					setUserMessage('Registration failed. Please try again.');
+					setUserMessage('Registration failed. Please try again later.');
 				}
 			});
 		}
