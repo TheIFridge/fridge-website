@@ -29,3 +29,7 @@ export async function getUserInventory(token, userid) {
 export async function putUserInventoryItem(token, userId, userIngredient) {
     return await putFetch(`${process.env.REACT_APP_LOCAL_API_URL}/api/users/${userId}/inventory/${userIngredient.ingredient.identifier}`, JSON.stringify(userIngredient), token);
 }
+
+export async function postUserInventoryItem(token, userId, userIngredient) {
+    return await postFetch(`${process.env.REACT_APP_LOCAL_API_URL}/api/users/${userId}/inventory/${userIngredient.ingredient.identifier}`, JSON.stringify(userIngredient), token);
+}
