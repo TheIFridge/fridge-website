@@ -136,3 +136,22 @@ export async function putFetch(endpoint, data, token) {
     .then(response => response)
     .catch(error => console.log('error', error));
 }
+
+export async function deleteFetch(endpoint, token) {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    
+    if (token) {
+        myHeaders.append("Authorization", `Bearer ${token}`);
+    }
+
+    var requestOptions = {
+        method: 'DELETE',
+        headers: myHeaders,
+        redirect: 'follow'
+    };
+
+    return fetch(endpoint, requestOptions)
+    .then(response => response)
+    .catch(error => console.log('error', error));
+}

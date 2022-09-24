@@ -12,7 +12,7 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 
 import { userLoggedIn, millisecondsToString, capitalise } from '../util/Helpers';
-import { getUserInventory, putUserInventoryItem } from '../util/Functions';
+import { deleteUserInventoryItem, getUserInventory, putUserInventoryItem } from '../util/Functions';
 
 // main function
 export default function Inventory() {
@@ -90,15 +90,18 @@ export default function Inventory() {
 		const newItems = [...items];
 		newItems[index].quantity--;
 		const filteredItems = newItems.filter((item) => item.quantity > 0);
-		putUserInventoryItem(sessionStorage.getItem("token"), sessionStorage.getItem("userid"), {
-			ingredient: {
-				identifier: newItems[index].ingredient.identifier ?? newItems[index].ingredient
-			},
-			quantity: newItems[index].quantity,
-			expiry: newItems[index].expiry
-		});
 
-		
+		if (newItems[index].quantity <= 0) {
+			deleteUserInventoryItem(sessionStorage.getItem("token"), sessionStorage.getItem("userid"), newItems[index].ingredient.identifier ?? newItems[index].ingredient);
+		} else {
+			putUserInventoryItem(sessionStorage.getItem("token"), sessionStorage.getItem("userid"), {
+				ingredient: {
+					identifier: newItems[index].ingredient.identifier ?? newItems[index].ingredient
+				},
+				quantity: newItems[index].quantity,
+				expiry: newItems[index].expiry
+			});
+		}
 
 		setItems(filteredItems);
 	};

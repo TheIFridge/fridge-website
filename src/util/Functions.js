@@ -1,5 +1,5 @@
 // import post fecch from the helpers.js file
-import { postFetch, getFetch, putFetch } from './Helpers.js'
+import { postFetch, getFetch, putFetch, deleteFetch } from './Helpers.js'
 
 export async function getIngredients(token) {
     return await getFetch(`${process.env.REACT_APP_LOCAL_API_URL}/api/ingredients/`, token);
@@ -32,4 +32,8 @@ export async function putUserInventoryItem(token, userId, userIngredient) {
 
 export async function postUserInventoryItem(token, userId, userIngredient) {
     return await postFetch(`${process.env.REACT_APP_LOCAL_API_URL}/api/users/${userId}/inventory/${userIngredient.ingredient.identifier}`, JSON.stringify(userIngredient), token);
+}
+
+export async function deleteUserInventoryItem(token, userId, ingredientId) {
+    return await deleteFetch(`${process.env.REACT_APP_LOCAL_API_URL}/api/users/${userId}/inventory/${ingredientId}`, token);
 }
