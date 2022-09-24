@@ -37,8 +37,6 @@ export function capitalise(word) {
 }
 
 export function millisecondsToString(millis) {
-    // console.log("trying to convert " + millis + " milliseconds to a string");
-    // var isNegative = millis < 0;
     var prefix = millis < 0 ? "in " : "";
     var suffix = millis > 0 ? " ago" : "";
     millis = Math.abs(millis);
@@ -139,3 +137,21 @@ export async function putFetch(endpoint, data, token) {
     .catch(error => console.log('error', error));
 }
 
+export async function deleteFetch(endpoint, token) {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    
+    if (token) {
+        myHeaders.append("Authorization", `Bearer ${token}`);
+    }
+
+    var requestOptions = {
+        method: 'DELETE',
+        headers: myHeaders,
+        redirect: 'follow'
+    };
+
+    return fetch(endpoint, requestOptions)
+    .then(response => response)
+    .catch(error => console.log('error', error));
+}

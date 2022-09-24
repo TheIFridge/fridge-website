@@ -8,9 +8,11 @@ export default function Recipe1() {
     return (
         <>
             <h1>Butter Chicken</h1>
-            <div>
-                <img src="https://www.countdown.co.nz/Content/Recipes/227490_ButterChicken_small_174x174.jpg " alt = "image1"></img>
-            </div>
+            <Card>
+                <Card.Body>
+                    <Card.Img style={{width: "10%"}} variant="top" src="https://www.countdown.co.nz/Content/Recipes/227490_ButterChicken_small_174x174.jpg" />
+                </Card.Body>
+            </Card>
             <br></br>
             <Card>
                 <Card.Body>

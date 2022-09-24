@@ -5,9 +5,11 @@ export default function RecipeCard() {
     return(
         <>
             <h1>Baked Salmon</h1>
-            <div>
-                <img src="https://www.countdown.co.nz/Content/Recipes/REP_751.jpg" alt = "image3"></img>
-            </div>
+            <Card>
+                <Card.Body>
+                    <Card.Img style={{width: "10%"}} variant="top" src="https://www.countdown.co.nz/Content/Recipes/REP_751.jpg" />
+                </Card.Body>
+            </Card>
             <br></br>
             <Card>
                 <Card.Body>

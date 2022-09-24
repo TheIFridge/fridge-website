@@ -35,7 +35,6 @@ export default function Register() {
 		let confirmed = true;
 		if (password !== '' && confirmPassword !== ''){
 			if (password !== confirmPassword) {
-				console.log(password + ' ' + confirmPassword);
 				confirmed = false;
 				setUserMessage('Passwords does not match')
 			}
@@ -52,7 +51,6 @@ export default function Register() {
 			// Create a new user with email and password using firebase
 			register(email, firstName, lastName, firstName + '' + lastName + generateRandom() + '_' + generateRandom(), password).then(async (response) => {
 				const data = await response.json();
-				console.log(response);
 				var valid = false;
 				if (response.status === 201) {
 					if(data.userToken !== '') {
@@ -84,12 +82,10 @@ export default function Register() {
 				<br />
 				<Form onSubmit={handleRegistration} name='registration_form'>
 					<InputGroup className="mb-3">
-						{/* <InputGroup.Text>First Name</InputGroup.Text> */}
 						<Form.Control placeholder="Enter first name" required value={firstName} onChange={e => setFirstName(e.target.value)}/>
 					</InputGroup>
 
 					<InputGroup className="mb-3">
-						{/* <InputGroup.Text>Last Name</InputGroup.Text> */}
 						<Form.Control placeholder="Enter last name" required value={lastName} onChange={e => setLastName(e.target.value)}/>
 					</InputGroup>
 
@@ -120,9 +116,6 @@ export default function Register() {
 
 function generateRandom(maxLimit = 100){
 	let rand = Math.random() * maxLimit;
-	console.log(rand); // say 99.81321410836433
-
 	rand = Math.floor(rand); // 99
-
 	return rand;
 }

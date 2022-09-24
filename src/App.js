@@ -43,7 +43,6 @@ function App() {
 
 	useMemo(() => {
 		changeTheme(getTheme());
-		// console.log('This is useMemo')
 	}, [changeTheme]);
 
 
@@ -66,14 +65,6 @@ function App() {
 	// setup document title
 	document.title = "iFridge";
 
-	// const { changeTheme } = useContext(ThemeContext);
-	// // const dark = getTheme();
-
-	// useLayoutEffect(() => {
-	// 	console.log("current: " + document.body.className);
-	// 	changeTheme(getTheme());
-	// });
-
 	return (
 		<div className="App">
 			<AuthProvider value={{currentUser, timeActive, setTimeActive}}>
@@ -93,15 +84,12 @@ function App() {
 						<Route exact path="/recipes" element={<Recipes/>} />
 						<Route exact path="/settings" element={<Settings/>} />
 						<Route exact path="/terms" element={<Terms/>} />
-						<Route exact path="/recipes/Recipe2" element={<Recipe2/>} />
-						<Route exact path="/recipes/Recipe3" element={<Recipe3/>} />
-						<Route exact path="/recipes/Recipe4" element={<Recipe4/>} />
-						{/* <Route exact path="/recipemethod" element={<RecipeMethod/>} /> */}
-
 						<Route exact path="/recipes/recipe1" element={<Recipe1/>} />
+						<Route exact path="/recipes/recipe2" element={<Recipe2/>} />
+						<Route exact path="/recipes/recipe3" element={<Recipe3/>} />
+						<Route exact path="/recipes/recipe4" element={<Recipe4/>} />
 					</Routes>
 				</div>
-				{/* <Footer /> */}
 			</AuthProvider>
 		</div>
 	)
