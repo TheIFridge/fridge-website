@@ -12,7 +12,7 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 
 import { userLoggedIn, millisecondsToString, capitalise } from '../util/Helpers';
-import { getUserInventory } from '../util/Functions';
+import { getUserInventory, putUserInventoryItem } from '../util/Functions';
 
 // main function
 export default function Inventory() {
@@ -53,15 +53,14 @@ export default function Inventory() {
 		if(add) {
 			const newIngredient = {
 				ingredient: {
+					identifier: inputValue,
 					generic_name: inputValue,
 				},
 				expiry: Date.now() + 604800000,
 				quantity: 1
 			}
 
-			// const newItem = {
-
-			// };
+			putUserInventoryItem(sessionStorage.getItem("token"), sessionStorage.getItem("userid"), newIngredient);
 
 			const newItems = [...items, newIngredient];
 			setItems(newItems);
@@ -129,7 +128,7 @@ export default function Inventory() {
 												<h3 style={{float: 'left'}}>{userIngredient.quantity}</h3>
 											</Card.Header>
 											<Card.Body>
-												<Card.Title>{capitalise(userIngredient.ingredient.generic_name)}</Card.Title>
+												<Card.Title>{capitalise(userIngredient.ingredient.generic_name ?? userIngredient.ingredient ?? "Unknown")}</Card.Title>
 												<Card.Text>Expiry: {userIngredient.expiry === 0 ? "Never" : millisecondsToString(new Date() - userIngredient.expiry)} </Card.Text>
 											</Card.Body>
 											<Card.Footer style={{width: '100%'}}>

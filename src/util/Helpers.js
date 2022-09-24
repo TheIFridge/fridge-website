@@ -124,7 +124,7 @@ export async function putFetch(endpoint, data, token) {
     myHeaders.append("Content-Type", "application/json");
     
     if (token) {
-        myHeaders.append("Authorization", `Token ${token}`);
+        myHeaders.append("Authorization", `Bearer ${token}`);
     }
 
     var requestOptions = {

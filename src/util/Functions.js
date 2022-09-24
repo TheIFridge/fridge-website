@@ -1,5 +1,5 @@
 // import post fecch from the helpers.js file
-import { postFetch, getFetch } from './Helpers.js'
+import { postFetch, getFetch, putFetch } from './Helpers.js'
 
 export async function getIngredients(token) {
     return await getFetch(`${process.env.REACT_APP_LOCAL_API_URL}/api/ingredients/`, token);
@@ -24,4 +24,8 @@ export async function getUserDetails(token, userid) {
 
 export async function getUserInventory(token, userid) {
     return await getFetch(`${process.env.REACT_APP_LOCAL_API_URL}/api/users/${userid}/inventory/`, token);
+}
+
+export async function putUserInventoryItem(token, userId, userIngredient) {
+    return await putFetch(`${process.env.REACT_APP_LOCAL_API_URL}/api/users/${userId}/inventory/${userIngredient.ingredient.identifier}`, JSON.stringify(userIngredient), token);
 }
