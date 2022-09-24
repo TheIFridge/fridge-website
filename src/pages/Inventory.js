@@ -22,7 +22,7 @@ export default function Inventory() {
 	const [loading, setLoading] = useState(false);
 	const [inventoryJson, setInventoryJson] = useState({});
 
-	const [items, setItems] = useState([]);
+	const [items, setItems] = useState({});
 	const [inputValue, setInputValue] = useState('');
 
 	useEffect(() => {
@@ -36,17 +36,10 @@ export default function Inventory() {
 		if(!loading) {
 			getUserInventory(sessionStorage.getItem("token"), sessionStorage.getItem("userid")).then(async (response) => {
 				const data = await response.json();
-				setInventoryJson(data.ingredients);
-				
-				console.log(data.ingredients);
-			}).then(() => {
-				setItems(inventoryJson.ingredients);
+				setInventoryJson(data);
+				setItems(data.ingredients);
 				setLoading(true);
 			});
-	
-			// setItems(inventoryJson.ingredients);
-
-			// setLoading(true);
 		}
 	}, [loading, inventoryJson]);
 
@@ -136,7 +129,7 @@ export default function Inventory() {
 							</Row>
 						</Container>						
 					</div>
-					<div className='total'>Total items: {items.reduce((accum, item) => accum + item.quantity, 0)}</div>
+					{ loading && <div className='total'>Total items: {items.reduce((accum, item) => accum + item.quantity, 0)}</div>}
 				</div>
 			</div>
 		</div>
