@@ -1,5 +1,9 @@
 // import post fecch from the helpers.js file
-import { postFetch, getFetch } from './Helpers.js'
+import { postFetch, getFetch, putFetch } from './Helpers.js'
+
+export async function getIngredients(token) {
+    return await getFetch(`${process.env.REACT_APP_LOCAL_API_URL}/api/ingredients/`, token);
+}
 
 export async function login(email, password) {
     // return postFetch(`${process.env.REACT_APP_LOCAL_API_URL}/api/auth/login/`, { email: email, password: password });
@@ -12,4 +16,20 @@ export function register(email, firstName, lastName, username, password) {
 
 export async function getUserDetails(token, userid) {
     return await getFetch(`${process.env.REACT_APP_LOCAL_API_URL}/api/users/${userid}/`, token);
+}
+
+// export async function updateUserDetails(token, userid, firstName, lastName, displayName, email) {
+//     return await postFetch(`${process.env.REACT_APP_LOCAL_API_URL}/api/users/${userid}/`, JSON.stringify({ first_name: firstName, last_name: lastName, username: displayName, email: email }), token);
+// }
+
+export async function getUserInventory(token, userid) {
+    return await getFetch(`${process.env.REACT_APP_LOCAL_API_URL}/api/users/${userid}/inventory/`, token);
+}
+
+export async function putUserInventoryItem(token, userId, userIngredient) {
+    return await putFetch(`${process.env.REACT_APP_LOCAL_API_URL}/api/users/${userId}/inventory/${userIngredient.ingredient.identifier}`, JSON.stringify(userIngredient), token);
+}
+
+export async function postUserInventoryItem(token, userId, userIngredient) {
+    return await postFetch(`${process.env.REACT_APP_LOCAL_API_URL}/api/users/${userId}/inventory/${userIngredient.ingredient.identifier}`, JSON.stringify(userIngredient), token);
 }

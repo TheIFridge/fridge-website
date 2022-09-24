@@ -25,7 +25,7 @@ import Inventory from './pages/Inventory';
 import PriceWatch from './pages/PriceWatch';
 import Settings from './pages/Settings';
 import Recipes from './pages/Recipes';
-// import RecipeMethod from './pages/RecipeMethod';
+import Terms from './pages/Terms';
 
 import Recipe1 from './pages/recipes/Recipe1';
 import Recipe2 from './pages/recipes/Recipe2';
@@ -92,6 +92,7 @@ function App() {
 						<Route exact path="/pricewatch" element={<PriceWatch/>} />
 						<Route exact path="/recipes" element={<Recipes/>} />
 						<Route exact path="/settings" element={<Settings/>} />
+						<Route exact path="/terms" element={<Terms/>} />
 						<Route exact path="/recipes/Recipe2" element={<Recipe2/>} />
 						<Route exact path="/recipes/Recipe3" element={<Recipe3/>} />
 						<Route exact path="/recipes/Recipe4" element={<Recipe4/>} />

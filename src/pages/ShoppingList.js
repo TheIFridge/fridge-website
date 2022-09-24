@@ -1,5 +1,6 @@
 // react
 import React from 'react';
+import { userLoggedIn } from '../util/Helpers';
 
 // import { InputGroup } from 'react-bootstrap';
 // import Button from 'react-bootstrap/Button';
@@ -86,6 +87,8 @@ import React from 'react';
 
 // main function
 export default function ShoppingList() {
+    if (!userLoggedIn()) {window.location.href = '/login';}
+
     return (
         <div>
             <h1>Shopping List</h1>

@@ -4,10 +4,14 @@ import React from 'react';
 // firebase
 // import { getAuth as auth, signOut } from "firebase/auth";
 
-import { logUserOut } from '../util/Helpers';
+import { logUserOut, userLoggedIn } from '../util/Helpers';
 
 // main function
 export default function Logout() {
+    if (!userLoggedIn()) {
+		window.location.href = '/login';
+	}
+
     // log user out
     logUserOut();
 

@@ -11,16 +11,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons'
 import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
 import { faLock } from '@fortawesome/free-solid-svg-icons'
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
-import { getDark } from '../util/Helpers';
+import { getDark, userLoggedIn } from '../util/Helpers';
 import { getUserDetails } from '../util/Functions';
 
 // main function
 export default function Settings() {
+	if (!userLoggedIn()) {window.location.href = '/login';}
+
 	const { changeTheme } = useContext(ThemeContext);
 	const [darkMode, setDarkMode] = useState(getDark());
 	const updateDarkMode = () => {
@@ -30,14 +33,7 @@ export default function Settings() {
 
 	// get userjson
 	const [loading, setLoading] = useState(false);
-
 	const [userJson, setUserJson] = useState({});
-
-	!loading && getUserDetails(sessionStorage.getItem("token"), sessionStorage.getItem("userid")).then(async (response) => {
-		const data = await response.json();
-		setUserJson(data);
-		setLoading(true);
-	});
 
 	// create states for each registration field
 	const [firstName, setFirstName] = useState('');
@@ -47,9 +43,16 @@ export default function Settings() {
 
 	// react on page load
 	useEffect(() => {
+		
+		!loading && getUserDetails(sessionStorage.getItem("token"), sessionStorage.getItem("userid")).then(async (response) => {
+			const data = await response.json();
+			setUserJson(data);
+			setLoading(true);
+		});
+
 		if(loading) {
-			setFirstName(userJson.firstName);
-			setLastName(userJson.lastName);
+			setFirstName(userJson.first_name);
+			setLastName(userJson.last_name);
 			setDisplayName(userJson.username);
 			setEmail(userJson.email);
 		}
@@ -111,13 +114,14 @@ export default function Settings() {
 				<br />
 				<Row>
 					<Col xs={12} md={4}>
+						{/* disable this field */}
 						<InputGroup className="mb-4">
 						<Form.Label>Email</Form.Label>&nbsp;
 						</InputGroup>
 					</Col>
 					<Col xs={12} md={8}>
 						<InputGroup className="mb-4">
-						<Form.Control placeholder="Email" required value={email} onChange={e => setEmail(e.target.value)}/>
+						<Form.Control placeholder="Email" required value={email} onChange={e => setEmail(e.target.value)} disabled/>
 						</InputGroup>
 					</Col>
 				</Row>
@@ -153,6 +157,11 @@ export default function Settings() {
 						<Button variant="success" onClick={() => {
 						console.log("saved!");
 						}}><FontAwesomeIcon icon={faCircleCheck} />&nbsp;&nbsp;Save Changes</Button>
+					</Col>
+					<Col xs={12} md={12} className="mb-4">
+						<Button variant="info" onClick={() => {
+						window.location.href = "/terms";
+						}}><FontAwesomeIcon icon={faInfoCircle} />&nbsp;&nbsp;Terms</Button>
 					</Col>
 				</Row>
 				<br />
