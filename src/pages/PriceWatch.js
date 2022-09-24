@@ -5,8 +5,16 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
+// import { userLoggedIn } from '../util/Helpers';
 
 export default function PriceWatch() {
+    // const [update, setUpdate] = useState(false);
+    // if (!userLoggedIn()) {
+    //     setUpdate(false);
+    // }
+
+    // if update, allow user to update price watch, else use database stuff
+
     const cardInfo = [
         {image: "https://upload.wikimedia.org/wikipedia/commons/9/92/95apple.jpeg", title: "Apple", text: "Royal Gala Apples", price: "$2.50/kg"},
         {image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Banana-Single.jpg/440px-Banana-Single.jpg", title: "Banana", text: "Fresh Dole Green Banana", price: "$6.90/kg"},

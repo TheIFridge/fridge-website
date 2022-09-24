@@ -13,3 +13,11 @@ export function register(email, firstName, lastName, username, password) {
 export async function getUserDetails(token, userid) {
     return await getFetch(`${process.env.REACT_APP_LOCAL_API_URL}/api/users/${userid}/`, token);
 }
+
+// export async function updateUserDetails(token, userid, firstName, lastName, displayName, email) {
+//     return await postFetch(`${process.env.REACT_APP_LOCAL_API_URL}/api/users/${userid}/`, JSON.stringify({ first_name: firstName, last_name: lastName, username: displayName, email: email }), token);
+// }
+
+export async function getUserInventory(token, userid) {
+    return await getFetch(`${process.env.REACT_APP_LOCAL_API_URL}/api/users/${userid}/inventory/`, token);
+}

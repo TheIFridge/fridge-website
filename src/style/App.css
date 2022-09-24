@@ -98,6 +98,11 @@ form .form-select:focus {
   text-align: center;
 }
 
+.dark-mode .card {
+  background-color: #1F2937;
+  color: #e2fff9;
+}
+
 .footer {
   position: fixed;
   bottom: 0;

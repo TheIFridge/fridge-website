@@ -3,9 +3,12 @@ import React, { useState } from 'react';
 import Data from './Data';
 import Card from './RecipeCard';
 import Buttons from './RecipeButtons';
-// import '../style/Recipes.css'
+
+import { userLoggedIn } from '../util/Helpers';
 
 export default function Recipes() {
+    if (!userLoggedIn()) {window.location.href = '/login';}
+
     const [item, setItem] = useState(Data);
     const menuItems = [...new Set(Data.map((Val) => Val.category))];
 
