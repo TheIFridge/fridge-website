@@ -7,10 +7,11 @@ export default function Recipe2() {
     return (
         <>
             <h1>Roasted Lamb</h1>
-            <div>
-                <img src="https://www.countdown.co.nz/Content/Recipes/227490_Herb-InfusedRoastLamb_small_174x174.jpg" alt = "image2"></img>
-            </div>
-
+            <Card>
+                <Card.Body>
+                    <Card.Img style={{width: "10%"}} variant="top" src="https://www.countdown.co.nz/Content/Recipes/227490_Herb-InfusedRoastLamb_small_174x174.jpg" />
+                </Card.Body>
+            </Card>
             <br></br>
             <Card>
                 <Card.Body>

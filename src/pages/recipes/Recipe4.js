@@ -5,9 +5,11 @@ export default function Recipe4() {
     return(
         <>
             <h1>Roasted Carrot Salad</h1>
-            <div>
-                <img src="https://www.countdown.co.nz/Content/Recipes/Roasted-Baby-Carrot-Salad-540.jpg" alt = "image4"></img>
-            </div>
+            <Card>
+                <Card.Body>
+                    <Card.Img style={{width: "10%"}} variant="top" src="https://www.countdown.co.nz/Content/Recipes/Roasted-Baby-Carrot-Salad-540.jpg" />
+                </Card.Body>
+            </Card>
             <br></br>
             <Card>
                 <Card.Body>

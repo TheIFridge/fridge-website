@@ -1,132 +1,73 @@
 // react
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Data from './Data';
-import Card from './RecipeCard';
-import Buttons from './RecipeButtons';
-// import '../style/Recipes.css'
+
+import { userLoggedIn } from '../util/Helpers';
+
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import { Button } from 'react-bootstrap';
+import Card from 'react-bootstrap/Card';
 
 export default function Recipes() {
-    const [item, setItem] = useState(Data);
-    const menuItems = [...new Set(Data.map((Val) => Val.category))];
+    if (!userLoggedIn()) {window.location.href = '/login';}
 
-    const filterItem = (curcat) => {
-        const newItem = Data.filter((newVal) => {
-            return newVal.category === curcat;
-        });
-        setItem(newItem);
-    };
+    const [filter, setFilter] = useState(null);
+    const [menuItems, setMenuItems] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        if(!loading) {
+            setMenuItems(Data);
+            setLoading(true);
+        }
+    }, [loading, menuItems, filter]);
     
     return (
         <>
-            <div>
-                <div>
-                    <h1>Recipe Filtering</h1>
-                    <Buttons
-                        filterItem={filterItem}
-                        setItem={setItem}
-                        menuItems={menuItems}
-                    />
-                    <Card item={item} />
-                </div>
-            </div>
+            <h1>Recipe Filtering</h1>
+            <br/>
+            <Container>
+                <Row xs={1} md={4} lg={4}>
+                    <Col>
+                        <Button variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Dairy Free')}>Diary Free</Button>
+                    </Col>
+                    <Col>
+                        <Button variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Gluten Free')}>Gluten Free</Button>
+                    </Col>
+                    <Col>
+                        <Button variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Vegetarian')}>Vegetarian</Button>
+                    </Col>
+                    <Col>
+                        <Button variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('')}>No Filter</Button>
+                    </Col>
+                </Row>
+            </Container>
+            <br/>
+            <Container>
+                <Row xs={1} md={3} lg={3}>
+                    {menuItems.map((item, index) => {
+                        // make sure it only shows the items that match the filter
+                        if (filter === null || item.category === filter) {
+                            return (
+                                <Col key={index}>
+                                    <Card style={{ width: '100%', height: '90%' }}>
+                                        <Card.Img variant="top" src={item.image} />
+                                        <Card.Body>
+                                            <Card.Title>{item.title}</Card.Title>
+                                            <Card.Text>
+                                                {item.description}
+                                            </Card.Text>
+                                            <a href={item.url}><Button variant="info">Go to recipe</Button></a>
+                                        </Card.Body>
+                                    </Card>
+                                </Col>
+                            );
+                        }
+                    })}
+                </Row>
+            </Container>
         </>
     )
 }
-
-
-
-
-
-
-// export default function Recipes() {
-
-
-//   return (
-//     <>
-//       <div>
-//         {/*filter buttons*/}
-//         <Button variant="outline-primary" className="filterButton">Dairy Free</Button>
-//         <Button variant="outline-primary" className="filterButton">Gluten Free</Button>
-//         <Button variant="outline-primary" className="filterButton">Low Sugar</Button>
-//         {/* Cards */}
-//         <Row>
-//           <Col>
-//             <Card>
-//               <Card.Img variant="top" src="https://www.countdown.co.nz/Content/Recipes/227490_ButterChicken_large_810x570.jpg" />
-//               <Card.Body>
-//                 <Card.Title>Butter Chicken</Card.Title>
-//                 <Card.Text>
-//                   You forget about takeaways with this easy and delicious recipe for Butter Chicken! This curry favourite is easy to prepare and ready in 30 minutes.
-//                 </Card.Text>
-//                 <Button href="./Recipe" variant="primary">Recipe</Button>
-//               </Card.Body>
-//             </Card>
-//           </Col>
-//           <Col>
-//             <Card>
-//               <Card.Img variant="top" src="https://www.countdown.co.nz/Content/Recipes/227490_Herb-InfusedRoastLamb_large_810x570.jpg" />
-//               <Card.Body>
-//                 <Card.Title>Herb-Infused Roast Lamb</Card.Title>
-//                 <Card.Text>
-//                   But any day is perfect to try this recipe for Herb-Infused Roast Lamb, which is even better when seasoned the night before, to let those flavours really infuse.
-//                 </Card.Text>
-//                 <Button href="./Recipe" variant="primary">Recipe</Button>
-//               </Card.Body>
-//             </Card>
-//           </Col>
-//           <Col>
-//             <Card>
-//               <Card.Img variant="top" src="https://www.countdown.co.nz/Content/Recipes/Large_751.jpg" />
-//               <Card.Body>
-//                 <Card.Title>Baked Salmon with Tomato Salsa and Crushed Potatoes</Card.Title>
-//                 <Card.Text>
-//                   This recipe for Baked Salmon with Tomato Salsa and Crushed Potatoes is a great way to get your omega-3s and is ready in just 30 minutes.
-//                 </Card.Text>
-//                 <Button href="./Recipe" variant="primary">Recipe</Button>
-//               </Card.Body>
-//             </Card>
-//           </Col>
-//         </Row>
-//         <br></br>
-//         <Row>
-//           <Col>
-//             <Card>
-//               <Card.Img variant="top" src="https://www.countdown.co.nz/Content/Recipes/Roasted-Baby-Carrot-Salad-540.jpg" />
-//               <Card.Body>
-//                 <Card.Title>Roasted Baby Carrot Salad</Card.Title>
-//                 <Card.Text>
-//                   This Roasted Baby Carrot Salad and is ready in just 30 minutes.
-//                 </Card.Text>
-//                 <Button href="./Recipe" variant="primary">Recipe</Button>
-//               </Card.Body>
-//             </Card>
-//           </Col>
-//           <Col>
-//             <Card>
-//               <Card.Img variant="top" src="https://www.countdown.co.nz/Content/Recipes/Thai-Beef-and-Sweet-Potato-Curry540.jpg" />
-//               <Card.Body>
-//                 <Card.Title>Thai Beef Curry</Card.Title>
-//                 <Card.Text>
-//                   This Thai Beef and Sweet Potato Curry and is ready in just 30 minutes.
-//                 </Card.Text>
-//                 <Button href="./Recipe" variant="primary">Recipe</Button>
-//               </Card.Body>
-//             </Card>
-//           </Col>
-//           <Col>
-//             <Card>
-//               <Card.Img variant="top" src="https://www.countdown.co.nz/Content/Recipes/bbq-corn-540.jpg" />
-//               <Card.Body>
-//                 <Card.Title>BBQ Corn</Card.Title>
-//                 <Card.Text>
-//                   This BBQ Corn is a great way to get your omega-3s and is ready in just 30 minutes.
-//                 </Card.Text>
-//                 <Button href="./Recipe" variant="primary">Recipe</Button>
-//               </Card.Body>
-//             </Card>
-//           </Col>
-//         </Row>
-//       </div>
-//     </>
-//   )
-// }

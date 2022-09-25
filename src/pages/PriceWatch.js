@@ -1,80 +1,86 @@
-// react
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
+import { useState } from 'react';
+import { getIngredients } from '../util/Functions';
+import { capitalise } from '../util/Helpers';
+// import { userLoggedIn } from '../util/Helpers';
 
 export default function PriceWatch() {
-  
+    // create states for searchInput, and searchResults
+    const [isLoading, setIsLoading] = useState(true);
+    const [cardInfo, setCardInfo] = useState({});
+    const [searchInput, setSearchInput] = useState("");
+    const [searchResults, setSearchResults] = useState([]);
 
-    const cardInfo = [
-        {image: "https://upload.wikimedia.org/wikipedia/commons/9/92/95apple.jpeg", title: "apple", text: "apples", price: "$2.50"},
-        {image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Banana-Single.jpg/440px-Banana-Single.jpg", title: "banana", text: "bananas", price: "$2.50"},
-        {image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Fresh_made_bread_05.jpg/500px-Fresh_made_bread_05.jpg", title: "bread", text: "bread", price: "$2.50"},
-        {image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Oranges_-_whole-halved-segment.jpg/440px-Oranges_-_whole-halved-segment.jpg", title: "orange", text: "oranges", price: "$2.50"},
-        {image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Pears.jpg/440px-Pears.jpg", title: "pear", text: "pears", price: "$2.50"},
-        {image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Abhar-iran.JPG/340px-Abhar-iran.JPG", title: "grapes", text: "grapes", price: "$2.50"},
-        {image: "https://assets.woolworths.com.au/images/2010/146108.jpg?impolicy=wowcdxwbjbx&w=900&h=900", title: "pineapple", text: "pineapple", price: "$2.50"},
-        {image: "https://meadowfresh.co.nz/assets/Products/Milk-2L/MF_2L_ORIGINAL__FillWzYwMCw2MDBd.png", title: "milk", text: "milk", price: "$2.50"},
-        {image: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/7._carton_of_eggs-9436ea8.jpg?quality=90&fit=700,350", title: "eggs", text: "eggs", price: "$2.50"},
-    ];
+    useEffect(() => {
+        isLoading && getIngredients(sessionStorage.getItem("token")).then(async (response) => {
+            const data = await response.json();
+            setCardInfo(data);
+            setIsLoading(false);
+            setSearchResults(data);
+        });
+    });
+
+    // when the searchInput changes, update the searchResults
+    const handleSearchInput = (event) => {
+        setSearchInput(event.target.value);
+        // if the searchInput is empty, set the searchResults to all the cardInfo
+        if (event.target.value === "") {
+            if (!isLoading) setSearchResults(cardInfo);
+        } else {
+            console.log("searching");
+            // otherwise, filter the cardInfo to only include the searchInput
+            const newFilter = cardInfo.filter((value) => {
+                // console.log(value.name.toLowerCase());
 
 
-   
-        
-    
-
-
-    const renderCard = (card, index) => {
-
-        // const [searchInput, setSearchInput] = useState("");
-        
-        // let inputHandler = (e) => {
-        //     var lowerCase = e.target.value.toLowerCase();
-        //     setInputText(lowerCase);
-        // }
-
-        // const handleSearchButtonClick = (index) => {
-        //     {inputHandler}
-        // }
-
-        return (             
-            <Col xs={12} md={4}>
-                <Row>
-                <Card style={{ width: '25rem', height: '20rem', margin: '5px'}} key={index}>
-                    <Card.Img style={{width: 120, height: 80}}variant="top" src={card.image} />
-                    <Card.Body>
-                      <Card.Title>{card.title}</Card.Title>
-                      <Card.Text>
-                       {card.text}
-                      </Card.Text>
-                      <Card.Text>
-                       {card.price}
-                      </Card.Text>
-                      <Button variant="primary">Go somewhere</Button>
-                    </Card.Body>
-                  </Card>
-                 </Row>
-            </Col>
-          );
+                return value.name.toLowerCase().includes(searchInput.toLowerCase()) || value.generic_name.toLowerCase().includes(searchInput.toLowerCase());
+            });
+            setSearchResults(newFilter);
+        }
     };
 
-    return <div className="App">
-        <InputGroup className="mb-3">
-			<Form.Control type="searchItem" placeholder="Enter item to search"/>
-            &nbsp;
-            <Button variant="secondary">
-            {/* onClick={() => handleSearchButtonCLick()} */}
-            Search
-            </Button>
-        </InputGroup>
+    const handleWatchlistAdd = (ingredient, event) => {
+        event.target.innerText = "Watching";
+    }
 
-        <Row>
-        {cardInfo.map(renderCard)}
-        </Row>
-    </div>
-    
+    return (
+        <div>
+            <h1>Price Watch</h1>
+            <Form>
+                <Form.Group controlId="formBasicEmail">
+                    <Form.Label>Search</Form.Label>
+                    <Form.Control type="text" placeholder="Search" onChange={handleSearchInput} />
+                </Form.Group>
+            </Form>
+            <br />
+            <Row xs={1} md={3} className="g-4">
+                {searchResults.map((value, index) => {
+                    return (
+                        <Col key={index}>
+                            <Card style={{ "height": "100%" }}>
+                                {/* <Card.Img variant="top" src={value.image} /> */}
+                                <Card.Body>
+                                    <Card.Title>{capitalise(value.generic_name)}</Card.Title>
+                                    <Card.Text>{capitalise(value.name)}</Card.Text>
+                                    <Card.Text>{value.price ?? "Price Untracked"}</Card.Text>
+                                    <hr/>
+                                    {/* 2 evenly spaced columns with placeholder text in each*/}
+                                    <Card.Text>{"Countdown: $0.00"}</Card.Text>
+                                    <Card.Text>{"Pak'N'Save: $0.00"}</Card.Text>
+                                </Card.Body>
+                                <Card.Footer>
+                                    <Button variant="primary" onClick={(event) => {handleWatchlistAdd(value, event)}}>Add to Watchlist</Button>
+                                </Card.Footer>
+                            </Card>
+                        </Col>
+                    );
+                })}
+            </Row>
+        </div>
+    );
 }

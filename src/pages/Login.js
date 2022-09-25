@@ -26,17 +26,15 @@ export default function Login() {
 	const handleLogin = e => {
 		e.preventDefault();
 		if (email !== '' && password !== '') {
-			console.log(email + ' ' + password);
-			login(email, password).then(response => {
-				// console.log(response);
+			login(email, password).then(async (response) => {
 				var valid = false;
-				if (response.status === 200) {
-					if(response.json().token !== '') {
-						valid = true;
-						sessionStorage.setItem("token", response.token);
-						sessionStorage.setItem("loggedIn", "true");
-						window.location.reload();
-					}
+				let json = await response.json();
+				if(json.token !== undefined) {
+					valid = true;
+					sessionStorage.setItem("token", json.token);
+					sessionStorage.setItem("userid", json.userId);
+					sessionStorage.setItem("loggedIn", "true");
+					window.location.reload();
 				}
 
 				if (!valid) {

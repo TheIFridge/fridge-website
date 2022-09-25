@@ -35,7 +35,6 @@ export default function Register() {
 		let confirmed = true;
 		if (password !== '' && confirmPassword !== ''){
 			if (password !== confirmPassword) {
-				console.log(password + ' ' + confirmPassword);
 				confirmed = false;
 				setUserMessage('Passwords does not match')
 			}
@@ -50,55 +49,23 @@ export default function Register() {
 
 		if(checkPass()) {
 			// Create a new user with email and password using firebase
-			register(email, firstName, lastName, firstName + '' + lastName + generateRandom() + '_' + generateRandom(), password, password).then(response => {
-				console.log(response);
+			register(email, firstName, lastName, firstName + '' + lastName + generateRandom() + '_' + generateRandom(), password).then(async (response) => {
+				const data = await response.json();
 				var valid = false;
-				if (response.status === 200) {
-					if(response.json().token !== '') {
+				if (response.status === 201) {
+					if(data.userToken !== '') {
 						valid = true;
-						sessionStorage.setItem("token", response.token);
+						sessionStorage.setItem("token", response.userToken);
 						sessionStorage.setItem("loggedIn", "true");
 						navigate('/');
 					}
 				}
 
 				if (!valid) {
-					setUserMessage('Registration failed. Please try again.');
+					setUserMessage('Registration failed. Please try again later.');
 				}
 			});
 		}
-
-
-		// 	signup(auth(), email, password)
-		// 	.then(() => {
-		// 		verify(auth().currentUser)   
-		// 		.then(() => {
-		// 			setTimeActive(true);
-		// 			navigate('/verify-email');
-
-		// 			let data = {
-		// 				firstName: firstName,
-		// 				lastName: lastName,
-		// 				displayName: firstName + '' + lastName + generateRandom() + '_' + generateRandom(),
-		// 				uid: auth().currentUser.uid,
-		// 				joined: new Date().toISOString(),
-		// 				dietryReq: [],
-		// 				profilePicture: '',
-		// 				darkMode: false,
-		// 				paymentTier: 'Free',
-		// 				paymentExpiration: ''
-		// 			};
-				
-		// 			try {
-		// 				addDoc(ref, data);
-		// 			} catch (err) {
-		// 				console.log(err);
-		// 			}
-
-		// 		}).catch((err) => alert(err.message))
-		// 	})
-		// 	.catch(err => setUserMessage(err.message));
-		// }
 
 		setFirstName('');
 		setLastName('');
@@ -115,12 +82,10 @@ export default function Register() {
 				<br />
 				<Form onSubmit={handleRegistration} name='registration_form'>
 					<InputGroup className="mb-3">
-						{/* <InputGroup.Text>First Name</InputGroup.Text> */}
 						<Form.Control placeholder="Enter first name" required value={firstName} onChange={e => setFirstName(e.target.value)}/>
 					</InputGroup>
 
 					<InputGroup className="mb-3">
-						{/* <InputGroup.Text>Last Name</InputGroup.Text> */}
 						<Form.Control placeholder="Enter last name" required value={lastName} onChange={e => setLastName(e.target.value)}/>
 					</InputGroup>
 
@@ -151,9 +116,6 @@ export default function Register() {
 
 function generateRandom(maxLimit = 100){
 	let rand = Math.random() * maxLimit;
-	console.log(rand); // say 99.81321410836433
-
 	rand = Math.floor(rand); // 99
-
 	return rand;
 }
