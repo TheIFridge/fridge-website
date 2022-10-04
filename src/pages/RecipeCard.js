@@ -1,5 +1,4 @@
 import React from "react";
-import { motion } from "framer-motion";
 import Button from "react-bootstrap/Button";
 import { Card } from "react-bootstrap";
 
@@ -9,35 +8,31 @@ const RecipeCard = ({ item }) => {
 
 
 
-  //getter that returs the recipe id
 
 
 
 
   return (
     <>
-      <motion.div className="container-fluid">
-        <motion.div className="row justify-content-center">
-          {item.map((Val) => {
-            return (
-              <Card key={Val.id} style={{ width: '18rem' }} className="my-2">
-                <Card.Img variant="top" src={Val.images} alt = {Val.Title}/>
+      {menuItems.map((item, index) => {
+        // make sure it only shows the items that match the filter
+        if (filter === null || item.category === filter) {
+          return (
+            <Col key={index}>
+              <Card style={{ width: '100%', height: '90%' }}>
+                <Card.Img variant="top" src={item.image} />
                 <Card.Body>
-                  <Card.Title>{Val.title}</Card.Title>
+                  <Card.Title>{item.title}</Card.Title>
                   <Card.Text>
-                    {Val.desc}
+                    {item.description}
                   </Card.Text>
-                  <Button variant="primary" id={Val.id} href={'recipes/Recipe'+ Val.id}>
-                    View Recipe
-                  </Button>
+                  <a href={item.url}><Button variant="info">Go to recipe</Button></a>
                 </Card.Body>
               </Card>
-            );
-          })}
-        </motion.div>
-      </motion.div>
-
-
+            </Col>
+          );
+        }
+      })}
     </>
   )
 }

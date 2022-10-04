@@ -9,6 +9,8 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import { Button } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
+import Dropdown from 'react-bootstrap/Dropdown';
+
 
 export default function Recipes() {
     if (!userLoggedIn()) {window.location.href = '/login';}
@@ -40,7 +42,26 @@ export default function Recipes() {
                         <Button variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Vegetarian')}>Vegetarian</Button>
                     </Col>
                     <Col>
-                        <Button variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('')}>No Filter</Button>
+                        <Button variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter()}>No Filter</Button>
+                    </Col>
+                    <Col>
+                        <Dropdown>
+                            <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                Food Culture
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu>
+                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('American')}>American</Dropdown.Item>
+                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Chinese')}>Chinese</Dropdown.Item>
+                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('French')}>French</Dropdown.Item>
+                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Indian')}>Indian</Dropdown.Item>
+                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Italian')}>Italian</Dropdown.Item>
+                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Japanese')}>Japanese</Dropdown.Item>
+                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Korean')}>Korean</Dropdown.Item>
+                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Mexican')}>Mexican</Dropdown.Item>
+                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Thai')}>Thai</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
                     </Col>
                 </Row>
             </Container>
