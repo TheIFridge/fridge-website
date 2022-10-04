@@ -33,16 +33,19 @@ export default function Recipes() {
             <Container>
                 <Row xs={1} md={4} lg={4}>
                     <Col>
-                        <Button variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Dairy Free')}>Diary Free</Button>
-                    </Col>
-                    <Col>
-                        <Button variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Gluten Free')}>Gluten Free</Button>
-                    </Col>
-                    <Col>
-                        <Button variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Vegetarian')}>Vegetarian</Button>
-                    </Col>
-                    <Col>
-                        <Button variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter()}>No Filter</Button>
+                     {/* Dairy Free Gluten Free, Vegetarian*/}
+                        <Dropdown>
+                            <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                Allergies
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu>
+                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Dairy Free')}>Dairy Free</Dropdown.Item>
+                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Gluten Free')}>Gluten Free</Dropdown.Item>
+                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Vegetarian')}>Vegetarian</Dropdown.Item>
+                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter(null)}>Reset</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
                     </Col>
                     <Col>
                         <Dropdown>
@@ -60,6 +63,26 @@ export default function Recipes() {
                                 <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Korean')}>Korean</Dropdown.Item>
                                 <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Mexican')}>Mexican</Dropdown.Item>
                                 <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Thai')}>Thai</Dropdown.Item>
+                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter(null)}>Reset</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </Col>
+                    <Col>
+                        <Dropdown>
+                            <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                Type Of Food
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu>
+                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Burger')}>Burger</Dropdown.Item>
+                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Chicken')}>Chicken</Dropdown.Item>
+                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Dessert')}>Dessert</Dropdown.Item>
+                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Pasta')}>Pasta</Dropdown.Item>
+                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Pizza')}>Pizza</Dropdown.Item>
+                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Rice')}>Rice</Dropdown.Item>
+                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Salad')}>Salad</Dropdown.Item>
+                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Sandwich')}>Sandwich</Dropdown.Item>
+                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter(null)}>Reset</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
                     </Col>
@@ -70,11 +93,11 @@ export default function Recipes() {
                 <Row xs={1} md={3} lg={3}>
                     {menuItems.map((item, index) => {
                         // make sure it only shows the items that match the filter
-                        if (filter === null || item.category === filter) {
+                        if (filter === null || item.category === filter || item.cuisine === filter) {
                             return (
                                 <Col key={index}>
-                                    <Card style={{ width: '100%', height: '90%' }}>
-                                        <Card.Img variant="top" src={item.image} />
+                                    <Card style={{ width: '100%', height: '100%' }}>
+                                        <Card.Img variant="top" src={item.images} />
                                         <Card.Body>
                                             <Card.Title>{item.title}</Card.Title>
                                             <Card.Text>
