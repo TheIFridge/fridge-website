@@ -12,7 +12,6 @@
     "axios": "^0.27.2",
     "bootstrap": "^5.2.0",
     "firebase": "^9.9.2",
-    "framer-motion": "^7.3.6",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
     "react-dom": "^18.2.0",
@@ -41,7 +40,6 @@
     "eject": "react-scripts eject",
     "emu": "firebase emulators:start",
     "deploy": "firebase deploy --only hosting"
-
   },
   "eslintConfig": {
     "extends": [
