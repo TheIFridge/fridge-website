@@ -4,12 +4,7 @@ import Data from './Data';
 
 import { userLoggedIn } from '../util/Helpers';
 
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container';
-import { Button } from 'react-bootstrap';
-import Card from 'react-bootstrap/Card';
-import Dropdown from 'react-bootstrap/Dropdown';
+import { Button, Card, Dropdown, Row, Col, Container} from 'react-bootstrap';
 
 
 export default function Recipes() {
