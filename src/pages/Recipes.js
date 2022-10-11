@@ -33,10 +33,14 @@ export default function Recipes() {
                             <Dropdown.Toggle variant="success" id="dropdown-basic">
                                 Allergies
                             </Dropdown.Toggle>
+
                             <Dropdown.Menu>
-                                {loading && [... new Set(menuItems.flatMap((data) => data.category))].forEach((item) => (
+                                {loading && [... new Set(menuItems.flatMap((data) => data.category))].map((item) => (
                                     <Dropdown.Item variant = "success" style={{width: '90%', height: '90%'}} key={item} onClick={() => setFilter(item)}>{item}</Dropdown.Item>
                                 ))}
+                                {/* {menuItems.map((item, index) => (
+                                    <Dropdown.Item variant = "success" key={index} onClick={() => setFilter(item.category)}>{item.category}</Dropdown.Item>
+                                ))} */}
                                 <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter(null)}>Reset</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
@@ -48,15 +52,9 @@ export default function Recipes() {
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu>
-                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('American')}>American</Dropdown.Item>
-                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Chinese')}>Chinese</Dropdown.Item>
-                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('French')}>French</Dropdown.Item>
-                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Indian')}>Indian</Dropdown.Item>
-                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Italian')}>Italian</Dropdown.Item>
-                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Japanese')}>Japanese</Dropdown.Item>
-                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Korean')}>Korean</Dropdown.Item>
-                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Mexican')}>Mexican</Dropdown.Item>
-                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Thai')}>Thai</Dropdown.Item>
+                                {loading && [... new Set(menuItems.flatMap((data) => data.cuisine))].map((item) => (
+                                    <Dropdown.Item variant = "success" style={{width: '90%', height: '90%'}} key={item} onClick={() => setFilter(item)}>{item}</Dropdown.Item>
+                                ))}
                                 <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter(null)}>Reset</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
@@ -68,14 +66,9 @@ export default function Recipes() {
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu>
-                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Burger')}>Burger</Dropdown.Item>
-                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Chicken')}>Chicken</Dropdown.Item>
-                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Dessert')}>Dessert</Dropdown.Item>
-                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Pasta')}>Pasta</Dropdown.Item>
-                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Pizza')}>Pizza</Dropdown.Item>
-                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Rice')}>Rice</Dropdown.Item>
-                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Salad')}>Salad</Dropdown.Item>
-                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Sandwich')}>Sandwich</Dropdown.Item>
+                                {loading && [... new Set(menuItems.flatMap((data) => data.type))].map((item) => (
+                                    <Dropdown.Item variant = "success" style={{width: '90%', height: '90%'}} key={item} onClick={() => setFilter(item)}>{item}</Dropdown.Item>
+                                ))}
                                 <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter(null)}>Reset</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
