@@ -43,6 +43,7 @@ export default function NavigationBar() {
                                 <Nav.Link href="/pricewatch">Price Watch</Nav.Link>
                                 <Nav.Link href="/login">Login</Nav.Link>
                                 <Nav.Link href="/register">Register</Nav.Link>
+                                <Nav.Link href="/support">Support</Nav.Link>
                             </Nav>
                         </Navbar.Collapse>
                     </Container>
