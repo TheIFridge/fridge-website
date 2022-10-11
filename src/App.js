@@ -25,6 +25,13 @@ import Inventory from './pages/Inventory';
 import PriceWatch from './pages/PriceWatch';
 import Settings from './pages/Settings';
 import Recipes from './pages/Recipes';
+import Terms from './pages/Terms';
+
+import Recipe1 from './pages/recipes/Recipe1';
+import Recipe2 from './pages/recipes/Recipe2';
+import Recipe3 from './pages/recipes/Recipe3';
+import Recipe4 from './pages/recipes/Recipe4';
+
 // styles
 import './style/App.css';
 
@@ -36,7 +43,6 @@ function App() {
 
 	useMemo(() => {
 		changeTheme(getTheme());
-		// console.log('This is useMemo')
 	}, [changeTheme]);
 
 
@@ -59,14 +65,6 @@ function App() {
 	// setup document title
 	document.title = "iFridge";
 
-	// const { changeTheme } = useContext(ThemeContext);
-	// // const dark = getTheme();
-
-	// useLayoutEffect(() => {
-	// 	console.log("current: " + document.body.className);
-	// 	changeTheme(getTheme());
-	// });
-
 	return (
 		<div className="App">
 			<AuthProvider value={{currentUser, timeActive, setTimeActive}}>
@@ -85,9 +83,13 @@ function App() {
 						<Route exact path="/pricewatch" element={<PriceWatch/>} />
 						<Route exact path="/recipes" element={<Recipes/>} />
 						<Route exact path="/settings" element={<Settings/>} />
+						<Route exact path="/terms" element={<Terms/>} />
+						<Route exact path="/recipes/recipe1" element={<Recipe1/>} />
+						<Route exact path="/recipes/recipe2" element={<Recipe2/>} />
+						<Route exact path="/recipes/recipe3" element={<Recipe3/>} />
+						<Route exact path="/recipes/recipe4" element={<Recipe4/>} />
 					</Routes>
 				</div>
-				{/* <Footer /> */}
 			</AuthProvider>
 		</div>
 	)

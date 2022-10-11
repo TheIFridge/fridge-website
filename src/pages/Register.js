@@ -5,10 +5,10 @@ import { React, useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 
 // firebase
-import { firestore } from '../service/firebase';
-import { addDoc, collection } from '@firebase/firestore';
-import { getAuth as auth, createUserWithEmailAndPassword as signup, sendEmailVerification as verify} from "firebase/auth";
-import { useAuthValue} from '../auth/AuthContext'
+// import { firestore } from '../service/firebase';
+// import { addDoc, collection } from '@firebase/firestore';
+// import { getAuth as auth, createUserWithEmailAndPassword as signup, sendEmailVerification as verify} from "firebase/auth";
+// import { useAuthValue} from '../auth/AuthContext'
 
 // components
 import Button from 'react-bootstrap/Button';
@@ -16,11 +16,10 @@ import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 
+import { register } from '../util/Functions.js';
+
 // main function
 export default function Register() {
-	// get current user from context
-	// const {currentUser} = useAuthValue();
-
 	// create states for each registration field
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
@@ -28,18 +27,14 @@ export default function Register() {
 	const [password, setPassword] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
 	const [userMessage, setUserMessage] = useState('');
+	
 	const navigate = useNavigate();
-	const {setTimeActive} = useAuthValue();
-
-	// setup firestore reference
-	const ref = collection(firestore, 'users');
 	
 	// check if passwords match
 	const checkPass = () => {
 		let confirmed = true;
 		if (password !== '' && confirmPassword !== ''){
 			if (password !== confirmPassword) {
-				console.log(password + ' ' + confirmPassword);
 				confirmed = false;
 				setUserMessage('Passwords does not match')
 			}
@@ -54,35 +49,22 @@ export default function Register() {
 
 		if(checkPass()) {
 			// Create a new user with email and password using firebase
-			signup(auth(), email, password)
-			.then(() => {
-				verify(auth().currentUser)   
-				.then(() => {
-					setTimeActive(true);
-					navigate('/verify-email');
-
-					let data = {
-						firstName: firstName,
-						lastName: lastName,
-						displayName: firstName + '' + lastName + generateRandom() + '_' + generateRandom(),
-						uid: auth().currentUser.uid,
-						joined: new Date().toISOString(),
-						dietryReq: [],
-						profilePicture: '',
-						darkMode: false,
-						paymentTier: 'Free',
-						paymentExpiration: ''
-					};
-				
-					try {
-						addDoc(ref, data);
-					} catch (err) {
-						console.log(err);
+			register(email, firstName, lastName, firstName + '' + lastName + generateRandom() + '_' + generateRandom(), password).then(async (response) => {
+				const data = await response.json();
+				var valid = false;
+				if (response.status === 201) {
+					if(data.userToken !== '') {
+						valid = true;
+						sessionStorage.setItem("token", response.userToken);
+						sessionStorage.setItem("loggedIn", "true");
+						navigate('/');
 					}
+				}
 
-				}).catch((err) => alert(err.message))
-			})
-			.catch(err => setUserMessage(err.message));
+				if (!valid) {
+					setUserMessage('Registration failed. Please try again later.');
+				}
+			});
 		}
 
 		setFirstName('');
@@ -100,12 +82,10 @@ export default function Register() {
 				<br />
 				<Form onSubmit={handleRegistration} name='registration_form'>
 					<InputGroup className="mb-3">
-						{/* <InputGroup.Text>First Name</InputGroup.Text> */}
 						<Form.Control placeholder="Enter first name" required value={firstName} onChange={e => setFirstName(e.target.value)}/>
 					</InputGroup>
 
 					<InputGroup className="mb-3">
-						{/* <InputGroup.Text>Last Name</InputGroup.Text> */}
 						<Form.Control placeholder="Enter last name" required value={lastName} onChange={e => setLastName(e.target.value)}/>
 					</InputGroup>
 
@@ -136,9 +116,6 @@ export default function Register() {
 
 function generateRandom(maxLimit = 100){
 	let rand = Math.random() * maxLimit;
-	console.log(rand); // say 99.81321410836433
-
 	rand = Math.floor(rand); // 99
-
 	return rand;
 }
