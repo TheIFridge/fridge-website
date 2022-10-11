@@ -103,6 +103,8 @@ export default function Recipes() {
                                     </Card>
                                 </Col>
                             );
+                        } else {
+                            return (<></>);
                         }
                     })}
                 </Row>
