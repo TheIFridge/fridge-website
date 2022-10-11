@@ -24,6 +24,7 @@ export default function NavigationBar() {
                                 <Nav.Link href="/shoppinglist">Shopping List</Nav.Link>
                                 <Nav.Link href="/inventory">Inventory</Nav.Link>
                                 <Nav.Link href="/recipes">Recipes</Nav.Link>
+                                <Nav.Link href="/support">Support</Nav.Link>
                                 <NavDropdown title="Profile" id="basic-nav-dropdown">
                                     <NavDropdown.Item href="/settings">Settings</NavDropdown.Item>
                                     <NavDropdown.Item href="/logout">Logout</NavDropdown.Item>
