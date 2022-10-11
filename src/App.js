@@ -26,6 +26,7 @@ import PriceWatch from './pages/PriceWatch';
 import Settings from './pages/Settings';
 import Recipes from './pages/Recipes';
 import Terms from './pages/Terms';
+import Support from './pages/Support';
 
 import Recipe1 from './pages/recipes/Recipe1';
 import Recipe2 from './pages/recipes/Recipe2';
@@ -84,6 +85,7 @@ function App() {
 						<Route exact path="/recipes" element={<Recipes/>} />
 						<Route exact path="/settings" element={<Settings/>} />
 						<Route exact path="/terms" element={<Terms/>} />
+						<Route exact path="/support" element={<Support/>} />
 						<Route exact path="/recipes/recipe1" element={<Recipe1/>} />
 						<Route exact path="/recipes/recipe2" element={<Recipe2/>} />
 						<Route exact path="/recipes/recipe3" element={<Recipe3/>} />
