@@ -33,11 +33,10 @@ export default function Recipes() {
                             <Dropdown.Toggle variant="success" id="dropdown-basic">
                                 Allergies
                             </Dropdown.Toggle>
-
                             <Dropdown.Menu>
-                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Dairy Free')}>Dairy Free</Dropdown.Item>
-                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Gluten Free')}>Gluten Free</Dropdown.Item>
-                                <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter('Vegetarian')}>Vegetarian</Dropdown.Item>
+                                {loading && [... new Set(menuItems.flatMap((data) => data.category))].forEach((item) => (
+                                    <Dropdown.Item variant = "success" style={{width: '90%', height: '90%'}} key={item} onClick={() => setFilter(item)}>{item}</Dropdown.Item>
+                                ))}
                                 <Dropdown.Item variant="success" style={{width: '90%', height: '90%'}} onClick={() => setFilter(null)}>Reset</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
