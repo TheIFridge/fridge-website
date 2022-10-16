@@ -11,6 +11,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 
+import Spinner from 'react-bootstrap/Spinner';
+
 import { userLoggedIn, millisecondsToString, capitalise } from '../util/Helpers';
 import { deleteUserInventoryItem, getUserInventory, putUserInventoryItem } from '../util/Functions';
 
@@ -138,6 +140,7 @@ export default function Inventory() {
 					<div className='item-list'>
 						<Container>
 							<Row >
+								{!loading && <><Spinner animation="border" variant="primary" style={{margin: 'auto'}} /></>}
 								{loading && items.map((userIngredient, index) => (
 									<Col key={index} xs={12} md={4}>
 										<Card style={{ width: '100%', height: '90%' }}>

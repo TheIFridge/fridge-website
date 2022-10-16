@@ -30,10 +30,7 @@ export function timestampToDateString(timestamp) {
 
 export function capitalise(word) {
     if(word === undefined) return word;
-    // capitalise the first letter of every word in a string
     return word.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-
-    // return word.charAt(0).toUpperCase() + word.slice(1);
 }
 
 export function millisecondsToString(millis) {
@@ -66,18 +63,6 @@ export function millisecondsToString(millis) {
     }
 }
 
-// export function timestampToTime(timestamp) {
-//     // given a timestamp, it should return "2 days ago" or "3 hours ago" or "5 minutes ago", or "in 2 days"
-//     var date = new Date(Date.now());
-
-//     var date = new Date(timestamp);
-//     var hour = date.getHours();
-//     var minute = date.getMinutes();
-//     var second = date.getSeconds();
-//     var timeString = hour + ":" + minute + ":" + second;
-//     return timeString;
-// }
-
 export async function postFetch(endpoint, data, token) {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -94,7 +79,13 @@ export async function postFetch(endpoint, data, token) {
     };
 
     return await fetch(endpoint, requestOptions)
-    .then(response => response)
+    .then(response => {
+        if(response.status === 401) {
+            logUserOut();
+            window.location = "/login";
+        }
+        return response;
+    })
     .catch(error => console.log('error', error));
 }
 
@@ -113,7 +104,13 @@ export async function getFetch(endpoint, token) {
     };
 
     return await fetch(endpoint, requestOptions)
-    .then(response => response)
+    .then(response => {
+        if(response.status === 401) {
+            logUserOut();
+            window.location = "/login";
+        }
+        return response;
+    })
     .catch(error => console.log('error', error));
 }
 
@@ -133,7 +130,13 @@ export async function putFetch(endpoint, data, token) {
     };
 
     return fetch(endpoint, requestOptions)
-    .then(response => response)
+    .then(response => {
+        if(response.status === 401) {
+            logUserOut();
+            window.location = "/login";
+        }
+        return response;
+    })
     .catch(error => console.log('error', error));
 }
 
@@ -152,6 +155,12 @@ export async function deleteFetch(endpoint, token) {
     };
 
     return fetch(endpoint, requestOptions)
-    .then(response => response)
+    .then(response => {
+        if(response.status === 401) {
+            logUserOut();
+            window.location = "/login";
+        }
+        return response;
+    })
     .catch(error => console.log('error', error));
 }
