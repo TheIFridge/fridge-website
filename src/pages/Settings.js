@@ -20,6 +20,8 @@ import Col from 'react-bootstrap/Col'
 import { getDark, userLoggedIn } from '../util/Helpers';
 import { getUserDetails } from '../util/Functions';
 
+import Spinner from 'react-bootstrap/Spinner'
+
 // main function
 export default function Settings() {
 	if (!userLoggedIn()) {window.location.href = '/login';}
@@ -78,7 +80,7 @@ export default function Settings() {
 	<div>
 		<h1 className="page-title">Settings</h1>
 		<br />
-
+		{!loading && <><Spinner animation="border" variant="primary" style={{margin: 'auto'}} /></>}
 		<Form onSubmit={handleSubmit}>
 			<Container>
 				<Row>

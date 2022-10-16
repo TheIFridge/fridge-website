@@ -2,6 +2,15 @@
 import { postFetch, getFetch, putFetch, deleteFetch } from './Helpers.js'
 
 export async function getIngredients(token) {
+    // // check if token is valid
+    // if (token) {
+    //     // get the ingredients from the server
+    //     const response = await getFetch('/ingredients', token)
+    //     // return the ingredients
+    //     return response
+    // } else {
+    //     // redirect to login page
+    //     window.location.href = '/login'
     return await getFetch(`${process.env.REACT_APP_PROD_API_URL}/api/ingredients/`, token);
 }
 

@@ -7,6 +7,7 @@ import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
 import { getIngredients } from '../util/Functions';
 import { capitalise } from '../util/Helpers';
+import { Spinner } from 'react-bootstrap';
 // import { userLoggedIn } from '../util/Helpers';
 
 export default function PriceWatch() {
@@ -58,6 +59,7 @@ export default function PriceWatch() {
                 </Form.Group>
             </Form>
             <br />
+            {isLoading && <><Spinner animation="border" variant="primary" style={{margin: 'auto'}} /></>}
             <Row xs={1} md={3} className="g-4">
                 {searchResults.map((value, index) => {
                     return (
