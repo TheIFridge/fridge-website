@@ -8,17 +8,22 @@ import { Button, Card, Dropdown, Row, Col, Container, Form, ButtonGroup } from '
 
 
 export default function Recipes() {
+    //checks if user is logged in
     if (!userLoggedIn()) { window.location.href = '/login'; }
     const [filter, setFilter] = useState(null);
     const [menuItems, setMenuItems] = useState([]);
     const [loading, setLoading] = useState(false);
 
+    
+    //filters the recipes based on the filter
     useEffect(() => {
         if (!loading) {
             setMenuItems(Data);
             setLoading(true);
         }
     }, [loading, menuItems, filter]);
+
+
 
 
     return (

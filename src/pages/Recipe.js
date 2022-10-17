@@ -21,21 +21,57 @@ export default function Recipe(props) {
     // preview
     // method
     // nutrition
+    console.log(props.image);
     console.log(props.title);
     console.log(props.brief);
     console.log(props.ingredientTitle);
     console.log(props.ingredientsList);
     console.log(props.cookTime);
-    console.log(props.prepTime);    
+    console.log(props.prepTime);
     console.log(props.numberOfPeople);
     // console.log(props.preview);
     console.log(props.method);
     console.log(props.nuitrition);
 
+
     return (
         <>
-        <h1>{props.title}</h1>
-
+            <div>
+                <Row>
+                    <Col>
+                        {props.image}
+                    </Col>
+                    <Col>
+                        <h1>{props.title}</h1>
+                        <h2>{props.brief}</h2>
+                    </Col>
+                    <Col>
+                        <p>{props.cookTime}</p>
+                        <p>{props.prepTime}</p>
+                        <p>{props.numberOfPeople}</p>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <h2>{props.ingredientTitle}</h2>
+                        <ul>
+                            {props.ingredientsList.map((item) => (
+                                <li>{item}</li>
+                            ))}
+                        </ul>
+                        <h2>{props.nuitrition}</h2>
+                        <ul>
+                            {props.nuitritionList.map((item) => (
+                                <li>{item}</li>
+                            ))}
+                        </ul>
+                    </Col>
+                    <Col>
+                        <h2>{props.methodTitle}</h2>
+                        <p>{props.method}</p>
+                    </Col>
+                </Row>
+            </div>
         </>
     )
 
@@ -52,7 +88,7 @@ export default function Recipe(props) {
     //         setLoading(true);
     //     }
     // }, [loading, menuItems, filter]);
-    
+
     // return (
     //     <>
     //         <h1>Recipe Filtering</h1>
