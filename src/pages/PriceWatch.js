@@ -7,6 +7,7 @@ import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
 import { getIngredients } from '../util/Functions';
 import { capitalise } from '../util/Helpers';
+import { Spinner } from 'react-bootstrap';
 // import { userLoggedIn } from '../util/Helpers';
 
 export default function PriceWatch() {
@@ -16,6 +17,8 @@ export default function PriceWatch() {
     const [searchInput, setSearchInput] = useState("");
     const [searchResults, setSearchResults] = useState([]);
 
+    // get ingredients needs to listen to blake api which return ingredients from shop
+    // BLAKE PROBLEM : SORT THIS NOW
     useEffect(() => {
         isLoading && getIngredients(sessionStorage.getItem("token")).then(async (response) => {
             const data = await response.json();
@@ -58,6 +61,8 @@ export default function PriceWatch() {
                 </Form.Group>
             </Form>
             <br />
+            {isLoading && <><Spinner animation="border" variant="primary" style={{margin: 'auto'}} /></>}
+
             <Row xs={1} md={3} className="g-4">
                 {searchResults.map((value, index) => {
                     return (
