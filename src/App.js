@@ -37,6 +37,7 @@ import Recipe4 from './pages/recipes/Recipe4';
 import './style/App.css';
 
 import { userLoggedIn } from './util/Helpers';
+import Recipe from './pages/Recipe';
 
 // main function
 function App() {
@@ -86,6 +87,18 @@ function App() {
 						<Route exact path="/settings" element={<Settings/>} />
 						<Route exact path="/terms" element={<Terms/>} />
 						<Route exact path="/support" element={<Support/>} />
+						<Route exact path="/dm" element={<Recipe 
+							title="Bob"
+							brief="brief"
+							ingredientTitle="Ingredients"
+							ingredientsList={["ingredient1", "ingredient2"]}
+							cookTime="30 mins"
+							prepTime="20 mins"
+							numberOfPeople="3"
+							preview={"image Path..."}
+							method={['make egg', 'die']}
+							nuitrition={["carlories - yes", "carbs - yes", "protein - yes"]}
+						/>} />
 						<Route exact path="/recipes/recipe1" element={<Recipe1/>} />
 						<Route exact path="/recipes/recipe2" element={<Recipe2/>} />
 						<Route exact path="/recipes/recipe3" element={<Recipe3/>} />
