@@ -50,6 +50,10 @@ export default function PriceWatch() {
     const handleWatchlistAdd = (ingredient, event) => {
         event.target.innerText = "Watching";
     }
+    
+    const handleShoppingListAdd = (ingredient, event) => {
+        //add to to shopping list
+    }
 
     return (
         <div>
@@ -80,6 +84,8 @@ export default function PriceWatch() {
                                 </Card.Body>
                                 <Card.Footer>
                                     <Button variant="primary" onClick={(event) => {handleWatchlistAdd(value, event)}}>Add to Watchlist</Button>
+                                    &nbsp;
+                                    <Button variant="info" onClick={(event) => {handleShoppingListAdd(value, event)}}>Add to shopping list</Button>
                                 </Card.Footer>
                             </Card>
                         </Col>
