@@ -1,5 +1,5 @@
 body {
-  background-color: #e2fff9;
+  background-color: #f3f3f3;
 }
 
 .App {
@@ -15,7 +15,7 @@ form .form-label {
 form .form-control {
   outline: none;
   border: none;
-  color: #1F2937;
+  color: #474545;
   border-radius: 0;
 }
 
@@ -26,7 +26,7 @@ form .form-control:focus {
 form .form-select {
   outline: none;
   border: none;
-  color: #1F2937;
+  color: #474545;
   border-radius: 0;
 }
 
@@ -35,34 +35,34 @@ form .form-select:focus {
 }
 
 .light-mode {
-  background-color: #e2fff9;
-  color: #1F2937;
+  background-color: #f3f3f3;
+  color: #474545;
 }
 
 .light-mode form .form-select {
-  background-color: #e2fff9;
-  color: #1F2937;
-  border-bottom: 1px solid #1F2937;
+  background-color: #f3f3f3;
+  color: #474545;
+  border-bottom: 1px solid #474545;
 }
 
 .light-mode form .form-control {
-  background-color: #e2fff9;
-  color: #1F2937;
-  border-bottom: 1px solid #1F2937;
+  background-color: #f3f3f3;
+  color: #474545;
+  border-bottom: 1px solid #474545;
 }
 
 .light-mode form .form-control:focus {
-  background-color: #e2fff9;
+  background-color: #f3f3f3;
 }
 
 .light-mode .dropdown-menu {
-  background-color: #e2fff9;
-  color: #1F2937;
-  border: 1px solid #1F2937;
+  background-color: #f3f3f3;
+  color: #474545;
+  border: 1px solid #474545;
 }
 
 .light-mode .dropdown-menu a {
-  color: #1F2937;
+  color: #474545;
   text-align: center;
 }
 

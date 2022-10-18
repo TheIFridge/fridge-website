@@ -14,7 +14,7 @@ export default function Recipes() {
     const [menuItems, setMenuItems] = useState([]);
     const [loading, setLoading] = useState(false);
 
-    
+
     //filters the recipes based on the filter
     useEffect(() => {
         if (!loading) {
@@ -30,8 +30,8 @@ export default function Recipes() {
         <>
             <div>
                 <h1>Recipes</h1>
-                <div>
-                    <Form className='d-flex'>
+                <div className='gap-2'>
+                    <Form >
                         <Form.Control
                             type="search"
                             placeholder="Search"
@@ -41,9 +41,8 @@ export default function Recipes() {
                     </Form>
                 </div>
                 <br></br>
-                <div>
-
-                    <Row className="d-flex gap-2">
+                <div className='gap-2'>
+                    <Row >
                         <Col>
                             <Dropdown>
                                 <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -56,7 +55,6 @@ export default function Recipes() {
                                 </Dropdown.Menu>
                             </Dropdown>
                         </Col>
-                        <br></br>
                         <Col>
                             <Dropdown>
                                 <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -69,7 +67,6 @@ export default function Recipes() {
                                 </Dropdown.Menu>
                             </Dropdown>
                         </Col>
-                        <br></br>
                         <Col>
                             <Dropdown>
                                 <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -82,36 +79,38 @@ export default function Recipes() {
                                 </Dropdown.Menu>
                             </Dropdown>
                         </Col>
-                        <br></br>
                         <Col>
                             <Button variant="success" onClick={() => setFilter(null)}>Reset</Button>
                         </Col>
                     </Row>
                 </div>
-                <div>
-                    <Row className="d-flex gap-2">
-                        {menuItems.map((item, index) => {
-                            if (filter === null || item.category === filter || item.cuisine === filter) {
-                                return (
-                                    <Col key={index}>
-                                        <Card style={{ width: '18rem', height: '100%' }}>
-                                            <Card.Img variant="top" src={item.images} />
-                                            <Card.Body>
-                                                <Card.Title>{item.title}</Card.Title>
-                                                <Card.Text>
-                                                    {item.description}
-                                                </Card.Text>
-                                                <a href={item.url}><Button variant="info">Go to recipe</Button></a>
-                                            </Card.Body>
-                                        </Card>
-                                    </Col>
-                                );
-                            } else {
-                                return (<></>);
-                            }
-                        })}
-                    </Row>
-                </div>
+                <br></br>
+                    {menuItems.map((item, index) => {
+                        if (filter === null || item.category === filter || item.cuisine === filter) {
+                            return (
+                                <div>
+                                <Container>
+                                    <Row>
+                                        <Col key={index} xs={12} md={4} >
+                                            <Card style={{ width: '100%', height: '96%' }} >
+                                                <Card.Img variant="top" src={item.images} />
+                                                <Card.Body>
+                                                    <Card.Title>{item.title}</Card.Title>
+                                                    <Card.Text>
+                                                        {item.description}
+                                                    </Card.Text>
+                                                    <Button variant="primary" href={item.url}>Go to recipe</Button>
+                                                </Card.Body>
+                                            </Card>
+                                        </Col>
+                                    </Row>
+                                </Container>
+                                </div>
+                            );
+                        } else {
+                            return (<></>);
+                        }
+                    })}
             </div>
         </>
     )

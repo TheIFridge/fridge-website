@@ -11,64 +11,46 @@ import { Button } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
 
 export default function Recipe(props) {
-    // title
-    // brief
-    // ingredientTitle
-    // ingredients (provide a ordered list)
-    // cook time
-    // prep time
-    // no. of. people
-    // preview
-    // method
-    // nutrition
-    console.log(props.image);
-    console.log(props.title);
-    console.log(props.brief);
-    console.log(props.ingredientTitle);
-    console.log(props.ingredientsList);
-    console.log(props.cookTime);
-    console.log(props.prepTime);
-    console.log(props.numberOfPeople);
-    // console.log(props.preview);
-    console.log(props.method);
-    console.log(props.nuitrition);
 
 
     return (
         <>
-            <div>
-                <Row>
-                    <Col>
+            <div className='background'>
+                <Row className="d-flex gap-2">
+                    <Col className='imageMain'>
                         {props.image}
                     </Col>
-                    <Col>
-                        <h1>{props.title}</h1>
-                        <h2>{props.brief}</h2>
-                    </Col>
+                    <div className='titleAndBrief'>
+                        <Col >
+                            <h1>{props.title}</h1>
+                            <h2>{props.brief}</h2>
+                        </Col>
+                    </div>
                     <Col>
                         <p>{props.cookTime}</p>
+                    </Col>
+                    <Col>
                         <p>{props.prepTime}</p>
+                    </Col>
+                    <Col>
                         <p>{props.numberOfPeople}</p>
                     </Col>
                 </Row>
-                <Row>
+                <Row className="d-flex gap-2">
                     <Col>
-                        <h2>{props.ingredientTitle}</h2>
-                        <ul>
-                            {props.ingredientsList.map((item) => (
-                                <li>{item}</li>
-                            ))}
-                        </ul>
-                        <h2>{props.nuitrition}</h2>
-                        <ul>
-                            {props.nuitritionList.map((item) => (
-                                <li>{item}</li>
-                            ))}
-                        </ul>
+                        {props.ingredientTitle}
+                        <br></br>
+                        {props.ingredientsList}
                     </Col>
                     <Col>
                         <h2>{props.methodTitle}</h2>
                         <p>{props.method}</p>
+                    </Col>
+                </Row>
+                <Row className="d-flex gap-2">
+                    <Col>
+                        <h2>{props.nutritionTitle}</h2>
+                        <p>{props.nutrition}</p>
                     </Col>
                 </Row>
             </div>
