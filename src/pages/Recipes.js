@@ -32,6 +32,16 @@ export default function Recipes() {
             <div>
                 <h1>Recipes</h1>
                 <br></br>
+                <Form className="d-flex">
+                    <Form.Control
+                        type="search"
+                        placeholder="Search"
+                        className="me-2"
+                        aria-label="Search"
+                    />
+                    <Button variant="outline-success">Search</Button>
+                </Form>
+                <br></br>
                 <div className='gap-2'>
                     <Row >
                         <Col>
