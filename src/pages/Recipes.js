@@ -13,18 +13,8 @@ export default function Recipes() {
     const [filter, setFilter] = useState(null);
     const [menuItems, setMenuItems] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [searchInput, setSearchInput] = useState('');
 
-    const handleChange = (e) => {
-        e.preventDefault();
-        setSearchInput(e.target.value);
-    }
 
-    if (searchInput.length > 0) {
-        Data.filter((item) => {
-            return item.title.match(searchInput);
-        })
-    }
 
     //filters the recipes based on the filter
     useEffect(() => {
@@ -41,13 +31,6 @@ export default function Recipes() {
         <>
             <div>
                 <h1>Recipes</h1>
-                <div className='gap-2'>
-                    <input
-                        type="text"
-                        placeholder="Search here"
-                        onChange={handleChange}
-                        value={searchInput} />
-                </div>
                 <br></br>
                 <div className='gap-2'>
                     <Row >
