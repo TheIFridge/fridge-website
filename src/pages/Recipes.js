@@ -13,7 +13,18 @@ export default function Recipes() {
     const [filter, setFilter] = useState(null);
     const [menuItems, setMenuItems] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [searchInput, setSearchInput] = useState('');
 
+    const handleChange = (e) => {
+        e.preventDefault();
+        setSearchInput(e.target.value);
+    }
+
+    if (searchInput.length > 0) {
+        Data.filter((item) => {
+            return item.title.match(searchInput);
+        })
+    }
 
     //filters the recipes based on the filter
     useEffect(() => {
@@ -31,14 +42,11 @@ export default function Recipes() {
             <div>
                 <h1>Recipes</h1>
                 <div className='gap-2'>
-                    <Form >
-                        <Form.Control
-                            type="search"
-                            placeholder="Search"
-                            className="me-2"
-                            aria-label="Search">
-                        </Form.Control>
-                    </Form>
+                    <input
+                        type="text"
+                        placeholder="Search here"
+                        onChange={handleChange}
+                        value={searchInput} />
                 </div>
                 <br></br>
                 <div className='gap-2'>
@@ -85,32 +93,33 @@ export default function Recipes() {
                     </Row>
                 </div>
                 <br></br>
-                    {menuItems.map((item, index) => {
-                        if (filter === null || item.category === filter || item.cuisine === filter) {
-                            return (
-                                <div>
-                                <Container>
-                                    <Row>
-                                        <Col key={index} xs={12} md={4} >
-                                            <Card style={{ width: '100%', height: '96%' }} >
-                                                <Card.Img variant="top" src={item.images} />
-                                                <Card.Body>
-                                                    <Card.Title>{item.title}</Card.Title>
-                                                    <Card.Text>
-                                                        {item.description}
-                                                    </Card.Text>
-                                                    <Button variant="primary" href={item.url}>Go to recipe</Button>
-                                                </Card.Body>
-                                            </Card>
-                                        </Col>
-                                    </Row>
-                                </Container>
-                                </div>
-                            );
-                        } else {
-                            return (<></>);
-                        }
-                    })}
+                <Container>
+                    <Row>
+
+                        {menuItems.map((item, index) => {
+                            if (filter === null || item.category === filter || item.cuisine === filter) {
+                                return (
+                                    <Col key={index} xs={12} md={4} >
+                                        <Card style={{ width: '100%', height: '99%' }} >
+                                            <Card.Img variant="top" src={item.images} style={{ width: '100%', height: '100%' }} />
+                                            <Card.Body>
+                                                <Card.Title>{item.title}</Card.Title>
+                                                <Card.Text>
+                                                    {item.description}
+                                                </Card.Text>
+                                                <Button variant="primary" href={item.url}>Go to recipe</Button>
+                                            </Card.Body>
+                                        </Card>
+                                    </Col>
+                                );
+                            } else {
+                                return (<></>);
+                            }
+                        })}
+                    </Row>
+
+                </Container>
+
             </div>
         </>
     )

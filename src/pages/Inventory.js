@@ -157,7 +157,6 @@ export default function Inventory() {
 												<Button style={{width: '50%'}} variant="danger" onClick={() => handleQuantityDecrease(index)}>-</Button>
 											</Card.Footer>
 										</Card>
-										<br/>
 									</Col>
 								))}
 							</Row>
