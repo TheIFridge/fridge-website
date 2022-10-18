@@ -47,7 +47,7 @@ export default function Home() {
                     {/* conditional to say if user logged in or not */}
                     {userLoggedIn() ? (
                         <Button variant="primary" size="lg" href="/inventory">
-                            Go to Fridge
+                            Add to inventory
                         </Button>
                     ) : (
                         <Button variant="primary" size="lg" href="/login">
