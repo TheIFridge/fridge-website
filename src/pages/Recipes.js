@@ -6,7 +6,6 @@ import { userLoggedIn } from '../util/Helpers';
 
 import { Button, Card, Dropdown, Row, Col, Container, Form } from 'react-bootstrap';
 
-
 export default function Recipes() {
     //checks if user is logged in
     if (!userLoggedIn()) { window.location.href = '/login'; }
@@ -23,7 +22,6 @@ export default function Recipes() {
             setLoading(true);
         }
     }, [loading, menuItems, filter]);
-
     
     //render the recipe on a new page
     //depending on the button pressed
@@ -34,12 +32,8 @@ export default function Recipes() {
         }
 
     }
-
-
-
-
     
-    return (
+     return (
         <>
             <div>
                 <h1>Recipes</h1>
