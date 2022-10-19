@@ -88,19 +88,18 @@ function App() {
 						<Route exact path="/terms" element={<Terms/>} />
 						<Route exact path="/support" element={<Support/>} />
 						<Route exact path="/dm" element={<Recipe
-							image= 'https://www.countdown.co.nz/Content/Recipes/bbq-corn-540.jpg' 
-							title="Bob"
-							brief="brief"
+							title="Chicken Karaage"
+							brief="Japanese fried chicken"
 							ingredientTitle="Ingredients"
-							ingredientsList={["ingredient1", "ingredient2"]}
-							cookTime="30 mins"
+							ingredientsList={["Chickent Thigh", "Soy Sauce", "Garlic", "Ginger", "Cornflour", "Egg", "Oil", "Salt"]}
+							cookTime="40 mins"
 							prepTime="20 mins"
-							numberOfPeople="3"
-							preview={"image Path..."}
-							methodTitle="Method"
-							method={['make egg', 'die']}
+							servings="4"
+							preview={"https://www.countdown.co.nz/Content/Recipes/bbq-corn-540.jpg"}
+							methodTitle="Recipe Preparation"
+							method={['step 1', 'dice chicken thigh and marinate with soy sauce, garlic, ginger, cornflour, egg, oil and salt', 'step 2', 'fry chicken in oil until golden brown', 'step 3', 'serve with rice and salad']}
 							nutritionTitle="Nutrition"
-							nutrition={["carlories - yes", "carbs - yes", "protein - yes"]}
+							nutrition={["carlories - 250Kcal", "carbs - 35g", "protein - 6.8g"]}
 						/>} />
 						<Route exact path="/recipes/recipe1" element={<Recipe1/>} />
 						<Route exact path="/recipes/recipe2" element={<Recipe2/>} />
