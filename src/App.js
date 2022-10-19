@@ -88,7 +88,7 @@ function App() {
 						<Route exact path="/terms" element={<Terms/>} />
 						<Route exact path="/support" element={<Support/>} />
 						<Route exact path="/dm" element={<Recipe
-							image="https://www.countdown.co.nz/Content/Recipes/bbq-corn-540.jpg" 
+							image= 'https://www.countdown.co.nz/Content/Recipes/bbq-corn-540.jpg' 
 							title="Bob"
 							brief="brief"
 							ingredientTitle="Ingredients"
