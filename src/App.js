@@ -87,7 +87,8 @@ function App() {
 						<Route exact path="/settings" element={<Settings/>} />
 						<Route exact path="/terms" element={<Terms/>} />
 						<Route exact path="/support" element={<Support/>} />
-						<Route exact path="/dm" element={<Recipe 
+						<Route exact path="/dm" element={<Recipe
+							image= 'https://www.countdown.co.nz/Content/Recipes/bbq-corn-540.jpg' 
 							title="Bob"
 							brief="brief"
 							ingredientTitle="Ingredients"
@@ -96,8 +97,10 @@ function App() {
 							prepTime="20 mins"
 							numberOfPeople="3"
 							preview={"image Path..."}
+							methodTitle="Method"
 							method={['make egg', 'die']}
-							nuitrition={["carlories - yes", "carbs - yes", "protein - yes"]}
+							nutritionTitle="Nutrition"
+							nutrition={["carlories - yes", "carbs - yes", "protein - yes"]}
 						/>} />
 						<Route exact path="/recipes/recipe1" element={<Recipe1/>} />
 						<Route exact path="/recipes/recipe2" element={<Recipe2/>} />
