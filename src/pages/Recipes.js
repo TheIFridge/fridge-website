@@ -4,7 +4,7 @@ import Data from './Data';
 
 import { userLoggedIn } from '../util/Helpers';
 
-import { Button, Card, Dropdown, Row, Col, Container, Form, ButtonGroup } from 'react-bootstrap';
+import { Button, Card, Dropdown, Row, Col, Container, Form } from 'react-bootstrap';
 
 
 export default function Recipes() {
@@ -24,13 +24,35 @@ export default function Recipes() {
         }
     }, [loading, menuItems, filter]);
 
+    
+    //render the recipe on a new page
+    //depending on the button pressed
+    const renderRecipe = (event) => {
+        let id = event.target.id;
+        if(id === "1"){
+            window.location.href = '/dm';
+        }
+
+    }
 
 
 
+
+    
     return (
         <>
             <div>
                 <h1>Recipes</h1>
+                <br></br>
+                <Form className="d-flex">
+                    <Form.Control
+                        type="search"
+                        placeholder="Search"
+                        className="me-2"
+                        aria-label="Search"
+                    />
+                    <Button variant="outline-success">Search</Button>
+                </Form>
                 <br></br>
                 <div className='gap-2'>
                     <Row >
@@ -40,7 +62,7 @@ export default function Recipes() {
                                     Allergies
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                    {loading && [... new Set(menuItems.flatMap((data) => data.category))].map((item) => (
+                                    {loading && [... new Set(menuItems.flatMap((data) => data.category))].map((item)=>(
                                         <Dropdown.Item variant="success" style={{ width: '90%', height: '90%' }} key={item} onClick={() => setFilter(item)}>{item}</Dropdown.Item>
                                     ))}
                                 </Dropdown.Menu>
@@ -78,7 +100,6 @@ export default function Recipes() {
                 <br></br>
                 <Container>
                     <Row>
-
                         {menuItems.map((item, index) => {
                             if (filter === null || item.category === filter || item.cuisine === filter) {
                                 return (
@@ -90,7 +111,7 @@ export default function Recipes() {
                                                 <Card.Text>
                                                     {item.description}
                                                 </Card.Text>
-                                                <Button variant="primary" href={item.url}>Go to recipe</Button>
+                                                <Button onClick={renderRecipe} Id = {item.id}>Recipe</Button>
                                             </Card.Body>
                                         </Card>
                                     </Col>
