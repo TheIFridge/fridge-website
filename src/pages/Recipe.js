@@ -18,6 +18,7 @@ export default function Recipe(props) {
                         </Col>
                         <Col>
                             <h2>{props.title}</h2>
+                            <br></br>
                             <h4>{props.brief}</h4>
                         </Col>
                         <Col>
@@ -40,12 +41,14 @@ export default function Recipe(props) {
                 <div>
                     <Row className="d-flex gap-2">
                         <Col>
+                        <br></br>
                             <h3>{props.ingredientTitle}</h3>
                             <p>chicken thigh <br></br>soy sauce<br></br> mirin<br></br> sake <br></br>sugar<br></br> salt pepper <br></br>corn starch<br></br> oil</p>
                             <h3>{props.nutritionTitle}</h3>
                             <p>calories: 300<br></br> carbs: 20g<br></br> protein: 30g</p>
                         </Col>
                         <Col>
+                        <br></br>
                             <h3>{props.methodTitle}</h3>
                             <h6>Step 1</h6>
                             <p>marinate the chicken</p>
