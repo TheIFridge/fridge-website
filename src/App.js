@@ -91,15 +91,15 @@ function App() {
 							title="Chicken Karaage"
 							brief="Japanese fried chicken"
 							ingredientTitle="Ingredients"
-							ingredientsList={["Chickent Thigh", "Soy Sauce", "Garlic", "Ginger", "Cornflour", "Egg", "Oil", "Salt"]}
+							ingredientsList={["chicken thigh"+"~"+"soy sauce"+ "\n mirin \n sake \n sugar \n salt \n pepper \n corn starch \n oil"]}
 							cookTime="40 mins"
 							prepTime="20 mins"
-							servings="4"
+							servings="4 servings"
 							preview={"https://www.countdown.co.nz/Content/Recipes/bbq-corn-540.jpg"}
 							methodTitle="Recipe Preparation"
 							method={['step 1', 'dice chicken thigh and marinate with soy sauce, garlic, ginger, cornflour, egg, oil and salt', 'step 2', 'fry chicken in oil until golden brown', 'step 3', 'serve with rice and salad']}
 							nutritionTitle="Nutrition"
-							nutrition={["carlories - 250Kcal", "carbs - 35g", "protein - 6.8g"]}
+							nutrition={["carlories - 250Kcal ", "carbs - 35g ", "protein - 6.8g "]}
 						/>} />
 						<Route exact path="/recipes/recipe1" element={<Recipe1/>} />
 						<Route exact path="/recipes/recipe2" element={<Recipe2/>} />

@@ -1,32 +1,6 @@
-.background {
-  background-color: #474545;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 100vh;
-  width: 100%;
-  position: relative;
-}
-.background .imageMain {
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 10px;
-}
-.background .titleAndBrief {
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding-left: 400px;
-  padding-top: 100px;
-  padding-right: 100px;
-}
-.background .titleAndBrief .title {
-  font-size: 50px;
-  font-weight: bold;
-  color: #f3f3f3;
-}
-.background .titleAndBrief .brief {
-  font-size: 20px;
-  color: #f3f3f3;
+.food-img {
+  max-width: 100%;
+  height: auto;
+  -o-object-fit: cover;
+     object-fit: cover;
 }/*# sourceMappingURL=Recipe.css.map */
