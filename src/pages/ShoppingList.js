@@ -1,109 +1,144 @@
-// react
-import React from 'react';
-import { userLoggedIn } from '../util/Helpers';
+import { React, useState, useEffect } from 'react';
+import { Button, Form, Card, Row, Col, Container, Spinner, InputGroup, Image } from 'react-bootstrap';
 
-// import { InputGroup } from 'react-bootstrap';
-// import Button from 'react-bootstrap/Button';
-// import Card from 'react-bootstrap/Card';
+import { AsyncTypeahead } from 'react-bootstrap-typeahead';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faDollarSign, faCartArrowDown } from '@fortawesome/free-solid-svg-icons'
 
-// import Row from 'react-bootstrap/Row';
-// import Col from 'react-bootstrap/Col';
-// import Container from 'react-bootstrap/Container';
-
-// function ShoppingListItem(props) {
-//     return (
-//         <>
-//             <Card style={{ width: '18rem' }}>
-//                 <Card.Img variant="top" src="https://mcdev.io/assets/oreplugin.png" />
-//                 <Card.Body>
-//                         <Row>
-//                             <Col xs={6} md={6}>
-//                                 <InputGroup className="mb-1">
-//                                     <Card.Title>{props.name}</Card.Title>
-//                                 </InputGroup>
-//                             </Col>
-//                             <Col xs={6} md={6}>
-//                                 <InputGroup className="mb-1" style={{justifyContent: 'right'}}>
-//                                     <Card.Text>x{props.quantity}</Card.Text>
-//                                 </InputGroup>
-//                             </Col>
-//                         </Row>
-//                         <Row>
-//                             <Col xs={4} md={4}>
-//                                 <InputGroup className="mb-1">
-//                                     <Button variant="success" onClick={props.onAdd} style={{width: '100%'}}>+</Button>
-//                                 </InputGroup>
-//                             </Col>
-//                             <Col xs={4} md={4}>
-//                                 <InputGroup className="mb-1">
-//                                     <Button variant="warning" onClick={props.onRemove} style={{width: '100%'}}>-</Button>
-//                                 </InputGroup>
-//                             </Col>
-//                             <Col xs={4} md={4}>
-//                                 <InputGroup className="mb-1">
-//                                     <Button variant="danger" onClick={props.onRemove} style={{width: '100%'}}>x</Button>
-//                                 </InputGroup>
-//                             </Col>
-//                         </Row>
-//                 </Card.Body>
-//             </Card>
-//             <br/>
-//         </>
-//     );
-// }
-
-// create component for a shopping list
-// function ShoppingListBox(props) {
-
-//     const onRemove = (name) => {
-//         console.log("remove " + name);
-//     }
-
-//     return (
-//         <div className="shopping-list">
-//             <Container>
-//                 <Row>
-//                     {props.items.map((item, idx) => (
-//                         <Col xs={12} sm={6}>
-//                             <ShoppingListItem name={item.name} quantity={item.quantity} onAdd={props.onAdd} onRemove={onRemove(this)} />
-//                         </Col>
-//                     ))}
-//                 </Row>
-//             </Container>
-//         </div>
-//     );
-// }
-
-// create component for an input box using bootstrap buttons
-// function InputBox(props) {
-//     return (
-//         <InputGroup className="mb-3">
-//             <input type="text" className="form-control" placeholder={props.placeholder} aria-label={props.title} aria-describedby="basic-addon1" />
-//             <Button className="btn btn-outline-secondary" type="button" id="button-addon2">{props.buttonText}</Button>
-//         </InputGroup>
-//     );
-// }
-
+import { userLoggedIn, millisecondsToString, capitalise } from '../util/Helpers';
+import { getShoppingLists, deleteShoppingListItem } from '../util/Functions';
 
 // main function
 export default function ShoppingList() {
-    if (!userLoggedIn()) {window.location.href = '/login';}
+	if (!userLoggedIn()) { window.location.href = '/login'; }
 
-    return (
-        <div>
-            <h1>Shopping List</h1>
-            <br/>
-            <h4>Coming Soon.</h4>
-        </div>
-    )
-    // return (
-    //     <div>
-    //         <h1>Shopping List</h1>
-    //         <br/>
-            
-    //         <InputBox title="Add Item" placeholder="Item Name" buttonText="Add" />
+	const [loading, setLoading] = useState(false);
+	const [shoppingListJson, setShoppingListJson] = useState({});
 
-    //         <ShoppingListBox title="Shopping List" items={[{name: "Milk", quantity: 2}, {name: "Eggs", quantity: 12}, {name: "Bread", quantity: 1}]} onAdd={() => {}} onRemove={() => {}} />
-    //     </div>
-    // )
+	const [options, setOptions] = useState([]);
+	const [isLoading, setIsLoading] = useState(false);
+
+	const [inputValue, setInputValue] = useState('');
+
+	useEffect(() => {
+		if (!loading) {
+			getShoppingLists().then(async (response) => {
+				const data = await response.json();
+				setShoppingListJson(data);
+				setLoading(true);
+			});
+		}
+	}, [loading, shoppingListJson]);
+
+	const handleRemoveItem = (ingredientId, shoppingListId) => {
+		deleteShoppingListItem(ingredientId, shoppingListId)
+		// .then((resp) => resp.json())
+		// .then((data) => {
+		// 	setShoppingListJson(data);
+		// });
+	}
+
+	const handleQuantityIncrease = (index) => {
+		// const newItems = [...items];
+		// newItems[index].quantity++;
+		// putUserInventoryItem(sessionStorage.getItem("token"), sessionStorage.getItem("userid"), {
+		// 	ingredient: {
+		// 		identifier: newItems[index].ingredient.identifier ?? newItems[index].ingredient
+		// 	},
+		// 	quantity: newItems[index].quantity,
+		// 	expiry: newItems[index].expiry
+		// });
+		// setItems(newItems);
+	};
+
+	const handleQuantityDecrease = (index) => {
+		// const newItems = [...items];
+		// newItems[index].quantity--;
+		// const filteredItems = newItems.filter((item) => item.quantity > 0);
+
+		// if (newItems[index].quantity <= 0) {
+		// 	deleteUserInventoryItem(sessionStorage.getItem("token"), sessionStorage.getItem("userid"), newItems[index].ingredient.identifier ?? newItems[index].ingredient);
+		// } else {
+		// 	putUserInventoryItem(sessionStorage.getItem("token"), sessionStorage.getItem("userid"), {
+		// 		ingredient: {
+		// 			identifier: newItems[index].ingredient.identifier ?? newItems[index].ingredient
+		// 		},
+		// 		quantity: newItems[index].quantity,
+		// 		expiry: newItems[index].expiry
+		// 	});
+		// }
+
+		// setItems(filteredItems);
+	};
+
+	const getImage = (userIngredient) => {
+		if (userIngredient.ingredient.images && userIngredient.ingredient.images.length > 0) {
+			return <Card.Img style={{ objectFit: 'cover', width: '100%', height: '250px' }} variant="top" src={userIngredient.ingredient.images[0]} />
+		} else {
+			return <Card.Img style={{ objectFit: 'cover', width: '100%', height: '250px' }} variant="top" src="https://static.vecteezy.com/system/resources/thumbnails/005/720/408/small_2x/crossed-image-icon-picture-not-available-delete-picture-symbol-free-vector.jpg" />
+		}
+	}
+
+	return (
+		<div id="inventory" style={{ width: '100%', justifyContent: 'center' }}>
+			<div className='app-background'>
+				<div className='main-container'>
+					<div className='item-list'>
+						<Container>
+							{!loading && <><Spinner animation="border" variant="primary" style={{ margin: 'auto' }} /></>}
+							{loading && shoppingListJson.length === 0 && <h3 style={{ textAlign: 'center' }}>No shopping lists found</h3>}
+							{loading && shoppingListJson.length > 0 && shoppingListJson.map((shoppingList) => (
+								<>
+									<h1 className="mb-5">{shoppingList.identifier}</h1>
+									<Row >
+										{shoppingList.ingredients.map((userIngredient, index) => (
+											<Col key={index} xs={12} md={3}>
+												<Card>
+													<Card.Header>
+														<Button variant="danger" onClick={() => handleRemoveItem(userIngredient.ingredient.identifier, shoppingList.identifier)} style={{ float: 'right' }}>
+															X
+														</Button>
+														{/* <Button variant="primary me-2" onClick={() => handleRemoveItem(index)} style={{ float: 'right' }}>
+															<FontAwesomeIcon icon={faArrowDown} />
+														</Button> */}
+														{/* <Card.Text style={{ float: 'left' }}>{userIngredient.ingredient.generic_name}</Card.Text> */}
+													</Card.Header>
+													{getImage(userIngredient)}
+													<Card.Body>
+														<Card.Title className='mb-0'>{capitalise(userIngredient.ingredient.name ?? userIngredient.ingredient ?? "Unknown")}</Card.Title>
+														<Card.Text className='mb-3'>{userIngredient.ingredient.description ?? "Unknown Description"}</Card.Text>
+														<Card.Text className='mb-0'>Expiry: {userIngredient.expiry === 0 ? "Never" : millisecondsToString(new Date() - userIngredient.expiry)} </Card.Text>
+													</Card.Body>
+													<Card.Footer>
+														<Card.Text>Countdown: $123</Card.Text>
+														<Card.Text>Pak n' Save: $123</Card.Text>
+													</Card.Footer>
+													<Card.Footer style={{ width: '100%' }}>
+														<Row>
+															<Col>
+																<Card.Text className='mb-0'>
+																	<FontAwesomeIcon icon={faCartArrowDown} /> {userIngredient.quantity}
+																</Card.Text>
+															</Col>
+															<Col>
+																<Card.Text className='mb-0'>
+																	<FontAwesomeIcon icon={faDollarSign} /> 200
+																</Card.Text>
+															</Col>
+														</Row>
+													</Card.Footer>
+												</Card>
+												<br />
+											</Col>
+										))}
+									</Row>
+								</>
+							))}
+
+						</Container>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
 }

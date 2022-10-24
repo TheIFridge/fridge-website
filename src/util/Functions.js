@@ -32,17 +32,37 @@ export async function getUserDetails(token, userid) {
 // }
 
 export async function getUserInventory(token, userid) {
-    return await getFetch(`${process.env.REACT_APP_PROD_API_URL}/api/users/${userid}/inventory/`, token);
+    return await getFetch(`${process.env.REACT_APP_PROD_API_URL}/api/inventory/`, token);
 }
 
 export async function putUserInventoryItem(token, userId, userIngredient) {
-    return await putFetch(`${process.env.REACT_APP_PROD_API_URL}/api/users/${userId}/inventory/${userIngredient.ingredient.identifier}`, JSON.stringify(userIngredient), token);
+    return await putFetch(`${process.env.REACT_APP_PROD_API_URL}/api/inventory/${userIngredient.ingredient.identifier}`, JSON.stringify(userIngredient), token);
 }
 
 export async function postUserInventoryItem(token, userId, userIngredient) {
-    return await postFetch(`${process.env.REACT_APP_PROD_API_URL}/api/users/${userId}/inventory/${userIngredient.ingredient.identifier}`, JSON.stringify(userIngredient), token);
+    return await postFetch(`${process.env.REACT_APP_PROD_API_URL}/api/inventory/${userIngredient.ingredient.identifier}`, JSON.stringify(userIngredient), token);
 }
 
 export async function deleteUserInventoryItem(token, userId, ingredientId) {
-    return await deleteFetch(`${process.env.REACT_APP_PROD_API_URL}/api/users/${userId}/inventory/${ingredientId}`, token);
+    return await deleteFetch(`${process.env.REACT_APP_PROD_API_URL}/api/inventory/${ingredientId}`, token);
+}
+
+export async function getIngredientOptions(ingredientName) {
+    return await postFetch(`${process.env.REACT_APP_PROD_API_URL}/api/ingredients/query/`, JSON.stringify({ "name": ingredientName }), sessionStorage.getItem("token"));
+}
+
+export async function putShoppingListIngredient(ingredientName, quantity) {
+    return await putFetch(`${process.env.REACT_APP_PROD_API_URL}/api/shoppinglist/`, JSON.stringify({ "ingredient": ingredientName, "quantity": quantity }), sessionStorage.getItem("token"));
+}
+
+export async function getShoppingLists() {
+    return await getFetch(`${process.env.REACT_APP_PROD_API_URL}/api/shoppinglist/`, sessionStorage.getItem("token"));
+}
+
+export async function deleteShoppingListItem(ingredientId, shoppingListId) {
+    return await deleteFetch(`${process.env.REACT_APP_PROD_API_URL}/api/shoppinglist/${shoppingListId}/${ingredientId}`, sessionStorage.getItem("token"));
+}
+
+export async function reportUserInventoryItem(ingredientId) {
+    return await postFetch(`${process.env.REACT_APP_PROD_API_URL}/api/inventory/${ingredientId}/report`, JSON.stringify({ "reason": "Unknown" }), sessionStorage.getItem("token"));
 }

@@ -22,6 +22,7 @@ import Register from './pages/Register';
 import VerifyEmail from './pages/VerifyEmail';
 import ShoppingList from './pages/ShoppingList';
 import Inventory from './pages/Inventory';
+import RecipeGeneration from './pages/RecipeGeneration';
 import PriceWatch from './pages/PriceWatch';
 import Settings from './pages/Settings';
 import Recipes from './pages/Recipes';
@@ -82,6 +83,7 @@ function App() {
 						<Route exact path="/logout" element={<Logout/>} />
 						<Route exact path="/shoppinglist" element={<ShoppingList/>} />
 						<Route exact path="/inventory" element={<Inventory/>} />
+						<Route exact path="/recipeGeneration" element={<RecipeGeneration/>} />
 						<Route exact path="/pricewatch" element={<PriceWatch/>} />
 						<Route exact path="/recipes" element={<Recipes/>} />
 						<Route exact path="/settings" element={<Settings/>} />
