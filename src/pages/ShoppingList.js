@@ -14,6 +14,8 @@ export default function ShoppingList() {
 
 	const [loading, setLoading] = useState(false);
 	const [shoppingListJson, setShoppingListJson] = useState({});
+	const [priceJson, setPriceJson] = useState({});
+
 
 	const [options, setOptions] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
