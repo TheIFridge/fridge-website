@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDollarSign, faCartArrowDown } from '@fortawesome/free-solid-svg-icons'
 
 import { userLoggedIn, millisecondsToString, capitalise } from '../util/Helpers';
-import { getShoppingLists, deleteShoppingListItem } from '../util/Functions';
+import { getShoppingLists, deleteShoppingListItem, getPrice } from '../util/Functions';
 
 // main function
 export default function ShoppingList() {
@@ -23,7 +23,14 @@ export default function ShoppingList() {
 	useEffect(() => {
 		if (!loading) {
 			getShoppingLists().then(async (response) => {
-				const data = await response.json();
+				let data = await response.json();
+				data.forEach((ingredients, index) => {
+					ingredients.ingredients.forEach(async (ingredient, index2) => {
+						// ingredient.ingredient.shop	s = getPrice(ingredient.ingredient.identifier);
+						data[index].ingredients[index2].shop = await (await getPrice(ingredient.ingredient?.identifier ?? ingredient.ingredient)).json()
+						console.log(data[index].ingredients[index2].shop)
+					});
+				});
 				setShoppingListJson(data);
 				setLoading(true);
 			});
@@ -110,8 +117,14 @@ export default function ShoppingList() {
 														<Card.Text className='mb-0'>Expiry: {userIngredient.expiry === 0 ? "Never" : millisecondsToString(new Date() - userIngredient.expiry)} </Card.Text>
 													</Card.Body>
 													<Card.Footer>
-														<Card.Text>Countdown: $123</Card.Text>
-														<Card.Text>Pak n' Save: $123</Card.Text>
+														{console.log(userIngredient?.ingredient?.stores) && userIngredient?.ingredient?.stores?.map((shop) => {
+															
+															return (
+																<>
+																	<Card.Text>{shop.store}: ${shop.price}</Card.Text>
+																</>
+															)
+														})}
 													</Card.Footer>
 													<Card.Footer style={{ width: '100%' }}>
 														<Row>

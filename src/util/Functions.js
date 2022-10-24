@@ -70,3 +70,7 @@ export async function reportUserInventoryItem(ingredientId, flaggedState) {
 export async function getFlaggedIngredients() {
     return await getFetch(`${process.env.REACT_APP_PROD_API_URL}/api/ingredients/reports`, sessionStorage.getItem("token"));
 }
+
+export async function getPrice(ingredientId) {
+    return await getFetch(`${process.env.REACT_APP_PROD_SCRAPER_URL}/api/ingredient/${ingredientId}`, sessionStorage.getItem("token"));
+}
