@@ -32,7 +32,7 @@ export default function NavigationBar() {
                             </Nav>
                             <Navbar.Collapse className="justify-content-end">
                                 <NavDropdown title="Admin Panel" id="navbarScrollingDropdown">
-                                    <NavDropdown.Item href="#action3">View Reports</NavDropdown.Item>
+                                    <NavDropdown.Item href="/flagged">View Reports</NavDropdown.Item>
                                 </NavDropdown>
                             </Navbar.Collapse>
                         </Navbar.Collapse>

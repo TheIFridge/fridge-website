@@ -39,6 +39,7 @@ import './style/App.css';
 
 import { userLoggedIn } from './util/Helpers';
 import Recipe from './pages/Recipe';
+import FlaggedIngredients from './pages/FlaggedIngredients';
 
 // main function
 function App() {
@@ -83,6 +84,7 @@ function App() {
 						<Route exact path="/logout" element={<Logout/>} />
 						<Route exact path="/shoppinglist" element={<ShoppingList/>} />
 						<Route exact path="/inventory" element={<Inventory/>} />
+						<Route exact path="/flagged" element={<FlaggedIngredients/>} />
 						<Route exact path="/recipeGeneration" element={<RecipeGeneration/>} />
 						<Route exact path="/pricewatch" element={<PriceWatch/>} />
 						<Route exact path="/recipes" element={<Recipes/>} />

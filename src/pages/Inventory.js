@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faFire, faFlag, faBasketShopping, faShoppingBag, faShoppingBasket } from '@fortawesome/free-solid-svg-icons'
 
 import { userLoggedIn, millisecondsToString, capitalise } from '../util/Helpers';
-import { deleteUserInventoryItem, getUserInventory, putUserInventoryItem, getIngredientOptions, putShoppingListIngredient, reportUserInventoryItem } from '../util/Functions';
+import { deleteUserInventoryItem, getUserInventory, putUserInventoryItem, getIngredientOptions, postShoppingListIngredient, reportUserInventoryItem } from '../util/Functions';
 
 // main function
 export default function Inventory() {
@@ -33,7 +33,7 @@ export default function Inventory() {
 	}, [loading, inventoryJson]);
 
 	const addToShoppingList = (ingredientId, quantity) => {
-		putShoppingListIngredient(ingredientId, quantity);
+		postShoppingListIngredient("Shopping List", ingredientId, quantity);
 	}
 
 	const handleAddButtonClick = () => {
@@ -109,7 +109,7 @@ export default function Inventory() {
 	};
 
 	const flagIngredient = (ingredientId, flag) => {
-		reportUserInventoryItem(ingredientId)
+		reportUserInventoryItem(ingredientId, flag)
 	}
 
 	const getOptions = (ingredientName) => {
@@ -134,12 +134,12 @@ export default function Inventory() {
 		if (userIngredient.ingredient.flagged.flagged) {
 			return (
 				<Button className="me-2" style={{ float: 'right' }} variant="secondary" onClick={() => flagIngredient(userIngredient.ingredient.identifier, false)}>
-					<FontAwesomeIcon icon={faFlag} />
+					Flagged
 				</Button>
 			)
 		} else {
 			return (
-				<Button className="me-2" style={{ float: 'right' }} variant="danger" onClick={() => handleQuantityDecrease(userIngredient.ingredient.identifier, true)}>
+				<Button className="me-2" style={{ float: 'right' }} variant="danger" onClick={() => flagIngredient(userIngredient.ingredient.identifier, true)}>
 					<FontAwesomeIcon icon={faFlag} />
 				</Button>
 			)
