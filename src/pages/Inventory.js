@@ -123,7 +123,7 @@ export default function Inventory() {
 	}
 
 	const getImage = (userIngredient) => {
-		if (userIngredient.ingredient.images && userIngredient.ingredient.images.length > 0) {
+		if (userIngredient.ingredient?.images?.length > 0) {
 			return <Card.Img style={{ objectFit: 'cover', width: '100%', height: '250px' }} variant="top" src={userIngredient.ingredient.images[0]} />
 		} else {
 			return <Card.Img style={{ objectFit: 'cover', width: '100%', height: '250px' }} variant="top" src="https://static.vecteezy.com/system/resources/thumbnails/005/720/408/small_2x/crossed-image-icon-picture-not-available-delete-picture-symbol-free-vector.jpg" />
@@ -131,7 +131,7 @@ export default function Inventory() {
 	}
 
 	const getFlaggedButton = (userIngredient) => {
-		if (userIngredient.ingredient.flagged.flagged) {
+		if (userIngredient.ingredient === String && userIngredient.ingredient.flagged.flagged) {
 			return (
 				<Button className="me-2" style={{ float: 'right' }} variant="secondary" onClick={() => flagIngredient(userIngredient.ingredient.identifier, false)}>
 					Flagged
@@ -193,8 +193,8 @@ export default function Inventory() {
 											</Card.Header>
 											{getImage(userIngredient)}
 											<Card.Body>
-												<Card.Title className='mb-0'>{capitalise(userIngredient.ingredient.generic_name ?? userIngredient.ingredient ?? "Unknown")}</Card.Title>
-												<Card.Text className='mb-3'>{userIngredient.ingredient.description ?? "Unknown Description"}</Card.Text>
+												<Card.Title className='mb-0'>{capitalise(userIngredient.ingredient?.generic_name ?? userIngredient.ingredient ?? "Unknown")}</Card.Title>
+												<Card.Text className='mb-3'>{userIngredient.ingredient?.description ?? "Unknown Description"}</Card.Text>
 												<Card.Text className='mb-0'>Expiry: {userIngredient.expiry === 0 ? "Never" : millisecondsToString(new Date() - userIngredient.expiry)} </Card.Text>
 											</Card.Body>
 											<Card.Footer style={{ width: '100%' }}>
@@ -203,7 +203,7 @@ export default function Inventory() {
 														<Button variant="success w-100" onClick={() => handleQuantityIncrease(index)}>+</Button>
 													</Col>
 													<Col>
-														<Button variant="primary w-100" onClick={() => addToShoppingList(userIngredient.ingredient.identifier, userIngredient.quantity)}>
+														<Button variant="primary w-100" onClick={() => addToShoppingList(userIngredient.ingredient?.identifier ?? userIngredient.ingredient, userIngredient.quantity)}>
 															<FontAwesomeIcon icon={faShoppingBasket} />
 														</Button>
 													</Col>
