@@ -145,7 +145,6 @@ export default function Inventory() {
 				</Button>
 			)
 		}
-
 	}
 
 	return (

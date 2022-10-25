@@ -148,7 +148,12 @@ export default function Settings() {
 				<br /> */}
 				<Row>
 					<Col xs={12} md={4} className="mb-4">
-						<Button variant="secondary" onClick={updateDarkMode}><FontAwesomeIcon icon={!darkMode ? faMoon : faSun} data-testid="darkModeButton"/>&nbsp;{!darkMode ? "Enable" : "Disable"} Dark Mode</Button>
+						<Button variant="secondary" onClick={updateDarkMode}>
+							<FontAwesomeIcon
+								icon={!darkMode ? faMoon : faSun}
+								data-testid="darkModeButton"/>
+								&nbsp;{!darkMode ? "Enable" : "Disable"} Dark Mode
+						</Button>
 					</Col>
 					{/* <Col xs={12} md={4} className="mb-4">
 						<Button variant="danger" onClick={() => {

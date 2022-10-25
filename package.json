@@ -71,6 +71,7 @@
     "@testing-library/react": "^13.4.0",
     "eslint-plugin-jest-dom": "^4.0.2",
     "fake-indexeddb": "^4.0.0",
+    "flush-promises": "^1.0.2",
     "jest": "^27.5.1",
     "msw": "^0.47.4"
   }

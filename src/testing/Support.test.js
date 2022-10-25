@@ -11,7 +11,7 @@
  // main component
  import Support from '../pages/Support';
 
- test('test#04: As a user I want to be able to customise my settings easily', async () => {
+ test('test#04: As a user I want to be able to ask questions about the app and get support', async () => {
      const mockResponse = jest.fn();
      Object.defineProperty(window, 'location', {
          value: {
