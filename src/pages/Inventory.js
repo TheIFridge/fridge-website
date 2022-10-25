@@ -25,6 +25,7 @@ export default function Inventory() {
 		if (!loading) {
 			getUserInventory(sessionStorage.getItem("token"), sessionStorage.getItem("userid")).then(async (response) => {
 				const data = await response.json();
+				console.log(data);
 				setInventoryJson(data);
 				setItems(data.ingredients);
 				setLoading(true);
@@ -164,6 +165,9 @@ export default function Inventory() {
 								isLoading={isLoading}
 								onChange={(input) => setInputValue(input[0])}
 								onSearch={getOptions}
+								inputProps={{
+									'data-testid': 'search-bar',
+								}}
 							/>
 							<Button variant="secondary"
 								type="submit"
@@ -184,7 +188,7 @@ export default function Inventory() {
 							<Row >
 								{!loading && <><Spinner animation="border" variant="primary" style={{ margin: 'auto' }} /></>}
 								{loading && items.map((userIngredient, index) => (
-									<Col key={index} xs={12} md={4}>
+									<Col key={index} xs={12} md={4} data-testid="ingredient">
 										<Card>
 											<Card.Header>
 												<Button variant="dark" onClick={() => handleRemoveItem(index)} style={{ float: 'right' }}> x </Button>
