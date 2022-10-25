@@ -10,7 +10,7 @@ import { ThemeContext, themes } from '../context/ThemeContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons'
 import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
-import { faLock } from '@fortawesome/free-solid-svg-icons'
+// import { faLock } from '@fortawesome/free-solid-svg-icons'
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 
 import Container from 'react-bootstrap/Container'
@@ -90,13 +90,13 @@ export default function Settings() {
 
 					<Col xs={12} md={4}>
 						<InputGroup className="mb-4">
-							<Form.Control placeholder="First name" required value={firstName} onChange={e => setFirstName(e.target.value)}/>
+							<Form.Control placeholder="First name" required value={firstName} onChange={e => setFirstName(e.target.value)} data-testid="firstName"/>
 						</InputGroup>
 					</Col>
 					
 					<Col xs={12} md={4}>
 						<InputGroup className="mb-4">
-							<Form.Control placeholder="Last name" required value={lastName} onChange={e => setLastName(e.target.value)}/>
+							<Form.Control placeholder="Last name" required value={lastName} onChange={e => setLastName(e.target.value)}  data-testid="lastName"/>
 						</InputGroup>
 					</Col>
 				</Row>
@@ -109,7 +109,7 @@ export default function Settings() {
 					</Col>
 					<Col xs={12} md={8}>
 						<InputGroup className="mb-4">
-							<Form.Control placeholder="Display name" required value={displayName} onChange={e => setDisplayName(e.target.value)}/>
+							<Form.Control placeholder="Display name" required value={displayName} onChange={e => setDisplayName(e.target.value)} data-testid="displayName"/>
 						</InputGroup>
 					</Col>
 				</Row>
@@ -123,12 +123,12 @@ export default function Settings() {
 					</Col>
 					<Col xs={12} md={8}>
 						<InputGroup className="mb-4">
-						<Form.Control placeholder="Email" required value={email} onChange={e => setEmail(e.target.value)} disabled/>
+						<Form.Control placeholder="Email" required value={email} onChange={e => setEmail(e.target.value)} disabled data-testid="email"/>
 						</InputGroup>
 					</Col>
 				</Row>
 				<br />
-				<Row>
+				{/* <Row>
 					<Col xs={12} md={4}>
 						<InputGroup className="mb-4" style={{textAlign: 'right'}}>
 						<Form.Label>Stores</Form.Label>&nbsp;
@@ -145,16 +145,21 @@ export default function Settings() {
 						</InputGroup>
 					</Col>
 				</Row>
-				<br />
+				<br /> */}
 				<Row>
 					<Col xs={12} md={4} className="mb-4">
-						<Button variant="secondary" onClick={updateDarkMode}><FontAwesomeIcon icon={!darkMode ? faMoon : faSun} />&nbsp;{!darkMode ? "Enable" : "Disable"} Dark Mode</Button>
+						<Button variant="secondary" onClick={updateDarkMode}>
+							<FontAwesomeIcon
+								icon={!darkMode ? faMoon : faSun}
+								data-testid="darkModeButton"/>
+								&nbsp;{!darkMode ? "Enable" : "Disable"} Dark Mode
+						</Button>
 					</Col>
-					<Col xs={12} md={4} className="mb-4">
+					{/* <Col xs={12} md={4} className="mb-4">
 						<Button variant="danger" onClick={() => {
 						console.log("password reset - todo!");
 						}}><FontAwesomeIcon icon={faLock} />&nbsp;&nbsp;Reset Password</Button>
-					</Col>
+					</Col> */}
 					<Col xs={12} md={4} className="mb-4">
 						<Button variant="success" onClick={() => {
 						console.log("saved!");

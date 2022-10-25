@@ -51,8 +51,8 @@ export async function getIngredientOptions(ingredientName) {
     return await postFetch(`${process.env.REACT_APP_PROD_API_URL}/api/ingredients/query/`, JSON.stringify({ "name": ingredientName }), sessionStorage.getItem("token"));
 }
 
-export async function putShoppingListIngredient(ingredientName, quantity) {
-    return await putFetch(`${process.env.REACT_APP_PROD_API_URL}/api/shoppinglist/`, JSON.stringify({ "ingredient": ingredientName, "quantity": quantity }), sessionStorage.getItem("token"));
+export async function postShoppingListIngredient(shoppingListId, ingredientId, quantity) {
+    return await postFetch(`${process.env.REACT_APP_PROD_API_URL}/api/shoppinglist/${shoppingListId}/${ingredientId}`, JSON.stringify({ "ingredient": ingredientId, "quantity": quantity }), sessionStorage.getItem("token"));
 }
 
 export async function getShoppingLists() {
@@ -63,6 +63,14 @@ export async function deleteShoppingListItem(ingredientId, shoppingListId) {
     return await deleteFetch(`${process.env.REACT_APP_PROD_API_URL}/api/shoppinglist/${shoppingListId}/${ingredientId}`, sessionStorage.getItem("token"));
 }
 
-export async function reportUserInventoryItem(ingredientId) {
-    return await postFetch(`${process.env.REACT_APP_PROD_API_URL}/api/inventory/${ingredientId}/report`, JSON.stringify({ "reason": "Unknown" }), sessionStorage.getItem("token"));
+export async function reportUserInventoryItem(ingredientId, flaggedState) {
+    return await postFetch(`${process.env.REACT_APP_PROD_API_URL}/api/ingredient/${ingredientId}/report`, JSON.stringify({ "reason": "Unknown", "flagged": flaggedState }), sessionStorage.getItem("token"));
+}
+
+export async function getFlaggedIngredients() {
+    return await getFetch(`${process.env.REACT_APP_PROD_API_URL}/api/ingredients/reports`, sessionStorage.getItem("token"));
+}
+
+export async function getPrice(ingredientId) {
+    return await getFetch(`${process.env.REACT_APP_PROD_SCRAPER_URL}/api/ingredient/${ingredientId}`, sessionStorage.getItem("token"));
 }

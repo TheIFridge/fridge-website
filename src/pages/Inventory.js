@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faFire, faFlag, faBasketShopping, faShoppingBag, faShoppingBasket } from '@fortawesome/free-solid-svg-icons'
 
 import { userLoggedIn, millisecondsToString, capitalise } from '../util/Helpers';
-import { deleteUserInventoryItem, getUserInventory, putUserInventoryItem, getIngredientOptions, putShoppingListIngredient, reportUserInventoryItem } from '../util/Functions';
+import { deleteUserInventoryItem, getUserInventory, putUserInventoryItem, getIngredientOptions, postShoppingListIngredient, reportUserInventoryItem } from '../util/Functions';
 
 // main function
 export default function Inventory() {
@@ -25,6 +25,7 @@ export default function Inventory() {
 		if (!loading) {
 			getUserInventory(sessionStorage.getItem("token"), sessionStorage.getItem("userid")).then(async (response) => {
 				const data = await response.json();
+				console.log(data);
 				setInventoryJson(data);
 				setItems(data.ingredients);
 				setLoading(true);
@@ -33,7 +34,7 @@ export default function Inventory() {
 	}, [loading, inventoryJson]);
 
 	const addToShoppingList = (ingredientId, quantity) => {
-		putShoppingListIngredient(ingredientId, quantity);
+		postShoppingListIngredient("Shopping List", ingredientId, quantity);
 	}
 
 	const handleAddButtonClick = () => {
@@ -109,7 +110,7 @@ export default function Inventory() {
 	};
 
 	const flagIngredient = (ingredientId, flag) => {
-		reportUserInventoryItem(ingredientId)
+		reportUserInventoryItem(ingredientId, flag)
 	}
 
 	const getOptions = (ingredientName) => {
@@ -123,7 +124,7 @@ export default function Inventory() {
 	}
 
 	const getImage = (userIngredient) => {
-		if (userIngredient.ingredient.images && userIngredient.ingredient.images.length > 0) {
+		if (userIngredient.ingredient?.images?.length > 0) {
 			return <Card.Img style={{ objectFit: 'cover', width: '100%', height: '250px' }} variant="top" src={userIngredient.ingredient.images[0]} />
 		} else {
 			return <Card.Img style={{ objectFit: 'cover', width: '100%', height: '250px' }} variant="top" src="https://static.vecteezy.com/system/resources/thumbnails/005/720/408/small_2x/crossed-image-icon-picture-not-available-delete-picture-symbol-free-vector.jpg" />
@@ -131,20 +132,19 @@ export default function Inventory() {
 	}
 
 	const getFlaggedButton = (userIngredient) => {
-		if (userIngredient.ingredient.flagged.flagged) {
+		if (userIngredient.ingredient === String && userIngredient.ingredient.flagged.flagged) {
 			return (
 				<Button className="me-2" style={{ float: 'right' }} variant="secondary" onClick={() => flagIngredient(userIngredient.ingredient.identifier, false)}>
-					<FontAwesomeIcon icon={faFlag} />
+					Flagged
 				</Button>
 			)
 		} else {
 			return (
-				<Button className="me-2" style={{ float: 'right' }} variant="danger" onClick={() => handleQuantityDecrease(userIngredient.ingredient.identifier, true)}>
+				<Button className="me-2" style={{ float: 'right' }} variant="danger" onClick={() => flagIngredient(userIngredient.ingredient.identifier, true)}>
 					<FontAwesomeIcon icon={faFlag} />
 				</Button>
 			)
 		}
-
 	}
 
 	return (
@@ -164,6 +164,9 @@ export default function Inventory() {
 								isLoading={isLoading}
 								onChange={(input) => setInputValue(input[0])}
 								onSearch={getOptions}
+								inputProps={{
+									'data-testid': 'search-bar',
+								}}
 							/>
 							<Button variant="secondary"
 								type="submit"
@@ -184,7 +187,7 @@ export default function Inventory() {
 							<Row >
 								{!loading && <><Spinner animation="border" variant="primary" style={{ margin: 'auto' }} /></>}
 								{loading && items.map((userIngredient, index) => (
-									<Col key={index} xs={12} md={4}>
+									<Col key={index} xs={12} md={4} data-testid="ingredient">
 										<Card>
 											<Card.Header>
 												<Button variant="dark" onClick={() => handleRemoveItem(index)} style={{ float: 'right' }}> x </Button>
@@ -193,8 +196,8 @@ export default function Inventory() {
 											</Card.Header>
 											{getImage(userIngredient)}
 											<Card.Body>
-												<Card.Title className='mb-0'>{capitalise(userIngredient.ingredient.generic_name ?? userIngredient.ingredient ?? "Unknown")}</Card.Title>
-												<Card.Text className='mb-3'>{userIngredient.ingredient.description ?? "Unknown Description"}</Card.Text>
+												<Card.Title className='mb-0'>{capitalise(userIngredient.ingredient?.generic_name ?? userIngredient.ingredient ?? "Unknown")}</Card.Title>
+												<Card.Text className='mb-3'>{userIngredient.ingredient?.description ?? "Unknown Description"}</Card.Text>
 												<Card.Text className='mb-0'>Expiry: {userIngredient.expiry === 0 ? "Never" : millisecondsToString(new Date() - userIngredient.expiry)} </Card.Text>
 											</Card.Body>
 											<Card.Footer style={{ width: '100%' }}>
@@ -203,7 +206,7 @@ export default function Inventory() {
 														<Button variant="success w-100" onClick={() => handleQuantityIncrease(index)}>+</Button>
 													</Col>
 													<Col>
-														<Button variant="primary w-100" onClick={() => addToShoppingList(userIngredient.ingredient.identifier, userIngredient.quantity)}>
+														<Button variant="primary w-100" onClick={() => addToShoppingList(userIngredient.ingredient?.identifier ?? userIngredient.ingredient, userIngredient.quantity)}>
 															<FontAwesomeIcon icon={faShoppingBasket} />
 														</Button>
 													</Col>

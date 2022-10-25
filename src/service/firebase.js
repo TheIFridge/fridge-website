@@ -3,7 +3,7 @@ import { initializeApp } from "firebase/app";
 
 // get required firebase functions
 import { getFirestore } from "firebase/firestore";
-import { getAnalytics } from "firebase/analytics";
+// import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -25,7 +25,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 // initialise analytics
-const analytics = getAnalytics(app);
+const analytics = null; // getAnalytics(app);
 
 // initialise Cloud Firestore and get a reference to the database service
 const firestore = getFirestore(app); 

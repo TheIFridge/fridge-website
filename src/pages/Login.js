@@ -58,14 +58,14 @@ export default function Login() {
 					<br />
 					<Form onSubmit={handleLogin} name='login_form'>
 						<InputGroup className="mb-3">
-							<Form.Control placeholder="Enter email" required value={email} onChange={e => setEmail(e.target.value)}/>
+							<Form.Control placeholder="Enter email" required value={email} onChange={e => setEmail(e.target.value)} data-testid="emailField"/>
 						</InputGroup>
 
 						<InputGroup className="mb-3">
-							<Form.Control placeholder="Enter password" type="password" required value={password} onChange={e => setPassword(e.target.value)}/>
+							<Form.Control placeholder="Enter password" type="password" required value={password} onChange={e => setPassword(e.target.value)} data-testid="passwordField"/>
 						</InputGroup>
 
-						<Button variant="primary" type="submit">Login</Button>
+						<Button variant="primary" type="submit" data-testid="loginButton">Login</Button>
 					</Form>
 				</Card.Body>
 			</Card>

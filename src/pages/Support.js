@@ -69,14 +69,14 @@ export default function Support() {
                     {!completed ? (
                         <Form ref={form} onSubmit={sendEmail}>
                             <InputGroup className="mb-3">
-                                <Form.Control placeholder="Enter subject" name="subject" value={subject} onChange={e => setSubject(e.target.value)}/>
+                                <Form.Control placeholder="Enter subject" name="subject" value={subject} onChange={e => setSubject(e.target.value)} data-testid="subjectBox"/>
                             </InputGroup>
 
                             <InputGroup.Text className="mb-3">
-                            <Form.Control placeholder="Enter message" name="message" value={message} onChange={e => setMessage(e.target.value)}/>
+                            <Form.Control placeholder="Enter message" name="message" value={message} onChange={e => setMessage(e.target.value)} data-testid="messageBox"/>
                             </InputGroup.Text>
 
-                            <Button variant="success" type="submit" value="Send">Submit</Button>
+                            <Button variant="success" type="submit" value="Send" data-testid="submitRequest">Submit</Button>
                         </Form>
                     ): (
                         <h1>Thank you for your message!</h1>
