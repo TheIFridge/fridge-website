@@ -95,7 +95,7 @@ function App() {
 							title="Chicken Karaage"
 							brief="Japanese fried chicken"
 							ingredientTitle="Ingredients"
-							ingredientsList={["chicken thigh"+"~"+"soy sauce"+ "\n mirin \n sake \n sugar \n salt \n pepper \n corn starch \n oil"]}
+							ingredientsList={["chicken thigh\nsoy sauce\n mirin \n sake \n sugar \n salt \n pepper \n corn starch \n oil"]}
 							cookTime="40 mins"
 							prepTime="20 mins"
 							servings="4 servings"

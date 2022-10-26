@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from 'react';
-import { Button, Form, Card, Row, Col, Container, Spinner, InputGroup, Image } from 'react-bootstrap';
+import { Button, Card, Row, Col, Container, Spinner } from 'react-bootstrap';
 
-import { AsyncTypeahead } from 'react-bootstrap-typeahead';
+// import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDollarSign, faCartArrowDown } from '@fortawesome/free-solid-svg-icons'
 

@@ -2,6 +2,7 @@
   "name": "ifridge-website",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://154.53.59.137:6969/",
   "dependencies": {
     "@emailjs/browser": "^3.7.0",
     "@fortawesome/fontawesome-svg-core": "^6.1.2",
