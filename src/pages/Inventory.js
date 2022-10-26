@@ -1,9 +1,9 @@
 import { React, useState, useEffect } from 'react';
-import { Button, Form, Card, Row, Col, Container, Spinner, InputGroup, Image } from 'react-bootstrap';
+import { Button, Form, Card, Row, Col, Container, Spinner, InputGroup } from 'react-bootstrap';
 
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch, faFire, faFlag, faBasketShopping, faShoppingBag, faShoppingBasket } from '@fortawesome/free-solid-svg-icons'
+import { faFire, faFlag, faShoppingBasket } from '@fortawesome/free-solid-svg-icons'
 
 import { userLoggedIn, millisecondsToString, capitalise } from '../util/Helpers';
 import { deleteUserInventoryItem, getUserInventory, putUserInventoryItem, getIngredientOptions, postShoppingListIngredient, reportUserInventoryItem } from '../util/Functions';
@@ -52,10 +52,13 @@ export default function Inventory() {
 		}
 
 		if (add) {
+			const generic_name = inputValue.trim().toLowerCase();
+			const identifier = generic_name.replace(/ /g, "-");
+
 			const newIngredient = {
 				ingredient: {
-					identifier: inputValue,
-					generic_name: inputValue,
+					identifier: identifier,
+					generic_name: generic_name,
 				},
 				expiry: Date.now() + 604800000,
 				quantity: 1
@@ -65,6 +68,9 @@ export default function Inventory() {
 
 			const newItems = [...items, newIngredient];
 			setItems(newItems);
+
+			// rerun useEffect
+			setLoading(false);
 		}
 
 		return;
@@ -155,7 +161,7 @@ export default function Inventory() {
 					<br />
 					<Form.Group>
 						<InputGroup>
-							<InputGroup.Text><FontAwesomeIcon icon={faSearch} /></InputGroup.Text>
+							{/* <InputGroup.Text><FontAwesomeIcon icon={faSearch} /></InputGroup.Text> */}
 							<AsyncTypeahead
 								className="form-control"
 								id="form-example"
@@ -168,15 +174,17 @@ export default function Inventory() {
 									'data-testid': 'search-bar',
 								}}
 							/>
-							<Button variant="secondary"
+							<Button variant="info"
 								type="submit"
 								onClick={() => handleAddButtonClick()}
 							>Add</Button>
-							<Button
-								variant="primary"
+							<Button variant="success"
 								type="submit"
-								href="/recipeGeneration"
-							><FontAwesomeIcon icon={faFire} /> Generate Recipes</Button>
+								
+								onClick={() => {
+									window.location.href = "/recipeGeneration";
+								}}
+							><FontAwesomeIcon icon={faFire}/></Button>
 						</InputGroup>
 					</Form.Group>
 
@@ -196,7 +204,7 @@ export default function Inventory() {
 											</Card.Header>
 											{getImage(userIngredient)}
 											<Card.Body>
-												<Card.Title className='mb-0'>{capitalise(userIngredient.ingredient?.generic_name ?? userIngredient.ingredient ?? "Unknown")}</Card.Title>
+												<Card.Title className='mb-0'>{capitalise(userIngredient.ingredient?.name ?? userIngredient.ingredient ?? "Unknown")}</Card.Title>
 												<Card.Text className='mb-3'>{userIngredient.ingredient?.description ?? "Unknown Description"}</Card.Text>
 												<Card.Text className='mb-0'>Expiry: {userIngredient.expiry === 0 ? "Never" : millisecondsToString(new Date() - userIngredient.expiry)} </Card.Text>
 											</Card.Body>

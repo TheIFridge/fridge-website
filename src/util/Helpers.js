@@ -63,6 +63,61 @@ export function millisecondsToString(millis) {
     }
 }
 
+export async function getRecipes(search) {
+    var body = {
+        "search": search
+    };
+    var response = await fetch('http://154.53.59.137/recipe/get', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "mode": "no-cors",
+            "Access-Control-Allow-Origin": "*"
+        },
+        body: JSON.stringify(body)
+    });
+    var data = await response.json();
+    return data;
+}
+
+export async function generateRecipes(ingredients) {
+    var body = {
+        "ingredients": ingredients
+    };
+
+    var response = await fetch('http://154.53.59.137:6969/recipe/generate', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "mode": "no-cors",
+            "Access-Control-Allow-Origin": "*"
+        },
+        body: JSON.stringify(body)
+    });
+    
+    var data = await response.json();
+    return data;
+}
+
+export async function getPrice(ingredient) {
+    var body = {
+        "search": ingredient
+    };
+
+    var response = await fetch('http://154.53.59.137:6969/ingredient/pricewatch', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "mode": "no-cors",
+            "Access-Control-Allow-Origin": "*"
+        },
+        body: JSON.stringify(body)
+    });
+    
+    var data = await response.json();
+    return data;
+}
+
 export async function postFetch(endpoint, data, token) {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");

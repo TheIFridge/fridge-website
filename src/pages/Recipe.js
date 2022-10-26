@@ -1,7 +1,7 @@
 // react
 
 import React from 'react';
-import { Button, Card, Dropdown, Row, Col, Container, Form } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 
 export default function Recipe(props) {
 
